@@ -75,7 +75,7 @@ footer{color:var(--muted);font-size:12px;margin-top:22px;line-height:1.6}
 .dsec li{margin-bottom:2px}
 .dsec p{margin:0;font-size:13.5px;line-height:1.8;color:#dbe3f7}
 .hook li{color:var(--red);font-weight:800}
-.cp{background:#1b2740;border:1px solid #3d4f77;color:var(--muted);font-size:11px;padding:4px 9px;border-radius:8px;cursor:pointer;font-weight:600}
+.cp{background:#1b2740;border:1px solid #3d4f77;color:var(--muted);font-size:11px;padding:4px 9px;border-radius:8px;cursor:pointer;font-weight:600;white-space:nowrap}
 .cp:hover{color:var(--text);border-color:var(--accent2)}
 .wide{grid-column:span 2}
 .pill{display:inline-block;font-size:11px;padding:2px 8px;border-radius:999px;background:#22304d;color:#c7d2fe;margin-left:6px;vertical-align:middle}
@@ -86,7 +86,25 @@ pre#plan{white-space:pre-wrap;background:#0d1424;border:1px solid #2b3a5c;border
 @media(max-width:900px){.kpi{grid-column:span 6}.chart,.side{grid-column:span 12}}
 @media(max-width:760px){.chartbox{height:620px}}
 @media(max-width:700px){.dgrid{grid-template-columns:1fr}.wide{grid-column:span 1}}
-@media(max-width:600px){.kpi{grid-column:span 12}.hide-mobile{display:none}}
+@media(max-width:600px){
+  .kpi{grid-column:span 6;padding:12px}
+  .kpi .num{font-size:24px;margin-top:2px}
+  .kpi .label{font-size:11.5px}
+  .hide-mobile{display:none}
+  /* 키워드 표 → 카드: 좌은 폭에서 키워드가 한 글자씩 세로로 쪼개지던 문제 해결 */
+  #kwTable,#kwTable tbody{display:block}
+  #kwTable thead{display:none}
+  #kwTable tr{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;border:1px solid #2b3a5c;border-radius:14px;padding:12px;margin-bottom:9px;background:#0f1729}
+  #kwTable td{border:0;padding:0;word-break:keep-all}
+  #kwTable td:nth-child(1){order:1;flex:none}
+  #kwTable td:nth-child(2){order:2;flex:1 1 calc(100% - 50px);min-width:0}
+  #kwTable td:nth-child(4){order:3;flex:1 1 100%}
+  #kwTable td:nth-child(4) .bar{min-width:0}
+  #kwTable td:nth-child(5){order:4;font-size:12px}
+  #kwTable td:nth-child(8){order:5;margin-left:auto}
+  #kwTable td:nth-child(8) .cp{padding:8px 12px}
+  #kwTable .kw{font-size:14.5px}
+}
 </style>
 </head>
 <body>
@@ -110,7 +128,7 @@ pre#plan{white-space:pre-wrap;background:#0d1424;border:1px solid #2b3a5c;border
 </div>
 <div style="text-align:right">
 <div class="badge" id="stamp">2026.11.26 업데이트</div>
-<div class="sub" id="routine" style="font-size:11px;margin-top:6px">매일 04:01 · 10:15 자동 갱신</div>
+<div class="sub" id="routine" style="font-size:11px;margin-top:6px">매시간 정각 자동 갱신</div>
 </div>
 </header>
 
@@ -147,7 +165,7 @@ pre#plan{white-space:pre-wrap;background:#0d1424;border:1px solid #2b3a5c;border
 <h2>키워드 필터 <span class="hint">행을 누르면 바로 글·쇼츠 쓰기 패널이 열립니다</span></h2>
 <div class="controls" id="filters"></div>
 <div style="overflow:auto">
-<table>
+<table id="kwTable">
 <thead><tr><th>순위</th><th>키워드</th><th class="hide-mobile">분야</th><th>인기 점수</th><th>수익성</th><th class="hide-mobile">추천 제목</th><th class="hide-mobile">수익 경로</th><th></th></tr></thead>
 <tbody id="tbody"></tbody>
 </table>
@@ -312,7 +330,7 @@ function renderChart(){
 function renderAll(){
   renderKPI(); renderSide(); renderFilters(); renderTable(); renderChart();
   const m = META||{};
-  if(m.updatedAt) document.getElementById('stamp').textContent = m.updatedAt.replace(' 기준','');
+  if(m.updatedAt) document.getElementById('stamp').textContent = m.updatedAt.replace(' 기준','').replace('(매시간 자동 갱신)','').trim();
   if(m.routines) document.getElementById('routine').textContent = m.routines;
   if(m.disclaimer) document.getElementById('foot').textContent = '※ '+m.disclaimer;
   document.getElementById('plan').textContent = STRATEGY.join('\n');

@@ -1,7 +1,7 @@
 {
   "meta": {
     "updated": "2026-11-26",
-    "updatedAt": "2026.11.26 11:30 기준",
+    "updatedAt": "2026.11.26 17:45 기준",
     "source": "scheduled-actions/🎁-매일-오전-10시-체험단-자동-신청-및-추천-보고/notes.md · scheduled-actions/📝-네이버-블로그-매일-5건-자동-발행/notes.md · scheduled-actions/🎬-네이버-클립-매일-3건-자동-발행/notes.md",
     "disclaimer": "표시된 리워드는 신청·응모 단계의 예정 금액이며 선정 전에는 수익이 아닙니다. 후기·발표 일정은 캠페인 공지 기준입니다."
   },
@@ -16,14 +16,14 @@
   "channels": [
     {
       "name": "네이버 쇼핑 커넥트",
-      "state": "링크 6개 발급",
+      "state": "오늘 클릭 13회",
       "value": 25405,
       "valueLabel": "예상 수익(발급 기준)",
-      "note": "내 블로그 myblog · 링크 발급만으로는 수익 아님"
+      "note": "링크 5건 발급 · 블로그 myblog · 링크 발급만으로는 수익 아님"
     },
     {
       "name": "쿠팡 파트너스",
-      "state": "최종 승인 진행 중",
+      "state": "승인 진행 중 · 클릭 3회",
       "value": 0,
       "valueLabel": "확정 수익",
       "note": "**** · 승인 + 누계 1만 원 이상 시 매월 15일 정산"
@@ -52,18 +52,18 @@
   ],
   "today": {
     "date": "2026-11-26",
-    "blog": { "target": 5, "published": 3, "pending": 2 },
+    "blog": { "target": 5, "published": 5, "pending": 0 },
     "clip": { "target": 3, "published": 0, "scheduledAt": "19:30", "channel": "https://clip.naver.com/@pickstyle_daily" },
+    "clicks": { "shoppingConnect": 13, "coupang": 3, "checkedAt": "2026-11-26 16:00" },
     "posts": [
       {
         "no": 1,
         "title": "🧥 무진장 상의데이, 니트는 '깃 2cm'만 | 11월 26일 남자 카라니트 3만원대",
-        "url": "https://blog.naver.com/myblog/224492743701",
+        "url": "https://blog.naver.com/myblog/224492793992",
         "product": "비스코스 니트티 9color (비욘드마이셀프) 42,800 → 32,800",
         "productUrl": "https://naver.me/FTduD2wm",
-        "status": "게시",
-        "warn": "본문 글자색이 빨강으로 올라감 · 수정 필요",
-        "photos": 4
+        "status": "게시 완료",
+        "photos": 5
       },
       {
         "no": 2,
@@ -71,9 +71,8 @@
         "url": "https://blog.naver.com/myblog/224492759251",
         "product": "스파오 와이드 코튼 팬츠 SPTCG49G01 49,900 → 39,900",
         "productUrl": "https://naver.me/F4WzHC8D",
-        "status": "게시",
-        "warn": "상품 사진 1장 더 필요",
-        "photos": 3
+        "status": "게시 완료",
+        "photos": 5
       },
       {
         "no": 3,
@@ -81,27 +80,29 @@
         "url": "https://blog.naver.com/myblog/224492765653",
         "product": "스파오 베이직 퍼플리스 집업 SPFZG4TC01 29,900 → 26,910",
         "productUrl": "https://naver.me/xeFTS4vk",
-        "status": "게시",
-        "warn": "상품 사진 1장 더 필요",
-        "photos": 2
-      }
-    ],
-    "drafts": [
-      {
-        "title": "[1+1] 아누아 PDRN 히알루론산 캡슐 세럼 30ml 2개",
-        "product": "78,000 → 33,900 (최대 30,900)",
-        "productUrl": "https://naver.me/F2Lybamh",
-        "status": "발급 완료 · 발행 전",
-        "file": "work/blog-2026-11-26/text-p4.txt"
+        "status": "게시 완료",
+        "photos": 4
       },
       {
-        "title": "AI 일자리 쇼크, 은행권 희망퇴직 20% 늘듯 (핫이슈 · 쇼핑 링크 없음)",
-        "product": "동아일보 2026-11-26 기사 기반",
+        "no": 4,
+        "title": "💧 '수지 세럼' 78,000원이 33,900원 | 겨울 속건조에 1+1로 두 병 쓰는 이유",
+        "url": "https://blog.naver.com/myblog/224492814895",
+        "product": "아누아 PDRN 히알루론산 캡슐 세럼 30ml 2개 78,000 → 33,900",
+        "productUrl": "https://naver.me/F2Lybamh",
+        "status": "게시 완료",
+        "photos": 5
+      },
+      {
+        "no": 5,
+        "title": "🤖 은행원도 희망퇴직 20% 늘었다 | AI가 가져간 일, 남는 일 (11월 26일 뉴스)",
+        "url": "https://blog.naver.com/myblog/224492820279",
+        "product": "핫이슈 · 동아일보 2026-11-26 · 쇼핑 링크 없음",
         "productUrl": "",
-        "status": "초안 완료 · 발행 전",
-        "file": "work/blog-2026-11-26/text-p5.txt"
+        "status": "게시 완료",
+        "photos": 3
       }
     ],
+    "drafts": [],
     "clips": [
       { "title": "오늘 19:30 예약 발행 3건 (아직 업로드 전)", "url": "https://clip.naver.com/@pickstyle_daily", "status": "예약" }
     ],
@@ -257,11 +258,13 @@
   },
   "tasks": [
     { "id": "t1", "text": "세스코(현금 10만 원) 발표 확인 — 브랜드 커넥트 > 캠페인 관리 > 대기 중", "url": "https://brandconnect.naver.com/****/campaign/1021074708020450" },
-    { "id": "t2", "text": "1번 글(224492743701) 본문 글자색 수정 — 상단 2줄만 빨강, 본문은 기본색", "url": "https://blog.naver.com/myblog/224492743701" },
-    { "id": "t3", "text": "2·3번 글에 순수 상품 사진 1장씩 추가", "url": "https://blog.naver.com/myblog/224492759251" },
-    { "id": "t4", "text": "아누아 세럼 글 발행 (초안 work/blog-2026-11-26/text-p4.txt)", "url": "https://naver.me/F2Lybamh" },
-    { "id": "t5", "text": "핫이슈 글 발행 (동아일보 AI 일자리 쇼크 · text-p5.txt)", "url": "" },
-    { "id": "t6", "text": "19:30 클립 3건 예약 발행 확인", "url": "https://clip.naver.com/@pickstyle_daily" }
+    { "id": "t2", "text": "1번 글 글자색 문제 → 삭제 후 재발행 완료 (224492793992)", "url": "https://blog.naver.com/myblog/224492793992", "done": true },
+    { "id": "t3", "text": "2·3번 글에 상품 사진 보충 완료 (5장·4장)", "url": "https://blog.naver.com/myblog/224492759251", "done": true },
+    { "id": "t4", "text": "아누아 세럼 글 발행 완료 (224492814895)", "url": "https://blog.naver.com/myblog/224492814895", "done": true },
+    { "id": "t5", "text": "핫이슈 AI 일자리 글 발행 완료 (224492820279)", "url": "https://blog.naver.com/myblog/224492820279", "done": true },
+    { "id": "t6", "text": "19:30 클립 3건 예약 발행 확인", "url": "https://clip.naver.com/@pickstyle_daily" },
+    { "id": "t7", "text": "이웃 품앗이 공감·댓글 4건 (PC 페이지에서 진행)", "url": "https://blog.naver.com/hl-henry/224480622249" },
+    { "id": "t8", "text": "쇼핑 커넥트·쿠팡 클릭 수 내일 오후 4시 재확인", "url": "https://sell.shopping.naver.com/" }
   ],
   "reviewSample": {
     "product": "스파오 베이직 퍼플리스 집업 SPFZG4TC01",

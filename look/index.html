@@ -538,7 +538,9 @@ async function runAI(){
 /* ---------- 상태 ---------- */
 const ST={photo:null,px:null,meta:"",styles:[],result:null,saved:new Set(),looks:[],user:null,active:0,busy:false,msg:0,err:"",mode:"login",
  f:{name:"",email:""},fe:{},note:"",key:"",model:"gemini-3.8-flash",imgModel:"gemini-3.1-flash-image",sample:null,
- profile:{shoulder:"normal",leg:"normal",build:"normal"},tpo:"daily",wea:"warm",wardrobe:[],wcombos:null,images:{}};
+ profile:{shoulder:"normal",leg:"normal",build:"normal"},tpo:"daily",wea:seasonWarmth(),wardrobe:[],wcombos:null,images:{}};
+/* 날씨 기본값: 계절에 맞게 (예전엔 사계정 "18~27도"로 고정돼 11월에도 봄날씨가 선택돼 있었음) */
+function seasonWarmth(){const m=new Date().getMonth()+1;if(m===12||m===1||m===2)return "cold";if(m===3||m===11)return "chill";if(m===4||m===5||m===10)return "warm";return "hot"}
 try{ST.key=localStorage.getItem("lookai:gkey")||"";ST.model=localStorage.getItem("lookai:gmodel")||ST.model}catch(e){}
 try{ST.profile=Object.assign(ST.profile,JSON.parse(localStorage.getItem("lookai:profile"))||{})}catch(e){}
 try{ST.looks=JSON.parse(localStorage.getItem("lookai:looks"))||[]}catch(e){}
