@@ -1,7 +1,7 @@
 {
   "meta": {
-    "updated": "2026-11-26",
-    "updatedAt": "2026.11.26 20:05 기준",
+    "updated": "2026-11-27",
+    "updatedAt": "2026.11.27 04:05 기준 (11/26 성과 실측 · 마지막 발행일 기준)",
     "source": "scheduled-actions/🎁-매일-오전-10시-체험단-자동-신청-및-추천-보고/notes.md · scheduled-actions/📝-네이버-블로그-매일-5건-자동-발행/notes.md · scheduled-actions/🎬-네이버-클립-매일-3건-자동-발행/notes.md",
     "disclaimer": "표시된 리워드는 신청·응모 단계의 예정 금액이며 선정 전에는 수익이 아닙니다. 후기·발표 일정은 캠페인 공지 기준입니다."
   },
@@ -9,31 +9,31 @@
     "min": 1000000,
     "max": 10000000,
     "confirmed": 0,
-    "pendingCash": 100000,
+    "pendingCash": 0,
     "pendingGoods": 342900,
-    "note": "월 100만~1,000만 원 목표 · 확정 수익 0원 · 선정 대기 리워드 442,900원"
+    "note": "월 100만~1,000만 원 목표 · 확정 수익 0원 · 선정 대기 상품 342,900원 (세스코 현금 10만 원은 11/26 미선정으로 제외)"
   },
   "channels": [
     {
       "name": "네이버 쇼핑 커넥트",
-      "state": "오늘 클릭 13회 · 링크 8건 발급",
-      "value": 25405,
-      "valueLabel": "예상 수익(발급 기준)",
-      "note": "링크 8건 발급(블로그 5·클립 3) · 블로그 myblog · 클립 @pickstyle_daily · 링크 발급만으로는 수익 아님"
+      "state": "최근 30일 클릭 13 · 주문 0 · 예상 수익 0원 (11/25 집계분)",
+      "value": 0,
+      "valueLabel": "예상 수익",
+      "note": "11/26분은 11/26 집계 후 반영 · 링크 8건 발급(블로그 5·클립 3) · 링크 발급만으로는 수익 아님"
     },
     {
       "name": "쿠팡 파트너스",
-      "state": "승인 진행 중 · 클릭 3회",
+      "state": "클릭 3 · 구매 0 · 수익 0원 (11.26 기준)",
       "value": 0,
       "valueLabel": "확정 수익",
       "note": "**** · 승인 + 누계 1만 원 이상 시 매월 15일 정산"
     },
     {
       "name": "네이버 브랜드 커넥트",
-      "state": "8건 선정 대기",
-      "value": 442900,
+      "state": "7건 선정 대기 · 1건 미선정",
+      "value": 342900,
       "valueLabel": "선정 대기 리워드",
-      "note": "현금 100,000원 + 상품 342,900원"
+      "note": "세스코 현금 100,000원 11/26 미선정 · 남은 7건 상품 합계 342,900원 · 캠페인 실적 진행/제출/수익 모두 0"
     },
     {
       "name": "무신사 체험단",
@@ -67,7 +67,7 @@
     "clicks": {
       "shoppingConnect": 13,
       "coupang": 3,
-      "checkedAt": "2026-11-26 16:00"
+      "checkedAt": "2026-11-27 04:05 · 쇼핑커넥트는 11/25 집계분"
     },
     "posts": [
       {
@@ -77,7 +77,8 @@
         "product": "비스코스 니트티 9color (비욘드마이셀프) 42,800 → 32,800",
         "productUrl": "https://naver.me/FTduD2wm",
         "status": "게시 완료",
-        "photos": 5
+        "photos": 5,
+        "views": 4
       },
       {
         "no": 2,
@@ -86,7 +87,8 @@
         "product": "스파오 와이드 코튼 팬츠 SPTCG49G01 49,900 → 39,900",
         "productUrl": "https://naver.me/F4WzHC8D",
         "status": "게시 완료",
-        "photos": 5
+        "photos": 5,
+        "views": 3
       },
       {
         "no": 3,
@@ -95,7 +97,8 @@
         "product": "스파오 베이직 퍼플리스 집업 SPFZG4TC01 29,900 → 26,910",
         "productUrl": "https://naver.me/xeFTS4vk",
         "status": "게시 완료",
-        "photos": 4
+        "photos": 4,
+        "views": 0
       },
       {
         "no": 4,
@@ -104,7 +107,8 @@
         "product": "아누아 PDRN 히알루론산 캡슐 세럼 30ml 2개 78,000 → 33,900",
         "productUrl": "https://naver.me/F2Lybamh",
         "status": "게시 완료",
-        "photos": 5
+        "photos": 5,
+        "views": 1
       },
       {
         "no": 5,
@@ -113,7 +117,8 @@
         "product": "핫이슈 · 동아일보 2026-11-26 · 쇼핑 링크 없음",
         "productUrl": "",
         "status": "게시 완료",
-        "photos": 3
+        "photos": 3,
+        "views": 6
       }
     ],
     "drafts": [],
@@ -142,21 +147,41 @@
     ],
     "clipsYesterday": [
       {
-        "title": "[N배송] 스파오 파스텔 퍼퍼 SPJPG4TG11",
-        "url": "https://naver.me/GjyjqA1F",
-        "views": "3"
-      },
-      {
         "title": "남자 라드 2단기장 겨울 기모안감 코듀로이 밴딩팬츠",
         "url": "https://naver.me/Gzd3FPbD",
-        "views": "23"
+        "views": "35"
       },
       {
         "title": "미라클뮤즈 아하바하 메디크림",
         "url": "https://naver.me/GKIA3jIe",
+        "views": "7"
+      },
+      {
+        "title": "[N배송] 스파오 파스텔 퍼퍼 SPJPG4TG11",
+        "url": "https://naver.me/GjyjqA1F",
         "views": "4"
       }
-    ]
+    ],
+    "label": "마지막 발행일",
+    "perf": {
+      "date": "2026-11-26",
+      "blogViews": 25,
+      "blogLikes": 7,
+      "blogComments": 0,
+      "blogVisitors": 15,
+      "inflow": "네이버 통합검색 모바일 60% · PC 20% · 블로그검색 13.3% · 블로그 모바일 6.7%",
+      "followers": 7,
+      "aiBriefing": "누적·11월·9월 인용수 모두 100 미만 (본인에게만 공개) · 네이버 메이트 선정 기준(9월 인용수) 미달",
+      "clipViews": {
+        "후아유 와이드": 11,
+        "디키즈 누빔": 6,
+        "올리즌 맨투맨": 4,
+        "라드 코듀로이(11/25)": 35,
+        "메디크림(11/25)": 7,
+        "스파오 퍼퍼(11/25)": 4
+      },
+      "note": "11/27 04:0x 조회. 클립은 발행 8시간 시점이라 48시간 후 재판정"
+    }
   },
   "brand": {
     "space": "****",
@@ -168,14 +193,15 @@
         "id": "sesco",
         "name": "[세스코] 정보형 파워블로그 운영건",
         "reward": "현금 100,000원",
-        "cash": 100000,
+        "cash": 0,
         "goods": 0,
         "apply": "6명 / 249명",
         "announce": "2026-11-26",
         "submitStart": "2026-11-26",
         "submitEnd": "2026-12-07",
         "mission": "블로그 1건 정보성 원고 1,500자 이상 · 사진 10장 · 세스코 링크 삽입 · 3개월 공개 유지",
-        "url": "https://brandconnect.naver.com/****/campaign/1021074708020450"
+        "url": "https://brandconnect.naver.com/****/campaign/1021074708020450",
+        "status": "미선정 (2026-11-26 발표)"
       },
       {
         "id": "incense",
@@ -183,12 +209,13 @@
         "reward": "상품 30,000원",
         "cash": 0,
         "goods": 30000,
-        "apply": "5명 / 18명",
+        "apply": "5명 / 69명",
         "announce": null,
         "submitStart": "2026-12-01",
         "submitEnd": "2026-12-28",
         "mission": "블로그 1건 · 사진 5~10장 · 6개월 공개 유지 (인센스 스틱 동봉 요청)",
-        "url": "https://brandconnect.naver.com/****/campaign/1021353381850147"
+        "url": "https://brandconnect.naver.com/****/campaign/1021353381850147",
+        "status": "선정 대기"
       },
       {
         "id": "terdi-oil",
@@ -196,12 +223,13 @@
         "reward": "상품 60,000원",
         "cash": 0,
         "goods": 60000,
-        "apply": "30명 / 17명",
+        "apply": "30명 / 81명",
         "announce": "2026-12-01",
         "submitStart": "2026-12-02",
         "submitEnd": "2026-12-10",
         "mission": "블로그 1건 · 6개월 공개 유지 · 지정 키워드 사용",
-        "url": "https://brandconnect.naver.com/****/campaign/1020745209833826"
+        "url": "https://brandconnect.naver.com/****/campaign/1020745209833826",
+        "status": "선정 대기"
       },
       {
         "id": "terdi-gwalsa",
@@ -209,12 +237,13 @@
         "reward": "상품 150,000원",
         "cash": 0,
         "goods": 150000,
-        "apply": "30명 / 18명",
+        "apply": "30명 / 137명",
         "announce": null,
         "submitStart": "2026-12-02",
         "submitEnd": "2026-12-10",
         "mission": "블로그 1건 · 6개월 공개 유지 · 페이스/바디 랜덤 제공",
-        "url": "https://brandconnect.naver.com/****/campaign/1020742356330914"
+        "url": "https://brandconnect.naver.com/****/campaign/1020742356330914",
+        "status": "선정 대기"
       },
       {
         "id": "betterskin",
@@ -222,12 +251,13 @@
         "reward": "상품 42,000원",
         "cash": 0,
         "goods": 42000,
-        "apply": "20명 / 55명",
+        "apply": "20명 / 66명",
         "announce": null,
         "submitStart": "2026-12-02",
         "submitEnd": "2026-12-18",
         "mission": "블로그 1건 · 선정 시 무료 쿠폰으로 직접 주문(자부담 0원)",
-        "url": "https://brandconnect.naver.com/****/campaign/1020410717763878"
+        "url": "https://brandconnect.naver.com/****/campaign/1020410717763878",
+        "status": "선정 대기"
       },
       {
         "id": "scotch",
@@ -235,12 +265,13 @@
         "reward": "상품 22,000원",
         "cash": 0,
         "goods": 22000,
-        "apply": "20명 / 99명",
+        "apply": "20명 / 125명",
         "announce": null,
         "submitStart": "2026-12-07",
         "submitEnd": "2026-12-20",
         "mission": "블로그 1건 · 200자 이상 · 사진 5장 · 지정 키워드",
-        "url": "https://brandconnect.naver.com/****/campaign/1021106557348866"
+        "url": "https://brandconnect.naver.com/****/campaign/1021106557348866",
+        "status": "선정 대기"
       },
       {
         "id": "popo",
@@ -248,12 +279,13 @@
         "reward": "상품 27,000원",
         "cash": 0,
         "goods": 27000,
-        "apply": "20명 / 64명",
+        "apply": "20명 / 80명",
         "announce": null,
         "submitStart": "2026-12-03",
         "submitEnd": "2026-12-10",
         "mission": "블로그 1건 · 1,500자 · 사진 10장 · GIF/숏영상 2개 · 필수 키워드·구매링크",
-        "url": "https://brandconnect.naver.com/****/campaign/1021139613183362"
+        "url": "https://brandconnect.naver.com/****/campaign/1021139613183362",
+        "status": "선정 대기"
       },
       {
         "id": "killpaf",
@@ -261,14 +293,16 @@
         "reward": "상품 11,900원",
         "cash": 0,
         "goods": 11900,
-        "apply": "50명 / 14명",
+        "apply": "50명 / 22명",
         "announce": null,
         "submitStart": "2026-12-07",
         "submitEnd": "2026-12-20",
         "mission": "블로그 1건 · 200자 · 사진 5장 · 해시태그 3회 이상 · 6개월 유지",
-        "url": "https://brandconnect.naver.com/****/campaign/1021346509257796"
+        "url": "https://brandconnect.naver.com/****/campaign/1021346509257796",
+        "status": "선정 대기"
       }
-    ]
+    ],
+    "resultSummary": "11/26 발표: 세스코(현금 10만 원) 미선정 · 나머지 7건 선정 대기"
   },
   "musinsa": {
     "account": "private-account",
@@ -372,36 +406,6 @@
       "url": "https://brandconnect.naver.com/****/campaign/1021074708020450"
     },
     {
-      "id": "t2",
-      "text": "1번 글 글자색 문제 → 삭제 후 재발행 완료 (224492793992)",
-      "url": "https://blog.naver.com/myblog/224492793992",
-      "done": true
-    },
-    {
-      "id": "t3",
-      "text": "2·3번 글에 상품 사진 보충 완료 (5장·4장)",
-      "url": "https://blog.naver.com/myblog/224492759251",
-      "done": true
-    },
-    {
-      "id": "t4",
-      "text": "아누아 세럼 글 발행 완료 (224492814895)",
-      "url": "https://blog.naver.com/myblog/224492814895",
-      "done": true
-    },
-    {
-      "id": "t5",
-      "text": "핫이슈 AI 일자리 글 발행 완료 (224492820279)",
-      "url": "https://blog.naver.com/myblog/224492820279",
-      "done": true
-    },
-    {
-      "id": "t6",
-      "text": "19:30 클립 3건 발행 완료 (디키즈 누빔·후아유 와이드·올리즌 맨투맨) — 조회수 48시간 뒤 확인",
-      "url": "https://clip.naver.com/@pickstyle_daily",
-      "done": true
-    },
-    {
       "id": "t7",
       "text": "이웃 품앗이 공감·댓글 4건 (PC 페이지에서 진행)",
       "url": "https://blog.naver.com/hl-henry/224480622249"
@@ -410,6 +414,26 @@
       "id": "t8",
       "text": "쇼핑 커넥트·쿠팡 클릭 수 내일 오후 4시 재확인",
       "url": "https://sell.shopping.naver.com/"
+    },
+    {
+      "id": "t11",
+      "text": "무진장 상의·하의데이 마지막 날(11/27) — 블로그 5건·클립 3건에 \"오늘까지\" 반영",
+      "url": "https://www.musinsa.com/"
+    },
+    {
+      "id": "t12",
+      "text": "올영데이 마지막 날(11/27) → 12월 올영 빅세일 예고 앵글로 뷰티 글 1건",
+      "url": "https://www.oliveyoung.co.kr/"
+    },
+    {
+      "id": "t13",
+      "text": "세스코 캠페인 미선정 확인 → 현금 10만 원 목표에서 제외, 신규 현금형 캠페인 재탐색",
+      "url": "https://brandconnect.naver.com/****/campaign/search"
+    },
+    {
+      "id": "t14",
+      "text": "정산 계좌: 첫 수익 발생 시 개인 유형 등록(카카오뱅크 ****) — 지금은 시스템이 등록 차단",
+      "url": "https://brandconnect.naver.com/****/settlement/affiliate"
     }
   ],
   "reviewSample": {
@@ -432,5 +456,13 @@
       "신축성이 거의 없어 정사이즈가 안전",
       "밝은 색은 안감 비침 있음"
     ]
+  },
+  "settlement": {
+    "space": "****",
+    "accountRegistered": false,
+    "autoSettlement": true,
+    "rule": "전월 1일~말일 구매확정 건 → 매월 22일 수익 확정 → 23일 기준 ①정산 신청 내역 ②계좌 등록 시 정산 진행 → 27일까지 매출증빙 → 익월 15일 지급 (개인 원천세 3.3%)",
+    "blocker": "개인 유형 정산 정보는 \"수익(현금 리워드)이 발생된 이후\"부터 등록 가능 → 현재 등록 버튼은 사업자 경로만 열림. 첫 수익 발생 시 카카오뱅크 ****(예금주 비공개) 등록 필요",
+    "checkedAt": "2026-11-27 04:05"
   }
 }
