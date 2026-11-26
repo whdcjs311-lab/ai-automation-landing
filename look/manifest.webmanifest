@@ -1,0 +1,40 @@
+{
+  "name": "LOOK AI",
+  "short_name": "LOOK AI",
+  "description": "사진 한 장으로 완성하는 코디 — AI 퍼스널 스타일링",
+  "lang": "ko",
+  "dir": "ltr",
+  "start_url": "/ai-automation-landing/look/",
+  "scope": "/ai-automation-landing/look/",
+  "id": "/ai-automation-landing/look/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#FAF8F4",
+  "theme_color": "#FAF8F4",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icon-1024.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

@@ -1,0 +1,961 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FAF8F4">
+<title>LOOK AI · 사진 한 장으로 완성하는 코디</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png" type="image/png">
+<link rel="icon" href="icon-512.png" type="image/png" sizes="512x512">
+<link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="180x180">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="LOOK AI">
+<meta name="application-name" content="LOOK AI">
+<style>
+:root{--bg:#F1EBDF;--ivory:#FAF8F4;--ink:#111;--mute:rgba(17,17,17,.62);--line:rgba(17,17,17,.13);--sand:#D9CDB8;--taupe:#7A6A55;--card:#F1EBDF;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b0b0b;--ivory:#151412;--ink:#F5F1EA;--mute:rgba(245,241,234,.6);--line:rgba(245,241,234,.15);--sand:#3a352c;--taupe:#b9a98c;--card:#201d19;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0b0b0b;--ivory:#151412;--ink:#F5F1EA;--mute:rgba(245,241,234,.6);--line:rgba(245,241,234,.15);--sand:#3a352c;--taupe:#b9a98c;--card:#201d19;color-scheme:dark}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;-webkit-font-smoothing:antialiased}
+#app{max-width:430px;margin:0 auto;min-height:100vh;min-height:100dvh;background:var(--ivory);padding-bottom:88px}
+a{color:inherit;text-decoration:none}
+input,button{font-family:inherit}
+input[type=text],input[type=email],input[type=password]{font-size:16px}
+.pad{padding:0 24px}
+.logo{font-family:"Cormorant Garamond",Didot,"Bodoni 72",Georgia,serif;font-size:22px;letter-spacing:.32em;font-weight:500}
+.logo b{color:var(--taupe);font-weight:500}
+.top{display:flex;justify-content:space-between;align-items:center;padding:20px 24px 0}
+.hd{position:relative;display:flex;justify-content:center;align-items:center;height:48px;margin-top:8px}
+.hd h1{font-size:15px;font-weight:500;margin:0;letter-spacing:.04em}
+.bk{position:absolute;left:8px;width:40px;height:40px;display:flex;align-items:center;justify-content:center}
+.steps{display:flex;gap:6px;padding:4px 24px 0}.steps i{flex:1;height:2px;border-radius:2px;background:var(--line)}.steps i.on{background:var(--ink)}
+h2.t{font-size:24px;font-weight:300;line-height:1.35;margin:18px 0 8px}
+h2.big{font-size:38px;font-weight:300;line-height:1.2;letter-spacing:-.02em;margin:14px 0}
+.lbl{font-size:11px;letter-spacing:.3em;color:var(--taupe);margin:0}
+.mute{color:var(--mute);font-size:14px;line-height:1.6}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;height:56px;border-radius:999px;border:1px solid var(--line);background:none;color:var(--ink);font-size:15px;font-weight:500;letter-spacing:.03em;cursor:pointer}
+.btn:active{transform:scale(.98)}.btn:disabled{opacity:.35;pointer-events:none}
+.p{background:var(--ink);color:var(--ivory);border-color:var(--ink)}
+.btn.sm{height:48px;font-size:14px}
+.ic{width:22px;height:22px;flex:none}.btn .ic{width:18px;height:18px}
+.hero{position:relative;height:240px;border-radius:28px;background:var(--card);overflow:hidden;margin-top:28px}
+.hero svg{position:absolute;width:200px;height:200px}
+.dots{position:absolute;left:16px;bottom:16px;display:flex;gap:8px}.dots i{width:28px;height:28px;border-radius:50%;border:1px solid var(--line)}
+.how{list-style:none;margin:20px 0 0;padding:0;border-top:1px solid var(--line)}
+.how li{display:flex;gap:20px;padding:20px 0;border-bottom:1px solid var(--line)}
+.how em{font-family:Georgia,serif;font-style:normal;font-size:24px;color:var(--taupe)}
+.how p{margin:0}.how b{font-weight:500}
+.ph{position:relative;border-radius:24px;overflow:hidden;background:var(--card);aspect-ratio:3/4}
+.ph img{width:100%;height:100%;object-fit:cover;display:block}
+.ph .x{position:absolute;top:12px;right:12px;width:36px;height:36px;border-radius:50%;border:0;background:rgba(0,0,0,.65);color:#fff;display:flex;align-items:center;justify-content:center}
+.ph .m{position:absolute;left:12px;bottom:12px;font-size:11px;color:#fff;background:rgba(0,0,0,.65);padding:4px 12px;border-radius:99px}
+.drop{aspect-ratio:3/4;border:1px dashed var(--line);border-radius:24px;background:var(--card);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;color:var(--taupe)}
+.drop .ic{width:40px;height:40px}.drop p{margin:12px 0 0;color:var(--ink);font-weight:500}.drop small{color:var(--mute);margin-top:4px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.err{margin-top:12px;padding:12px 16px;border-radius:16px;background:var(--ink);color:var(--ivory);font-size:14px}
+.tips{list-style:none;padding:0;margin:20px 0 0;font-size:13px;color:var(--mute);line-height:1.9}
+.sg{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+.sc{min-height:132px;border-radius:24px;border:1px solid var(--line);background:var(--ivory);color:var(--ink);padding:16px;text-align:left;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer}
+.sc.on{background:var(--ink);color:var(--ivory);border-color:var(--ink)}.sc.lock{opacity:.4}
+.sw{display:flex}.sw i{width:20px;height:20px;border-radius:50%;border:1px solid var(--line);margin-right:-6px}
+.sc small{display:block;font-size:11px;letter-spacing:.2em;opacity:.55}.sc b{display:block;font-size:15px;font-weight:500;margin:4px 0 2px}.sc span{font-size:12px;opacity:.65}
+.ov{position:fixed;inset:0;z-index:50;background:var(--ivory);opacity:.97;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.sp{width:40px;height:40px;border-radius:50%;border:2px solid var(--line);border-top-color:var(--ink);animation:r 1s linear infinite}@keyframes r{to{transform:rotate(360deg)}}
+.badge{text-align:center;font-size:11px;color:var(--taupe);background:var(--card);border-radius:99px;padding:8px 16px;margin:8px 0 16px}
+.row{display:flex;align-items:center;gap:20px}.row img{width:96px;height:116px;border-radius:16px;object-fit:cover;flex:none}
+.ring{position:relative;width:112px;height:112px;flex:none}.ring svg{transform:rotate(-90deg)}
+.ring div{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}.ring b{font:400 30px Georgia,serif}.ring small{font-size:9px;letter-spacing:.15em;color:var(--mute)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.chips span{background:var(--card);color:var(--taupe);font-size:12px;border-radius:99px;padding:4px 12px}
+.box{border:1px solid var(--line);border-radius:16px;padding:16px}.box p{margin:8px 0 0;font-weight:500}
+.pal{display:flex;gap:16px;margin-top:12px}.pal div{text-align:center;font-size:11px;color:var(--mute)}.pal i{display:block;width:48px;height:48px;border-radius:50%;border:1px solid var(--line);margin-bottom:6px}
+.it{padding:16px 0;border-bottom:1px solid var(--line)}.it:first-child{border-top:1px solid var(--line)}
+.it div{display:flex;justify-content:space-between;align-items:baseline;font-size:15px;font-weight:500}.it small{font-size:12px;color:var(--mute);font-weight:400}
+.bar{height:3px;border-radius:3px;background:var(--line);margin-top:8px}.bar i{display:block;height:100%;border-radius:3px;background:var(--ink)}
+.tipbox{background:var(--card);border-radius:24px;padding:20px;margin-top:24px;font-size:14px;line-height:1.7}
+.oc{border:1px solid var(--line);border-radius:24px;overflow:hidden;margin-top:20px}.oc .cl{display:flex;height:88px}.oc .cl i{flex:1}
+.oc .bd{padding:20px}.oc h3{margin:8px 0 0;font-size:18px;font-weight:500}
+.oc .hr{position:absolute;right:12px;top:12px;width:40px;height:40px;border:0;background:none;color:var(--ink)}.oc .hr.on svg{fill:currentColor}
+.pc{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}.pc i{width:16px;height:16px;border-radius:50%;border:1px solid var(--line);flex:none}.pc small{width:44px;color:var(--taupe);font-size:12px}
+.why{margin:16px 0 0;padding:12px 16px;border-radius:16px;background:var(--card);font-size:13px;line-height:1.7;color:var(--mute)}
+.tab{display:grid;grid-template-columns:1fr 1fr;background:var(--card);border-radius:99px;padding:4px;margin-top:20px}.tab button{height:44px;border:0;border-radius:99px;background:none;color:var(--mute);font-size:14px}.tab .on{background:var(--ink);color:var(--ivory)}
+.fld{width:100%;height:56px;border-radius:16px;border:1px solid var(--line);background:var(--ivory);color:var(--ink);padding:0 16px;margin-top:14px;outline:none}.fld:focus{border-color:var(--ink)}
+.fe{font-size:12px;margin:6px 4px 0;color:var(--mute)}
+.chk{display:flex;gap:12px;align-items:flex-start;font-size:13px;color:var(--mute);margin-top:16px}.chk input{width:20px;height:20px;accent-color:var(--ink);margin:0}
+nav{position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:100%;max-width:430px;display:grid;grid-template-columns:repeat(5,1fr);background:var(--ivory);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px);z-index:9}
+nav a{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 0;font-size:10px;letter-spacing:.04em;color:var(--mute)}nav a.on{color:var(--ink)}
+.seg{display:flex;gap:6px;margin-top:10px}
+.seg button{flex:1;height:46px;border-radius:12px;border:1px solid var(--line);background:var(--ivory);color:var(--mute);font-size:13px;font-weight:500;cursor:pointer;padding:0 4px;line-height:1.2}
+.seg button.on{background:var(--ink);color:var(--ivory);border-color:var(--ink)}
+.chips.sel{margin-top:10px}
+.chip{border:1px solid var(--line);background:var(--ivory);color:var(--mute);font-size:13px;border-radius:99px;padding:9px 15px;cursor:pointer;font-weight:500}
+.chip.on{background:var(--ink);color:var(--ivory);border-color:var(--ink)}
+.hb{border:1px solid var(--line);border-radius:16px;padding:16px;margin-top:12px}
+.hb-top{display:flex;justify-content:space-between;align-items:baseline}
+.hb-top b{font:400 26px Georgia,serif}
+.hb .bar{margin-top:10px}
+.shop{font-size:11px;color:var(--taupe);border:1px solid var(--line);border-radius:99px;padding:6px 11px;flex:none;margin-left:8px;white-space:nowrap;display:inline-flex;align-items:center;min-height:26px}
+.pc span{flex:1;min-width:0;line-height:1.35;white-space:normal;overflow-wrap:anywhere}
+
+.board{width:100%;height:auto;display:block;border-radius:20px}
+.boardwrap{padding:0 0 4px;position:relative}
+.lookcap{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-top:8px;font-size:12px;color:var(--mute)}
+.lookcap b{font-size:14px;color:var(--ink);font-weight:500}
+.comps{display:grid;gap:8px;margin-top:10px}
+.comp{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:14px;padding:10px 12px;background:var(--ivory)}
+.comp-sw{width:18px;height:18px;border-radius:50%;border:1px solid var(--line);flex:none}
+.comp-tx{flex:1;min-width:0}
+.comp-tx small{display:block;font-size:10px;letter-spacing:.14em;color:var(--taupe)}
+.comp-tx b{display:block;font-size:13.5px;font-weight:500}
+.comp-tx span{display:block;font-size:11.5px;color:var(--mute);line-height:1.45;margin-top:2px}
+.comp-a{flex:none;font-size:11px;border:1px solid var(--line);border-radius:99px;padding:6px 10px;color:var(--taupe);min-height:26px;display:flex;align-items:center}
+.wgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px}
+.witem{position:relative;aspect-ratio:3/4;border-radius:14px;overflow:hidden;background:var(--card)}
+.witem img{width:100%;height:100%;object-fit:cover;display:block}
+.witem .wdel{position:absolute;top:4px;right:4px;width:34px;height:34px;border-radius:50%;border:0;background:rgba(0,0,0,.6);color:#fff;display:flex;align-items:center;justify-content:center}
+.witem .wdel .ic{width:16px;height:16px}
+.wcat{position:absolute;left:6px;bottom:6px;border:0;border-radius:99px;background:rgba(255,255,255,.92);color:#111;font-size:11px;padding:7px 11px;font-weight:500;min-height:30px}
+.witem small{position:absolute;right:8px;bottom:9px;width:14px;height:14px;border-radius:50%;border:1px solid rgba(255,255,255,.7)}
+.wrow{display:flex;gap:6px;padding:12px 12px 0}
+.wrow img{flex:1;min-width:0;aspect-ratio:1;object-fit:cover;border-radius:12px;background:var(--card)}
+/* ---- FULL LOOK: 조합 탭 · 룩보드 · 아이템 카드 · 구매 링크 ---- */
+.ltabs{display:flex;gap:8px;overflow-x:auto;margin:14px -24px 0;padding:0 24px 6px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.ltabs::-webkit-scrollbar{display:none}
+.ltabs button{flex:none;border:1px solid var(--line);background:var(--ivory);color:var(--ink);border-radius:16px;padding:10px 14px;font-size:12.5px;font-weight:500;line-height:1.3;text-align:left;cursor:pointer;max-width:186px}
+.ltabs button b{display:block;font-size:9px;letter-spacing:.18em;font-weight:400;color:var(--taupe);margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ltabs button span{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;opacity:.6;font-weight:400;font-size:11px;margin-top:2px}
+.ltabs button.on{background:var(--ink);color:var(--ivory);border-color:var(--ink)}
+.ltabs button.on b{color:rgba(250,248,244,.55)}
+.lb{border:1px solid var(--line);border-radius:26px;padding:14px;margin-top:12px;background:var(--ivory)}
+.lb-top{display:flex;gap:14px;align-items:flex-start}
+.lb-photo{width:88px;height:112px;border-radius:16px;object-fit:cover;flex:none;background:var(--card)}
+.lb-meta{flex:1;min-width:0}
+.lb-meta h3{margin:6px 0 0;font-size:19px;font-weight:500;line-height:1.3;letter-spacing:-.01em}
+.lb-meta p{margin:6px 0 0;font-size:12px;line-height:1.55;color:var(--mute)}
+.lb-colors{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+.lb-colors div{text-align:center;min-width:0}
+.lb-colors i{display:block;width:100%;height:28px;border-radius:7px;border:1px solid var(--line)}
+.lb-colors small{display:block;font-size:8.5px;letter-spacing:.06em;color:var(--taupe);margin-top:5px}
+.lb-colors b{display:block;font-size:9.5px;font-weight:500;line-height:1.3;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lb-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.lbc{position:relative;border-radius:16px;background:var(--card);padding:22px 6px 8px}
+.lbc small{position:absolute;left:9px;top:8px;font-size:8px;letter-spacing:.12em;color:var(--taupe)}
+.lbc svg{display:block;width:100%;height:auto;max-height:104px}
+.lbc b{display:block;font-size:9.5px;font-weight:500;line-height:1.35;text-align:center;margin-top:4px;min-height:26px;overflow-wrap:anywhere}
+.icard{border:1px solid var(--line);border-radius:20px;padding:14px 16px;margin-top:10px}
+.icard-h{display:flex;align-items:center;gap:10px}
+.icard-h i{width:28px;height:28px;border-radius:50%;border:1px solid var(--line);flex:none}
+.icard-h div{flex:1;min-width:0}
+.icard-h small{display:block;font-size:9px;letter-spacing:.16em;color:var(--taupe)}
+.icard-h b{display:block;font-size:15px;font-weight:500;line-height:1.35}
+.icard-h span{margin-left:auto;font-size:9.5px;color:var(--mute);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;flex:none}
+.icard p{margin:8px 0 0;font-size:12.5px;line-height:1.6}
+.icard .fit{color:var(--taupe)}
+.icard .fit b{color:var(--ink);font-weight:500}
+.icard .why2{color:var(--mute)}
+.shops{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:11px}
+.shops a{display:flex;align-items:center;justify-content:center;height:38px;border-radius:12px;border:1px solid var(--line);font-size:11.5px;font-weight:500;letter-spacing:.01em}
+.shops a:first-child{background:var(--ink);color:var(--ivory);border-color:var(--ink)}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<nav id="nav" aria-label="주요 메뉴"></nav>
+<input id="fa" type="file" accept="image/*" hidden>
+<input id="fc" type="file" accept="image/*" capture="environment" hidden>
+<input id="fw" type="file" accept="image/*" multiple hidden>
+<script>
+"use strict";
+const $=s=>document.querySelector(s);
+const ICON={home:'<path d="M4 11l8-7 8 7v9a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/>',upload:'<path d="M12 16V4M7 9l5-5 5 5M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/>',analysis:'<path d="M5 20V11M12 20V4M19 20v-6"/>',outfit:'<path d="M12 7V5.5a2 2 0 1 0-2-2M12 7l8 5.5a1.5 1.5 0 0 1-.8 2.8H4.8A1.5 1.5 0 0 1 4 12.5z"/>',user:'<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',back:'<path d="M15 5l-7 7 7 7"/>',img:'<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.5"/><path d="M21 16l-5-5-9 9"/>',cam:'<path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="3.5"/>',heart:'<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>',x:'<path d="M6 6l12 12M18 6L6 18"/>',ok:'<path d="M5 12.5l4.5 4.5L19 7.5"/>',bookmark:'<path d="M6 4h12v17l-6-4.5L6 21z"/>',share:'<path d="M12 3v12M8 7l4-4 4 4M5 14v5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5"/>',spark:'<path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/>',trash:'<path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/>',body:'<circle cx="12" cy="4.5" r="2.2"/><path d="M12 7v7M7 10l5-1 5 1M12 14l-3.5 7M12 14l3.5 7"/>'};
+const ic=n=>`<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICON[n]}</svg>`;
+
+const STY=[
+ ["minimal","미니멀","MINIMAL","절제된 라인, 무채색 톤",["#F5F1EA","#D9CDB8","#111"]],
+ ["casual","캐주얼","CASUAL","편안한 데일리 무드",["#E9E1D3","#8C7B65","#3A3A3A"]],
+ ["street","스트릿","STREET","오버핏과 레이어드",["#1A1A1A","#6E6A63","#CBBBA0"]],
+ ["classic","클래식","CLASSIC","단정한 테일러드 실루엣",["#EFE8DC","#4A3F33","#111"]],
+ ["business","비즈니스 캐주얼","BUSINESS","출근룩, 깔끔한 셋업",["#D9D4CA","#2B2B2B","#FAF8F4"]],
+ ["smart","스마트 캐주얼","SMART","격식과 편안함의 균형",["#CBBBA0","#5B5247","#F5F1EA"]]
+];
+const P={ink:"#111111",charcoal:"#2B2B2B",gray:"#9A9489",light:"#E5DED0",ivory:"#FAF8F4",sand:"#D9CDB8",camel:"#CBBBA0",taupe:"#8C7B65",brown:"#4A3F33",navy:"#24304A",denim:"#4A5568",olive:"#5F6350",wine:"#6D2A3C",sky:"#BFD0DE"};
+
+/* ---------- 코디 카탈로그 · 테마별 풀코디(아우터·상의·하의·신발·액세서리) ---------- */
+const SLOTK=["outer","top","bottom","shoes","accessory"];
+const CATOF={outer:"아우터",top:"상의",bottom:"하의",shoes:"신발",accessory:"액세서리"};
+const I=(slot,name,color,hex,fit,reason)=>({slot,name,color,hex,fit,reason,q:name});
+const TH=(key,name,en,mood,title,titleLt,occ,tpo,sty,why,heavy,light)=>({key,name,en,mood,title,titleLt,occ,tpo,sty,why,heavy,light});
+const THEMES=[
+ TH("ivy","아이비 스트릿","IVY STREET","무채색 바탕에 카멜·올리브 한 점","카멜 아이비 스트릿","샌드 아이비 스트릿","데이트 · 주말 외출",["date","hangout","daily"],["classic","smart","minimal"],
+  "아이비 스트릿은 색을 네 개 이하로 묶고, 재킷·셔츠·치노의 정돈된 실루엣에 볼캡 하나로 힘을 빼는 조합이에요.",
+  [
+   I("outer","카멜 오버핏 울 블레이저","카멜","#CBBBA0","세미오버 · 힙 커버","크림 셔츠 위에 걸치면 아이비 특유의 단정한 여유가 나요."),
+   I("top","크림 옥스포드 셔츠","크림","#F2EDE4","레귤러 · 단추 두 개 오픈","카멜과 가장 잘 붙는 중간 밝기라 얼굴이 화사해 보여요."),
+   I("bottom","올리브 와이드 치노","올리브","#5F6350","와이드 · 풀 기장","카멜과 색상환에서 이웃해 부딪히지 않고 자연스럽게 이어져요."),
+   I("shoes","브라운 스웨이드 로퍼","브라운","#4A3F33","스퀘어 토 · 낮은 굽","하의보다 한 톤 진하게 잡아 발끝에 무게를 줬어요."),
+   I("accessory","다크 네이비 볼캡","네이비","#24304A","6패널 · 무지","웜 톤 조합에 유일한 쿨 톤으로 포인트를 만듭니다.")
+  ],
+  [
+   I("outer","샌드 코튼 오버셔츠","샌드","#D9CDB8","오버핏 · 힙 기장","더운 날 재킷 대신 걸치는 가벼운 겉옷이에요."),
+   I("top","화이트 옥스포드 셔츠","화이트","#FFFFFF","레귤러 · 반소매","가장 밝은 면을 위에 두어 시원한 인상을 만들어요."),
+   I("bottom","올리브 치노 팬츠","올리브","#5F6350","스트레이트 · 크롭","발목이 보이는 기장이라 다리가 길어 보여요."),
+   I("shoes","브라운 스웨이드 로퍼","브라운","#4A3F33","스퀘어 토 · 낮은 굽","샌드·올리브와 같은 웜 계열로 발끝을 정리했어요."),
+   I("accessory","네이비 버킷햇","네이비","#24304A","코튼 · 와이드 브림","햇빛과 함께 목선을 정리해 주는 여름 포인트예요.")
+  ]),
+ TH("mono","모노톤 미니멀","MONO MINIMAL","블랙·차콜·실버 한 줄","차콜 모노톤 미니멀","블랙 모노톤 미니멀","외출 · 모임 · 출근",["daily","hangout","work"],["minimal","street"],
+  "모노톤은 색을 늘리지 않고 소재 광택과 크롭 비율로만 변화를 주는 조합이에요. 액세서리는 금속 하나만 남깁니다.",
+  [
+   I("outer","차콜 크롭 울 집업","차콜","#2B2B2B","크롭 · 세미오버","허리선이 드러나는 기장이라 다리가 길어 보여요."),
+   I("top","블랙 헤비코튼 티셔츠","블랙","#111111","오버핏 · 드롭숄더","집업 안에서 목선이 정리되고 색이 겹쳐도 답답하지 않아요."),
+   I("bottom","블랙 와이드 슬랙스","블랙","#1A1A1A","와이드 · 원턱","같은 블랙이라도 광택이 다른 소재로 깊이를 만들어요."),
+   I("shoes","블랙 레더 더비","블랙","#111111","라운드 토 · 3cm","발끝까지 어둡게 이어 실루엣을 길게 봅니다."),
+   I("accessory","실버 체인 목걸이","실버","#C9C9C9","45cm · 슬림 체인","무채색 사이에 금속광 하나로 시선을 위로 모아요.")
+  ],
+  [
+   I("outer","블랙 오버핏 셔츠 재킷","블랙","#111111","오버핏 · 반소매","셔츠를 겉옷처럼 걸쳐 이너와 톤을 나눠요."),
+   I("top","차콜 무지 티셔츠","차콜","#2B2B2B","레귤러 · 코튼","얇은 무지 티로 겹침을 줄여 시원하게 보여요."),
+   I("bottom","차콜 와이드 슬랙스","차콜","#2B2B2B","와이드 · 원턱","상의와 살짝 다른 농도로 톤온톤 깊이를 줍니다."),
+   I("shoes","블랙 캔버스 스니커즈","블랙","#111111","로우컷 · 캔버스","가벼운 소재로 검정의 무게를 덜어냈어요."),
+   I("accessory","실버 볼 체인 목걸이","실버","#C9C9C9","50cm · 볼 체인","목선이 비는 날 목걸이 하나로 빈 곳을 채워요.")
+  ]),
+ TH("earth","어스톤 캐주얼","EARTH CASUAL","샌드·브라운·아이보리 흙빛","브라운 어스톤 캐주얼","샌드 어스톤 캐주얼","모임 · 동네 나들이",["hangout","daily","travel"],["casual","street"],
+  "어스톤은 흙빛 세 가지를 명도만 바꿔 쌓는 조합이에요. 소재(스웨이드·코듀로이·코튼)를 섞으면 같은 색도 지루하지 않습니다.",
+  [
+   I("outer","브라운 스웨이드 블루종","브라운","#6B5545","세미오버 · 밴딩 밑단","밑단이 잡혀 상체가 짧아 보이고 다리가 길어 보여요."),
+   I("top","아이보리 헤비 맨투맨","아이보리","#F2EDE4","오버핏 · 도톰","어두운 겉옷 안을 밝게 채워 답답해 보이지 않아요."),
+   I("bottom","브라운 코듀로이 와이드 팬츠","브라운","#6B5545","와이드 · 골지","상의와 같은 계열이지만 골지 질감으로 구분돼요."),
+   I("shoes","아이보리 컨버스 스니커즈","아이보리","#F4F1EA","로우컷 · 캔버스","어두운 하의 끝을 밝게 끊어 발이 가벼워 보여요."),
+   I("accessory","브라운 가죽 벨트","브라운","#4A3F33","3cm · 스퀘어 버클","상하의 경계가 흐려질 때 허리선을 잡아줘요.")
+  ],
+  [
+   I("outer","샌드 린넨 오버셔츠","샌드","#D9CDB8","오버핏 · 반소매","구김이 자연스러운 린넨으로 여름 겉옷을 대신해요."),
+   I("top","아이보리 무지 티셔츠","아이보리","#F2EDE4","레귤러 · 코튼","가장 밝은 톤을 얼굴 가까이 두어 화사해 보여요."),
+   I("bottom","샌드 치노 팬츠","샌드","#C8B79B","스트레이트 · 크롭","오버셔츠와 같은 계열로 이어 다리가 길어 보여요."),
+   I("shoes","아이보리 슬립온","아이보리","#F4F1EA","라운드 토 · 캔버스","끈 없는 슬립온이면 발목이 깔끔하게 보여요."),
+   I("accessory","캔버스 토트백","샌드","#CBBBA0","A4 · 숄더 겸용","린넨 룩에는 가죽보다 캔버스 가방이 잘 어울려요.")
+  ]),
+ TH("navy","네이비 크림 클래식","CREAM NAVY","크림과 네이비의 깨끗한 대비","네이비 클래식 코트","크림 네이비 캐주얼","데이트 · 출근",["date","work","hangout"],["smart","classic","minimal"],
+  "네이비와 크림은 명도 차가 커서 옷이 단정해 보이는 조합이에요. 대비가 세니 액세서리는 한 가지로 줄입니다.",
+  [
+   I("outer","네이비 싱글 코트","네이비","#24304A","레귤러 · 무릎 아래","코트를 길게 잡으면 전체 비율이 안정돼 보여요."),
+   I("top","크림 니트 폴로","크림","#F2EDE4","슬림 · 카라","셔츠보다 부드러운 카라로 단정함을 유지해요."),
+   I("bottom","네이비 슬랙스","네이비","#24304A","테이퍼드 · 크롭","코트와 같은 색으로 세로 라인을 만들어요."),
+   I("shoes","블랙 레더 로퍼","블랙","#111111","라운드 토 · 2.5cm","어두운 바지에 검정 신발로 발끝을 정리했어요."),
+   I("accessory","크림 니트 머플러","크림","#EFE8DC","한 바퀴 · 도톰","목을 감아 얼굴을 밝히고 네이비와 경계를 만들어요.")
+  ],
+  [
+   I("outer","크림 셋업 재킷","크림","#EFE8DC","레귤러 · 힙 기장","밝은 겉옷으로 네이비 이너를 감싸 대비를 살려요."),
+   I("top","네이비 스트라이프 티셔츠","네이비","#24304A","레귤러 · 보트넥","가로 줄무늬로 가슴을 넓어 보이게 해요."),
+   I("bottom","크림 치노 팬츠","크림","#E5DED0","테이퍼드 · 크롭","재킷과 같은 톤으로 다리 라인을 길게 봅니다."),
+   I("shoes","네이비 캔버스 스니커즈","네이비","#24304A","로우컷 · 캔버스","이너 색을 신발에 한 번 더 반복해 통일감을 줍니다."),
+   I("accessory","네이비 볼캡","네이비","#24304A","6패널 · 무지","캐주얼하게 낮추고 싶은 날의 마무리예요.")
+  ])
+];
+/* ---------- 색 계산 ---------- */
+function rgb(c){return Array.isArray(c)?c:hex2rgb(c)}
+function hex2rgb(h){h=h.replace("#","");if(h.length===3)h=h.split("").map(x=>x+x).join("");return[parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)]}
+const hex=c=>"#"+c.map(v=>Math.max(0,Math.min(255,Math.round(v))).toString(16).padStart(2,"0")).join("");
+function hsl(c){let[r,g,b]=rgb(c).map(v=>v/255);const M=Math.max(r,g,b),m=Math.min(r,g,b),l=(M+m)/2,d=M-m;let h=0,s=0;if(d){s=d/(1-Math.abs(2*l-1));h=M===r?((g-b)/d+6)%6:M===g?(b-r)/d+2:(r-g)/d+4;h*=60}return{h,s,l}}
+function lab(c){let[r,g,b]=rgb(c).map(v=>{v/=255;return v>.04045?Math.pow((v+.055)/1.055,2.4):v/12.92});
+ r*=100;g*=100;b*=100;
+ let x=(r*.4124+g*.3576+b*.1805)/95.047,y=(r*.2126+g*.7152+b*.0722)/100,z=(r*.0193+g*.1192+b*.9505)/108.883;
+ const f=t=>t>.008856?Math.cbrt(t):7.787*t+16/116;
+ x=f(x);y=f(y);z=f(z);
+ return{L:116*y-16,a:500*(x-y),b:200*(y-z)}}
+const dE=(a,b)=>{const x=lab(a),y=lab(b);return Math.sqrt((x.L-y.L)**2+(x.a-y.a)**2+(x.b-y.b)**2)};
+function cname(c){const{h,s,l}=hsl(c);
+ if(l<.13)return"블랙";if(l>.86)return s<.25?"화이트":"크림";
+ if(s<.12)return l<.3?"차콜":l<.62?"그레이":"라이트그레이";
+ if(h<15||h>=345)return l<.32?"버건디":"레드";
+ if(h<45)return l<.28?"다크브라운":(s<.4&&l>.6)?"베이지":l<.45?"브라운":"카멜";
+ if(h<70)return s<.45?"카키":"머스터드";
+ if(h<165)return l<.3?"다크그린":s<.28?"카키":"그린";
+ if(h<200)return l<.3?"틸":"민트";
+ if(h<260)return l<.28?"네이비":l<.55?"데님":"블루";
+ if(h<300)return"퍼플";return l<.35?"버건디":"핑크"}
+function family(c){const{h,s,l}=hsl(c);if(s<.14||l<.12||l>.9)return"뉴트럴";return(h<70||h>=330)?"웜":"쿨"}
+
+/* ---------- 기기 안 분석 ---------- */
+const GW=90,GH=120;
+const st=[];
+function px(x,y){const i=(y*GW+x)*4;return[ST.px[i],ST.px[i+1],ST.px[i+2]]}
+function region(x0,y0,x1,y1){
+ const pts=[];
+ for(let y=y0;y<y1;y+=1)for(let x=x0;x<x1;x+=1)pts.push(px(x,y));
+ if(pts.length<20)return null;
+ let cs=[];
+ for(let k=0;k<3;k++){const p=pts[Math.floor(pts.length*(k+1)/4)];cs.push([p[0]+k*2,p[1]+k,p[2]+k])}
+ for(let it=0;it<7;it++){
+  const g=cs.map(()=>[0,0,0,0]);
+  for(const p of pts){
+   let bi=0,bd=1e9;
+   for(let k=0;k<cs.length;k++){const d=(p[0]-cs[k][0])**2+(p[1]-cs[k][1])**2+(p[2]-cs[k][2])**2;if(d<bd){bd=d;bi=k}}
+   g[bi][0]++;g[bi][1]+=p[0];g[bi][2]+=p[1];g[bi][3]+=p[2];
+  }
+  g.forEach((s,i)=>{if(s[0])cs[i]=[s[1]/s[0],s[2]/s[0],s[3]/s[0]]});
+ }
+ const g=cs.map((c,i)=>({c,n:0}));
+ const counts=cs.map(()=>0);
+ for(const p of pts){let bi=0,bd=1e9;for(let k=0;k<cs.length;k++){const d=(p[0]-cs[k][0])**2+(p[1]-cs[k][1])**2+(p[2]-cs[k][2])**2;if(d<bd){bd=d;bi=k}}counts[bi]++}
+ const order=counts.map((n,i)=>({c:cs[i].map(Math.round),n})).sort((a,b)=>b.n-a.n);
+ const top=order[0],share=top.n/pts.length;
+ return{rgb:top.c,share,alts:order.slice(1).map(o=>({hex:hex(o.c),share:o.n/pts.length}))};
+}
+function splitRow(){
+ let best=Math.round(GH*.46),bestD=0;
+ for(let y=Math.round(GH*.36);y<Math.round(GH*.6);y++){
+  const a=region(24,y-10,66,y-2),b=region(24,y+2,66,y+10);
+  if(!a||!b)continue;
+  const d=dE(hex(a.rgb),hex(b.rgb));
+  if(d>bestD){bestD=d;best=y}
+ }
+ return best;
+}
+function analyze(){
+ const yy=splitRow();
+ const regs=[["상의",[22,Math.round(GH*.2),68,yy-2]],["하의",[24,yy+2,66,Math.round(GH*.72)]],["신발",[20,Math.round(GH*.76),70,Math.round(GH*.86)]]];
+ const items=regs.map(([cat,r])=>{
+   const d=region(r[0],r[1],r[2],r[3]);
+   if(!d)return null;
+   const h=hsl(d.rgb);
+   return{cat,hex:hex(d.rgb),color:cname(d.rgb),conf:Math.min(96,Math.round(52+d.share*52+(d.alts[0]?d.alts[0].share*12:0))),...h,share:d.share};
+ }).filter(Boolean);
+ const[top,bot]=items;
+ if(!top||!bot)return null;
+ const dl=Math.abs(top.l-bot.l),dh=Math.abs(top.h-bot.h),neu=items.filter(i=>i.s<.2).length/items.length;
+ const warm=items.filter(i=>i.s>=.2&&(i.h<70||i.h>=330)).length,cool=items.filter(i=>i.s>=.2&&i.h>=70&&i.h<330).length;
+ const tone=neu>=.67?"뉴트럴":warm>=cool?"웜 톤":"쿨 톤";
+ const con=dl>.42?"하이 콘트라스트":dl<.18?"톤온톤":"밸런스";
+ const av=(top.l+bot.l)/2,br=av<.3?"다크":av>.65?"라이트":"미디엄";
+ const d=dE(top.hex,bot.hex);
+ let hscore=84,hnote="상하의 색 거리가 적당해 안정적으로 읽혀요.";
+ if(con==="톤온톤"){hscore=90;hnote="톤온톤이라 차분하고 단정해 보여요. 소재 차이로 입체감을 주세요."}
+ else if(con==="하이 콘트라스트"){hscore=81;hnote="명도 대비가 강해 또렷한 인상이에요. 포인트는 한 곳만 두세요."}
+ if(d<12){hscore-=6;hnote="두 색이 거의 붙어 보여 경계가 흐려질 수 있어요. 벨트나 아우터로 선을 만들어 주세요."}
+ const score=Math.max(64,Math.min(97,Math.round(66+(100-d)/6+(con==="밸런스"?7:con==="톤온톤"?6:3)+items.reduce((a,i)=>a+i.conf,0)/(items.length*14))));
+ const seen=new Set(),palette=items.filter(i=>!seen.has(i.color)&&seen.add(i.color)).map(i=>({color:i.color,hex:i.hex}));
+ const tips=[
+  con==="하이 콘트라스트"?"상하의 명도 차가 커서 시선이 허리선에 모여요. 벨트나 이너로 톤을 이어 주세요."
+   :con==="톤온톤"?"톤온톤이라 단정해요. 니트·가죽처럼 질감이 다른 소재를 섞어 입체감을 더해 보세요."
+   :"상하의 명도 균형이 좋아요. 포인트는 한 곳만 더해 주세요.",
+  "신발 색을 하의와 같은 계열로 맞추면 다리 라인이 길어 보여요.",
+  `사진에서 ${top.color} 상의가 가장 넓은 면적이에요. 이 색을 기준으로 아우터를 고르면 안정적이에요.`,
+  "전신이 나온 사진일수록 영역 분석이 정확해요."];
+ const harmony={score:hscore,note:hnote,type:con};
+ return{score,tone,contrast:con,summary:`${top.color} 상의와 ${bot.color} 하의가 중심인 ${tone} 룩이에요. ${con==="톤온톤"?"명도 차가 작아 차분하고 단정한 인상이에요.":con==="하이 콘트라스트"?"상하의 명도 대비가 강해 또렷한 인상이에요.":"상하의 명도 균형이 안정적이에요."}`,
+  tags:["#"+tone.replace(" ",""),"#"+con.replace(" ",""),"#"+br+"무드"],items,palette,tips,harmony,
+  warmCool:warm>=cool?"웜":"쿨",brightness:br};
+}
+
+/* ---------- 코디 생성 엔진 ---------- */
+const PROFILE_TIPS={
+ shoulder:{narrow:"어깨선이 잡힌 재킷이나 스트라이프 상의가 상체를 넓혀 보여요.",normal:"어깨는 표준 비율이라 상의 핏만 맞으면 됩니다.",wide:"어깨가 넓으면 레글런 소매와 어두운 상의가 균형을 잡아줘요."},
+ leg:{short:"하의 허리선을 올리고 상의는 짧게. 신발과 하의 색을 같게 하면 다리가 길어 보여요.",normal:"상하체 비율이 균형이라 실루엣 선택이 자유로워요.",long:"다리가 길어 보이는 편이니 상의에 볼륨을 줘 전체 비율을 맞추세요."},
+ build:{slim:"레이어드와 오버핏으로 두께를 만들어 주세요. 얇은 니트 단독은 피하세요.",normal:"체형이 균형이라 대부분의 실루엣이 잘 맞아요.",muscular:"상체가 발달했다면 어깨선이 좁은 재킷은 피하고, 스트레치 소재를 고르세요.",heavy:"어두운 단일 톤과 세로선이 있는 옷이 정돈돼 보여요. 가로 줄무늬는 피하세요."}
+};
+const TPO={date:"데이트",work:"출근",interview:"면접",hangout:"모임",travel:"여행",daily:"외출"};
+const WEA={hot:"한여름",warm:"선선함",chill:"쌀쌀함",cold:"한겨울"};
+
+function buildOutfits(r){
+ const pf=ST.profile;
+ const heavyW=ST.wea==="chill"||ST.wea==="cold";
+ const base=r&&r.items&&r.items[0]?r.items[0].hex:P.taupe;
+ const baseName=r&&r.items&&r.items[0]?r.items[0].color:"내";
+ const photoCols=(r&&r.items?r.items:[]).map(i=>i.hex);
+ const scored=THEMES.map(t=>{
+  const items=(heavyW?t.heavy:t.light).slice();
+  const all=items.map(i=>i.name+" "+i.fit).join(" ");
+  let s=40;
+  if(t.tpo.includes(ST.tpo))s+=22;
+  const st=t.sty.filter(x=>ST.styles.includes(x)).length;
+  s+=Math.min(16,st*8);
+  const near=items.filter(i=>photoCols.some(h=>dE(h,i.hex)<28)).length;
+  s+=Math.min(14,near*4);
+  if(pf.leg==="short"&&/크롭|숏|와이드/.test(all))s+=5;
+  if(pf.shoulder==="narrow"&&/블레이저|재킷|코트|셔츠/.test(items[0].name))s+=4;
+  if(pf.build==="slim"&&/오버|와이드|레이어/.test(all))s+=4;
+  if(pf.build==="heavy"&&/와이드|세로|테이퍼드/.test(all))s+=3;
+  const score=Math.max(74,Math.min(97,Math.round(74+s*.42)));
+  const why=[t.why];
+  why.push(near>1?`사진 속 ${baseName} 톤과 같은 계열이라 자연스럽게 이어져요.`:`사진 속 ${baseName} 톤과는 대비를 이뤄 새로워 보여요.`);
+  if(pf.leg==="short"&&/크롭/.test(items[0].fit))why.push("크롭 아우터로 허리선을 올려 다리 길이를 보완했어요.");
+  if(pf.shoulder==="narrow"&&/블레이저|재킷/.test(items[0].name))why.push("어깨선이 잡힌 아우터라 상체가 넓어 보여요.");
+  return{t,items,score,why:why.join(" ")};
+ }).sort((a,b)=>b.score-a.score).slice(0,3);
+ return scored.map((x,i)=>({id:"s"+i+"-"+x.t.key,title:heavyW?x.t.title:x.t.titleLt,theme:x.t.name,en:x.t.en,mood:x.t.mood,occ:x.t.occ,
+  why:x.why,score:x.score,items:x.items,pcs:x.items.map(p=>[CATOF[p.slot],p.name,p.hex]),src:"engine"}));
+}
+function bodyTips(){
+ const pf=ST.profile,out=[PROFILE_TIPS.shoulder[pf.shoulder]||"",PROFILE_TIPS.leg[pf.leg]||""];
+ if(PROFILE_TIPS.build[pf.build])out.push(PROFILE_TIPS.build[pf.build]);
+ return out.filter(Boolean);
+}
+
+/* ---------- 실제 AI (선택) ---------- */
+const H=v=>/^#[0-9a-fA-F]{6}$/.test(v)?v:"#D9CDB8",N=v=>Math.max(0,Math.min(100,Math.round(+v||0))),S=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const AIP=()=>`당신은 한국 남성 패션 스타일리스트입니다. 사진 속 옷차림을 분석하고, 핀터레스트에 저장하고 싶은 무드의 풀코디 3세트를 제안하세요. 사람의 신원이나 외모는 평가하지 말고 옷에 대해서만 말하세요.
+사용자 조건 — 상황: ${TPO[ST.tpo]}, 날씨: ${WEA[ST.wea]}, 선호 스타일: ${ST.styles.map(i=>STY.find(s=>s[0]===i)[1]).join(", ")}, 어깨: ${ST.profile.shoulder}, 다리 비율: ${ST.profile.leg}, 체형: ${ST.profile.build}
+
+규칙
+1) 세트는 정확히 3개. 세 세트는 색조합과 무드가 서로 겹치지 않아야 합니다. 예: ① 무채색+카멜/올리브 아이비 스트릿 ② 올블랙·차콜 모노톤 미니멀 ③ 크림·네이비 캐주얼 또는 어스톤(샌드·브라운) 캐주얼.
+2) 세트마다 아우터, 상의, 하의, 신발, 액세서리 5개 슬롯을 반드시 모두 채우세요. 액세서리는 볼캡·비니·버킷햇·가방·벨트·안경·목걸이·머플러·유선이어폰·시계 중에서 그 조합에 실제로 어울리는 것 하나.
+3) name은 쇼핑몰에서 그대로 검색되는 구체적인 한국어 상품명으로 쓰세요(색 + 소재 + 핏/기장 + 품목). 예: "차콜 크롭 울 집업", "올리브 와이드 치노 팬츠", "브라운 스웨이드 로퍼".
+4) color는 한국어 색 이름, hex는 그 색의 #RRGGBB, fit은 핏과 기장(예: "세미오버 · 힙 커버"), reason은 왜 이 조합에 맞는지 한 문장, searchQuery는 무신사·네이버쇼핑·쿠팡에 그대로 넣을 한국어 검색어입니다.
+5) 날씨에 맞는 소재·기장만 고르세요(7도 이하 코트·패딩·부츠, 28도 이상 반소매·린넨). 세트 안에서 색은 3~4개로 제한하세요.
+
+한국어 JSON으로만 답하세요:
+{"score":0-100,"tone":"","contrast":"","summary":"","tags":[""],"items":[{"cat":"상의","color":"","conf":0-100,"hex":"#RRGGBB"}],"palette":[{"color":"","hex":"#RRGGBB"}],"tips":[""],"harmony":{"score":0-100,"note":""},"bodyTips":[""],
+"sets":[{"title":"차콜 모노톤 미니멀","theme":"모노톤 미니멀","mood":"무채색과 금속광 하나","occ":"데이트 · 모임","score":0-100,"why":"이 조합을 고른 이유 두 문장","items":[
+{"slot":"outer","name":"","color":"","hex":"#RRGGBB","fit":"","reason":"","searchQuery":""},
+{"slot":"top","name":"","color":"","hex":"#RRGGBB","fit":"","reason":"","searchQuery":""},
+{"slot":"bottom","name":"","color":"","hex":"#RRGGBB","fit":"","reason":"","searchQuery":""},
+{"slot":"shoes","name":"","color":"","hex":"#RRGGBB","fit":"","reason":"","searchQuery":""},
+{"slot":"accessory","name":"","color":"","hex":"#RRGGBB","fit":"","reason":"","searchQuery":""}]}]}
+sets[].items의 slot은 outer, top, bottom, shoes, accessory 5개를 이 순서로만 쓰세요. 각 why와 reason에는 사진에서 관찰한 색과 사용자 조건을 근거로 넣으세요.`;
+const SLOTOF=v=>{const s=String(v||"").toLowerCase();
+ if(/accessory|액세서리|소품|모자|가방|벨트|목걸이|머플러|안경|이어폰|시계/.test(s))return"accessory";
+ if(/outer|아우터|코트|재킷|자켓|블레이저|점퍼|패딩|집업|블루종|바람막이/.test(s))return"outer";
+ if(/shoes|신발|슈즈|부츠|스니커|로퍼|구두|샌들|슬립온/.test(s))return"shoes";
+ if(/bottom|하의|팬츠|바지|데님|슬랙스|쇼츠|치노/.test(s))return"bottom";
+ return"top"};
+function setNormalize(o,i){
+ if(!o||typeof o!=="object")return null;
+ const raw=Array.isArray(o.items)?o.items:Array.isArray(o.pcs)?o.pcs:[];
+ const items=[],seen={};
+ raw.slice(0,7).forEach(p=>{
+  let x;
+  if(Array.isArray(p))x={slot:SLOTOF(p[0]),name:S(p[1]!=null?p[1]:""),color:"",hex:H(p[2]),fit:"",reason:"",q:S(p[1]!=null?p[1]:"")};
+  else if(p&&typeof p==="object")x={slot:SLOTOF(p.slot||p.cat),name:S(p.name||""),color:S(p.color||""),hex:H(p.hex),fit:S(p.fit||""),reason:S(p.reason||p.why||""),q:S(p.searchQuery||p.q||p.name||"")};
+  if(!x||!x.name||seen[x.slot])return;seen[x.slot]=1;
+  if(!x.color)x.color=cname(x.hex);
+  if(!x.q)x.q=x.name;
+  items.push(x);
+ });
+ if(items.length<3)return null;
+ items.sort((a,b)=>SLOTK.indexOf(a.slot)-SLOTK.indexOf(b.slot));
+ const title=S(o.title||o.name||"AI 추천 코디");
+ return{id:"ai"+i,title,theme:S(o.theme||o.mood||title),en:"AI PICK",mood:S(o.mood||""),occ:S(o.occ||""),
+  why:S(o.why||""),score:N(o.score)||84,items,pcs:items.map(p=>[CATOF[p.slot],p.name,p.hex]),src:"ai"};
+}
+function normAI(r,src){
+ if(!r||typeof r.summary!=="string"||!Array.isArray(r.items))throw 0;
+ const rawSets=Array.isArray(r.sets)?r.sets:Array.isArray(r.outfits)?r.outfits:[];
+ const sets=rawSets.slice(0,4).map(setNormalize).filter(Boolean);
+ if(!sets.length)throw 0;
+ return{score:N(r.score),tone:S(r.tone),contrast:S(r.contrast),summary:S(r.summary),tags:(r.tags||[]).slice(0,5).map(S),
+ items:r.items.slice(0,6).map(i=>({cat:S(i.cat),color:S(i.color),conf:N(i.conf),hex:H(i.hex)})),
+ palette:(r.palette||[]).slice(0,6).map(p=>({color:S(p.color),hex:H(p.hex)})),
+ tips:(r.tips||[]).slice(0,4).map(S),
+ harmony:{score:N(r.harmony?.score),note:S(r.harmony?.note||""),type:""},
+ bodyTips:(r.bodyTips||[]).slice(0,3).map(S),
+ outfits:sets,src};
+}
+const b64=u=>u.split(",")[1];
+/* ---------- LOOK AI 무료 AI 서버 (/api/gemini) ---------- */
+// Vercel에 배포되면 같은 주소의 /api/gemini 가 Gemini 키를 대신 씁니다. GitHub Pages 등에서는 404 → 기기 분석으로 안전하게 대체.
+const SERV=(()=>{try{const q=new URLSearchParams(location.search).get("api");if(q)return new URL(q,location.href).href}catch(e){}return"/api/gemini"})();
+const SRV={ok:false,reach:false,configured:false,checked:false,busy:null};
+function checkServer(){
+ if(SRV.busy)return SRV.busy;
+ SRV.busy=fetch(SERV,{method:"GET",cache:"no-store",signal:AbortSignal.timeout(6000)}).then(async r=>{
+  const j=await r.json().catch(()=>null);
+  SRV.reach=!!(r.ok&&j&&j.ok===true);
+  SRV.configured=!!(j&&j.configured);
+  SRV.ok=SRV.reach&&SRV.configured;
+  return SRV.ok;
+ }).catch(()=>{SRV.reach=false;SRV.configured=false;SRV.ok=false;return false}).finally(()=>{SRV.checked=true;SRV.busy=null});
+ return SRV.busy;
+}
+const canAI=()=>SRV.ok||!!ST.key;
+// 무료 AI 서버는 응답이 느린 모델을 쓰면 55초 제한에 걸려 기기 분석으로 떨어지므로, 빠른 lite 모델로 분석합니다. 내 키를 쓰면 설정한 모델을 그대로 씁니다.
+const apm=()=>SRV.ok&&!ST.key?"gemini-3.5-flash-lite":ST.model;
+async function gcall(model,body){
+ if(SRV.ok){
+  const res=await fetch(SERV,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(Object.assign({model},body)),signal:AbortSignal.timeout(55000)});
+  const j=await res.json().catch(()=>null);
+  if(!res.ok||!j){const e=new Error("server "+res.status);e.status=res.status;e.detail=JSON.stringify(j||{}).slice(0,300);throw e}
+  return j;
+ }
+ if(!ST.key)throw new Error("nocred");
+ const res=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`,{method:"POST",headers:{"x-goog-api-key":ST.key,"Content-Type":"application/json"},body:JSON.stringify(body),signal:AbortSignal.timeout(45000)});
+ if(!res.ok){const e=new Error("gemini "+res.status);e.status=res.status;e.detail=(await res.text().catch(()=>"")).slice(0,300);throw e}
+ return res.json();
+}
+async function viaGemini(){
+ const sys={parts:[{text:AIP()}]},contents=[{role:"user",parts:[{text:"사진을 분석해 주세요."},{inline_data:{mime_type:"image/jpeg",data:b64(ST.photo)}}]}];
+ // 새 모델은 일부 생성 옵션을 거부할 수 있어, 400이 나면 옵션을 줄여 다시 시도합니다.
+ const gcs=[{responseMimeType:"application/json",temperature:.6},{responseMimeType:"application/json"},null];
+ let err=null;
+ for(const gc of gcs){
+  try{
+   const body={systemInstruction:sys,contents};if(gc)body.generationConfig=gc;
+   const j=await gcall(apm(),body),t=(j.candidates?.[0]?.content?.parts||[]).map(p=>p.text||"").join("");
+   return normAI(JSON.parse(t.replace(/^```(?:json)?\s*|\s*```$/g,"")),"gemini");
+  }catch(e){err=e;if(e&&e.status&&e.status!==400)break}
+ }
+ throw err||new Error("ai");
+}
+async function viaClaude(){
+ const bin=atob(b64(ST.photo)),u8=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u8[i]=bin.charCodeAt(i);
+ const lim=await ST.sample.limits();if(!lim||!lim.images)throw 0;
+ return normAI(await ST.sample.json(AIP()+"\n첨부한 사진을 분석하세요.",{images:[new Blob([u8],{type:"image/jpeg"})],cache:false}),"claude");
+}
+async function makeImage(look){
+ if(!SRV.checked)await checkServer();
+ if(!canAI()){alert("AI 사진 생성은 LOOK AI 서버 연결이 필요해요. AI 설정에서 연결 상태를 확인해 주세요.");return}
+ const prompt=`패션 플랫레이 상품 사진. ${look.pcs.map(p=>p[0]+": "+p[1]+" ("+p[2]+")").join(", ")}. 아이보리 배경, 부드러운 자연광, 사람 없이 옷만 정면으로, 고급스러운 편집샵 스타일.`;
+ try{
+  const j=await gcall(ST.imgModel||"gemini-3.1-flash-image",{contents:[{role:"user",parts:[{text:prompt}]}],generationConfig:{responseModalities:["TEXT","IMAGE"]}});
+  const parts=j.candidates&&j.candidates[0]&&j.candidates[0].content?j.candidates[0].content.parts||[]:[];
+  const im=parts.find(p=>p.inlineData||p.inline_data);
+  const data=im&&((im.inlineData&&im.inlineData.data)||(im.inline_data&&im.inline_data.data));
+  if(!data)throw new Error("no image");
+  const mt=(im.inlineData&&im.inlineData.mimeType)||(im.inline_data&&im.inline_data.mime_type)||"image/png";
+  ST.images[look.id]="data:"+mt+";base64,"+data;
+ }catch(e){const d=String((e&&(e.detail||e.message))||"");alert(e&&(e.status===403||e.status===429)||/billing|quota|RESOURCE_EXHAUSTED|PERMISSION|paid/i.test(d)?"AI 코디 이미지 생성은 결제가 활성화된 Gemini 키에서만 동작해요(1장 약 $0.03~0.07). 분석 결과와 코디 그림은 그대로 볼 수 있어요.":SRV.ok?"AI 이미지를 만들지 못했어요. 잠시 후 다시 시도해 주세요. 코디 그림은 그대로 볼 수 있어요.":"AI 이미지를 만들지 못했어요. 이미지 생성이 지원되는 모델·키인지 확인해 주세요. 코디 그림은 그대로 볼 수 있어요.")}
+}
+async function runAI(){
+ if(!SRV.checked)await checkServer();
+ if(canAI()){try{return await viaGemini()}catch(e){ST.note=e&&e.status===404?"AI 서버가 이 모델을 찾지 못했어요. AI 설정에서 모델명을 확인해 주세요.":e&&e.status===429?"무료 AI 사용량이 잠시 차서 기기 분석으로 대체했어요. 잠시 후 다시 시도해 주세요.":SRV.ok?"무료 AI 서버 호출이 잠시 실패해 기기 분석으로 대체했어요. 다시 시도해 주세요.":"Gemini 호출에 실패해 기기 분석으로 대체했어요. 키·모델명을 확인해 주세요."}}
+ if(ST.sample){try{return await viaClaude()}catch(e){ST.note=ST.note||"Claude AI 호출이 실패해 기기 분석으로 대체했어요."}}
+ return null;
+}
+
+/* ---------- 상태 ---------- */
+const ST={photo:null,px:null,meta:"",styles:[],result:null,saved:new Set(),looks:[],user:null,active:0,busy:false,msg:0,err:"",mode:"login",
+ f:{name:"",email:""},fe:{},note:"",key:"",model:"gemini-3.8-flash",imgModel:"gemini-3.1-flash-image",sample:null,
+ profile:{shoulder:"normal",leg:"normal",build:"normal"},tpo:"daily",wea:"warm",wardrobe:[],wcombos:null,images:{}};
+try{ST.key=localStorage.getItem("lookai:gkey")||"";ST.model=localStorage.getItem("lookai:gmodel")||ST.model}catch(e){}
+try{ST.profile=Object.assign(ST.profile,JSON.parse(localStorage.getItem("lookai:profile"))||{})}catch(e){}
+try{ST.looks=JSON.parse(localStorage.getItem("lookai:looks"))||[]}catch(e){}
+try{ST.wardrobe=JSON.parse(localStorage.getItem("lookai:wardrobe"))||[]}catch(e){}
+ST.looks.forEach(l=>ST.saved.add(l.id));
+try{if(window.claude&&claude.use)claude.use("sample").then(s=>{if(s){ST.sample=s;render(true)}}).catch(()=>{})}catch(e){}
+try{ST.user=JSON.parse(localStorage.getItem("lookai:user"))}catch(e){}
+
+const head=(t,back,step)=>`<header class="hd">${back?`<a href="#${back}" class="bk" aria-label="뒤로 가기">${ic("back")}</a>`:""}<h1>${t}</h1></header>${step?`<div class="steps">${[1,2,3].map(i=>`<i class="${i<=step?"on":""}"></i>`).join("")}</div>`:""}`;
+const shirt='<path d="M30 20 L45 12 Q60 26 75 12 L90 20 L104 42 L88 50 L86 106 L34 106 L32 50 L16 42 Z"/>';
+const seg=(k,opts,cur)=>`<div class="seg">${opts.map(([v,t])=>`<button data-a="pf" data-k="${k}" data-v="${v}" class="${cur===v?"on":""}" aria-pressed="${cur===v}">${t}</button>`).join("")}</div>`;
+const chips=(k,opts,cur)=>`<div class="chips sel">${opts.map(([v,t])=>`<button data-a="pf" data-k="${k}" data-v="${v}" class="chip ${cur===v?"on":""}" aria-pressed="${cur===v}">${t}</button>`).join("")}</div>`;
+
+/* ---------- 코디 보드 (옷 그림) ---------- */
+const shade=(h,f)=>{const c=hex2rgb(h).map(v=>Math.max(0,Math.min(255,v+f)));return hex(c)};
+const isDark=c=>hsl(c).l<.42;
+function garment(kind,c){
+ const line=isDark(c)?"rgba(255,255,255,.22)":"rgba(0,0,0,.14)";
+ const edge=isDark(c)?"rgba(255,255,255,.34)":"rgba(0,0,0,.22)";
+ const fill=c, d=shade(c,isDark(c)?26:-16);
+ let s="";
+ if(kind==="outer"){
+  s=`<path d="M34 18 L50 26 L66 18 L80 30 L84 44 L74 47 L74 92 L26 92 L26 47 L16 44 L20 30 Z" fill="${fill}" stroke="${edge}" stroke-width="1.2"/>
+     <path d="M50 26 L50 92" stroke="${line}" stroke-width="1.4"/>
+     <path d="M34 18 L50 34 L44 40 L31 28 Z" fill="${d}" stroke="${edge}" stroke-width="1"/>
+     <path d="M66 18 L50 34 L56 40 L69 28 Z" fill="${d}" stroke="${edge}" stroke-width="1"/>`;
+ } else if(kind==="puffer"){
+  s=`<path d="M34 18 L50 26 L66 18 L80 30 L84 44 L74 47 L74 92 L26 92 L26 47 L16 44 L20 30 Z" fill="${fill}" stroke="${edge}" stroke-width="1.2"/>
+     <path d="M50 26 L50 92" stroke="${line}" stroke-width="1.4"/>
+     <g stroke="${line}" stroke-width="1.1">${[40,50,60,70,80].map(y=>`<path d="M27 ${y} H73"/>`).join("")}</g>`;
+ } else if(kind==="knit"){
+  s=`<path d="M30 24 L42 16 L50 22 L58 16 L70 24 L80 36 L72 43 L72 90 L28 90 L28 43 L20 36 Z" fill="${fill}" stroke="${edge}" stroke-width="1.2"/>
+     <ellipse cx="50" cy="22" rx="8" ry="4" fill="${d}" stroke="${edge}" stroke-width="1"/>
+     <g stroke="${line}" stroke-width="1">${[40,48,56,64,72,80].map(y=>`<path d="M29 ${y} H71"/>`).join("")}</g>
+     <g stroke="${line}" stroke-width=".8">${[34,42,50,58,66].map(x=>`<path d="M${x} 30 V88"/>`).join("")}</g>`;
+ } else if(kind==="shirt"){
+  s=`<path d="M32 22 L43 15 L50 26 L57 15 L68 22 L80 34 L72 41 L72 90 L28 90 L28 41 L20 34 Z" fill="${fill}" stroke="${edge}" stroke-width="1.2"/>
+     <path d="M43 15 L50 26 L57 15 L54 12 L50 22 L46 12 Z" fill="${d}" stroke="${edge}" stroke-width="1"/>
+     <path d="M50 26 V90" stroke="${line}" stroke-width="1.2"/>
+     <g stroke="${line}" stroke-width="1">${[48,60,72].map(y=>`<circle cx="50" cy="${y}" r="1.4"/>`).join("")}</g>`;
+ } else if(kind==="tee"){
+  s=`<path d="M33 22 L44 15 L50 20 L56 15 L67 22 L80 33 L72 41 L72 88 L28 88 L28 41 L20 33 Z" fill="${fill}" stroke="${edge}" stroke-width="1.2"/>
+     <path d="M44 15 Q50 24 56 15" fill="none" stroke="${edge}" stroke-width="1.4"/>`;
+ } else if(kind==="pants"||kind==="denim"){
+  s=`<path d="M33 12 H67 L71 78 L56 78 L50 40 L44 78 L29 78 Z" fill="${fill}" stroke="${edge}" stroke-width="1.2"/>
+     <path d="M33 12 H67" stroke="${d}" stroke-width="4"/>
+     <path d="M50 22 V40" stroke="${line}" stroke-width="1"/>`;
+  if(kind==="denim")s+=`<g stroke="${line}" stroke-width=".9"><path d="M35 30 Q40 34 44 30"/><path d="M56 30 Q60 34 64 30"/></g>`;
+ } else if(kind==="shorts"){
+  s=`<path d="M33 22 H67 L70 58 L56 58 L50 40 L44 58 L30 58 Z" fill="${fill}" stroke="${edge}" stroke-width="1.2"/>
+     <path d="M33 22 H67" stroke="${d}" stroke-width="4"/>`;
+ } else if(kind==="boots"){
+  s=`<path d="M28 22 H48 V58 Q48 64 54 66 L70 70 V78 H28 Z" fill="${fill}" stroke="${edge}" stroke-width="1.2"/>
+     <path d="M28 74 H70" stroke="${d}" stroke-width="3"/>`;
+ } else if(kind==="loafer"){
+  s=`<path d="M20 60 Q22 50 36 50 L54 53 Q72 57 79 66 Q82 70 82 76 H20 Z" fill="${fill}" stroke="${edge}" stroke-width="1.2"/>
+     <path d="M20 76 H82" stroke="${d}" stroke-width="4"/>
+     <path d="M20 80 H82" stroke="${edge}" stroke-width="1.6"/>
+     <path d="M38 54 Q48 60 60 58" fill="none" stroke="${line}" stroke-width="1.4"/>`;
+ } else if(kind==="sneakers"){
+  s=`<path d="M22 60 Q24 46 40 47 L58 52 Q72 56 76 64 L76 70 H22 Z" fill="${fill}" stroke="${edge}" stroke-width="1.2"/>
+     <path d="M22 68 H76" stroke="${d}" stroke-width="3"/>
+     <g stroke="${line}" stroke-width=".9">${[36,44,52].map(x=>`<path d="M${x} 50 L${x+4} 64"/>`).join("")}</g>`;
+ } else if(kind==="bag"){
+  s=`<rect x="28" y="40" width="44" height="36" rx="6" fill="${fill}" stroke="${edge}" stroke-width="1.2"/>
+     <path d="M38 40 Q38 26 50 26 Q62 26 62 40" fill="none" stroke="${edge}" stroke-width="1.6"/>
+     <path d="M28 56 H72" stroke="${line}" stroke-width="1.2"/>`;
+ } else if(kind==="hat"){
+  s=`<path d="M32 58 Q32 32 50 32 Q68 32 68 58 Z" fill="${fill}" stroke="${edge}" stroke-width="1.2"/>
+     <path d="M24 58 H76 Q80 58 80 62 Q80 66 74 66 H26 Q20 66 20 62 Q20 58 24 58 Z" fill="${d}" stroke="${edge}" stroke-width="1.2"/>`;
+ } else if(kind==="beanie"){
+  s=`<path d="M28 60 Q28 28 50 28 Q72 28 72 60 Z" fill="${fill}" stroke="${edge}" stroke-width="1.2"/>
+     <path d="M24 60 H76 Q80 60 80 70 Q80 82 74 82 H26 Q20 82 20 70 Q20 60 24 60 Z" fill="${d}" stroke="${edge}" stroke-width="1.2"/>
+     <g stroke="${line}" stroke-width=".8">${[34,42,50,58,66].map(x=>`<path d="M${x} 34 V62"/>`).join("")}</g>`;
+ } else if(kind==="glasses"){
+  s=`<rect x="18" y="46" width="28" height="22" rx="8" fill="${fill}" fill-opacity=".9" stroke="${edge}" stroke-width="1.8"/>
+     <rect x="54" y="46" width="28" height="22" rx="8" fill="${fill}" fill-opacity=".9" stroke="${edge}" stroke-width="1.8"/>
+     <path d="M46 55 H54 M18 53 L10 47 M82 53 L90 47" fill="none" stroke="${edge}" stroke-width="1.8" stroke-linecap="round"/>`;
+ } else if(kind==="earbuds"){
+  s=`<circle cx="30" cy="36" r="8" fill="${fill}" stroke="${edge}" stroke-width="1.4"/>
+     <circle cx="70" cy="36" r="8" fill="${fill}" stroke="${edge}" stroke-width="1.4"/>
+     <path d="M30 44 Q28 60 36 72 Q44 84 56 84 Q66 84 70 74" fill="none" stroke="${edge}" stroke-width="1.7"/>
+     <rect x="66" y="56" width="9" height="15" rx="3" fill="${d}" stroke="${edge}" stroke-width="1.1"/>`;
+ } else if(kind==="belt"){
+  s=`<rect x="10" y="52" width="80" height="15" rx="4" fill="${fill}" stroke="${edge}" stroke-width="1.2"/>
+     <rect x="38" y="45" width="24" height="29" rx="6" fill="none" stroke="${edge}" stroke-width="2.6"/>
+     <path d="M50 52 V67" stroke="${edge}" stroke-width="2"/>`;
+ } else if(kind==="scarf"){
+  s=`<path d="M30 26 Q50 44 70 26 L75 33 Q50 55 25 33 Z" fill="${fill}" stroke="${edge}" stroke-width="1.2"/>
+     <path d="M41 47 Q45 72 41 96 L55 96 Q59 72 57 47 Z" fill="${d}" stroke="${edge}" stroke-width="1.2"/>
+     <g stroke="${line}" stroke-width=".9">${[56,66,76,86].map(y=>`<path d="M43 ${y} H55"/>`).join("")}</g>`;
+ } else if(kind==="necklace"){
+  s=`<path d="M28 30 Q28 74 50 82 Q72 74 72 30" fill="none" stroke="${edge}" stroke-width="1.9" stroke-linecap="round"/>
+     <circle cx="50" cy="83" r="6.5" fill="${fill}" stroke="${edge}" stroke-width="1.4"/>`;
+ } else if(kind==="watch"){
+  s=`<rect x="42" y="18" width="16" height="20" rx="4" fill="${fill}" stroke="${edge}" stroke-width="1.2"/>
+     <rect x="42" y="74" width="16" height="20" rx="4" fill="${fill}" stroke="${edge}" stroke-width="1.2"/>
+     <circle cx="50" cy="56" r="20" fill="${fill}" stroke="${edge}" stroke-width="1.4"/>
+     <circle cx="50" cy="56" r="14" fill="none" stroke="${line}" stroke-width="1"/>
+     <path d="M50 56 V47 M50 56 L57 61" stroke="${edge}" stroke-width="1.6" stroke-linecap="round"/>`;
+ } else {
+  s=`<rect x="30" y="20" width="40" height="68" rx="6" fill="${fill}" stroke="${edge}" stroke-width="1.2"/>`;
+ }
+ return s;
+}
+function kindOf(name,cat){
+ const n=String(name||"");
+ if(/머플러|목도리|스카프|숄/.test(n))return"scarf";
+ if(/목걸이|체인|펜던트|네크리스/.test(n))return"necklace";
+ if(/안경|선글라스|글라스/.test(n))return"glasses";
+ if(/이어폰|이어버드|헤드폰/.test(n))return"earbuds";
+ if(/시계|워치/.test(n))return"watch";
+ if(/벨트|띠/.test(n))return"belt";
+ if(/비니|바라클라바/.test(n))return"beanie";
+ if(cat==="상의"){ // 상의 슬롯은 겉옷처럼 보이지 않도록 상의 실루엣으로 그립니다
+  if(/니트|스웨터|맨투맨|후드|집업|스웻|폴로|가디건|카디건/.test(n))return"knit";
+  if(/셔츠|옥스포드/.test(n))return"shirt";
+  if(/티셔츠|반팔|무지 티/.test(n))return"tee";
+ }
+ if(/패딩/.test(n))return"puffer";
+ if(/코트|트렌치/.test(n))return"outer";
+ if(/재킷|자켓|블레이저|블루종|집업|바람막이|셋업|베스트/.test(n))return"outer";
+ if(/니트|스웨터|맨투맨|후드|가디건|폴로|집업/.test(n))return"knit";
+ if(/셔츠|옥스포드/.test(n))return"shirt";
+ if(/티셔츠|티\b|반팔/.test(n))return"tee";
+ if(/데님|청바지/.test(n))return"denim";
+ if(/쇼츠|버뮤다|반바지/.test(n))return"shorts";
+ if(/부츠/.test(n))return"boots";
+ if(/가방|백|크로스|토트|에코백|파우치/.test(n))return"bag";
+ if(/로퍼|구두|더비|옥스퍼드|메리제인/.test(n))return"loafer";
+ if(/스니커즈|러닝화|슬립온|슬라이드|샌들|캔버스/.test(n))return"sneakers";
+ if(/모자|볼캡|버킷햇|캡/.test(n))return"hat";
+ if(cat==="액세서리")return"bag";
+ if(cat==="하의")return"pants";
+ if(cat==="신발")return"sneakers";
+ return"tee";
+}
+const SHOP_LABEL=[["outer","아우터"],["top","상의"],["bottom","하의"],["shoes","신발"],["accessory","액세서리"]];
+const SHOPS=[
+ ["무신사",q=>`https://www.musinsa.com/search/musinsa/goods?q=${encodeURIComponent(q)}`],
+ ["네이버쇼핑",q=>`https://search.shopping.naver.com/search/all?query=${encodeURIComponent(q)}`],
+ ["쿠팡",q=>`https://www.coupang.com/np/search?q=${encodeURIComponent(q)}`]
+];
+const pick=(x,slot)=>x&&Array.isArray(x.items)?x.items.find(i=>i.slot===slot):null;
+function lookboard(x,opt){
+ const o=opt||{};
+ const chips=SHOP_LABEL.map(([k,ko])=>{const p=pick(x,k);const c=p?p.hex:"#E5DED0";
+  return `<div><i style="background:${c}" title="${p?(p.color+" "+c):""}"></i><small>${ko}</small><b>${p?S(p.color||cname(c)):"—"}</b></div>`}).join("");
+ const cells=SHOP_LABEL.map(([k,ko])=>{
+  const p=pick(x,k);
+  if(!p)return `<div class="lbc" style="opacity:.4"><small>${ko}</small><b>—</b></div>`;
+  return `<div class="lbc"><small>${ko}</small><svg viewBox="0 0 100 112" role="img" aria-label="${S(p.name)}">${garment(kindOf(p.name,ko),p.hex)}</svg><b>${S(p.name)}</b></div>`;
+ }).join("");
+ const photo=o.photo?`<img class="lb-photo" src="${o.photo}" alt="분석한 내 사진">`:"";
+ return `<div class="lb"><div class="lb-top">${photo}<div class="lb-meta"><p class="lbl">${S(String(x.en||"LOOK").toUpperCase())}</p><h3>${S(x.title)}</h3><p>${S(x.mood||x.occ||"")}</p></div></div>
+<div class="lb-colors">${chips}</div><div class="lb-grid">${cells}</div></div>`;
+}
+function lookTabs(list,cur,act){
+ return `<div class="ltabs" role="tablist">${list.map((x,i)=>`<button role="tab" data-a="${act}" data-id="${i}" class="${i===cur?"on":""}" aria-pressed="${i===cur}" aria-selected="${i===cur}"><b>조합 0${i+1} · ${S(x.theme||"LOOK")}</b>${S(x.title)}</button>`).join("")}</div>`;
+}
+function itemCards(x){
+ return (x.items||[]).map(p=>`<article class="icard">
+  <div class="icard-h"><i style="background:${p.hex}"></i><div><small>${CATOF[p.slot]||"아이템"} · ${S(p.color||cname(p.hex))}</small><b>${S(p.name)}</b></div><span>${S(String(p.hex).toUpperCase())}</span></div>
+  ${p.fit?`<p class="fit"><b>핏</b> · ${S(p.fit)}</p>`:""}
+  ${p.reason?`<p class="why2">${S(p.reason)}</p>`:""}
+  <div class="shops">${SHOPS.map(([k,f])=>`<a href="${f(p.q||p.name)}" target="_blank" rel="noopener noreferrer">${k}</a>`).join("")}</div>
+ </article>`).join("");
+}
+/* ---------- 함께 입을 아이템 추천 ---------- */
+const SHOP=q=>`https://search.shopping.naver.com/search/all?query=${encodeURIComponent(q)}`;
+function complements(pcs){
+ const names=pcs.map(p=>p[1]).join(" ");
+ const out=[];const add=(cat,name,why,hex)=>{if(!out.some(o=>o.name===name))out.push({cat,name,why,hex})};
+ const cold=ST.wea==="cold"||ST.wea==="chill";
+ if(!/가방|백|토트|크로스/.test(names))add("가방","미니멀 토트백","가방 색은 신발과 맞추면 가장 깔끔합니다.",P.ink);
+ if(!/벨트/.test(names))add("벨트","레더 벨트","상하의 색 경계가 흐릴 때 허리선을 잡아줘요.",P.brown);
+ if(cold){if(!/머플러|목도리|스카프/.test(names))add("머플러","차콜 울 머플러","쌀쌀한 날 목을 감으면 얼굴이 밝아지고 아우터와 톤이 이어져요.","#2B2B2B")}
+ else add("양말","아이보리 크루 삭스","바지와 신발 사이를 이어주면 다리가 길어 보여요.",P.ivory);
+ if(!/안경|선글라스/.test(names))add("안경","라운드 메탈 안경","액세서리를 하나 더할 때 가장 부담 없는 선택이에요.","#C9C9C9");
+ return out.slice(0,3);
+}
+function compCards(list,small){
+ return `<div class="comps">${list.map(c=>`<div class="comp">${small?"":`<div class="comp-sw" style="background:${c.hex}"></div>`}<div class="comp-tx"><small>${c.cat} 추천</small><b>${c.name}</b><span>${c.why}</span></div><a class="comp-a" href="${SHOP(c.name)}" target="_blank" rel="noopener">보기</a></div>`).join("")}</div>`;
+}
+
+/* ---------- 옷장 ---------- */
+const CATS=["상의","하의","아우터","신발","가방","모자"];
+const cycleCat=c=>CATS[(CATS.indexOf(c)+1)%CATS.length];
+const wsave=()=>{try{localStorage.setItem("lookai:wardrobe",JSON.stringify(ST.wardrobe))}catch(e){
+  ST.err="옷장 저장 공간이 부족해요. 사진 수를 줄여 주세요.";}};
+async function addWardrobe(files){
+ for(const f of [...files].slice(0,8)){
+  if(!f.type.startsWith("image/"))continue;
+  try{
+   const u=URL.createObjectURL(f);
+   const img=await new Promise((ok,no)=>{const i=new Image();i.onload=()=>ok(i);i.onerror=no;i.src=u});
+   const s=Math.min(1,320/Math.max(img.naturalWidth,img.naturalHeight)),w=Math.max(1,Math.round(img.naturalWidth*s)),h=Math.max(1,Math.round(img.naturalHeight*s));
+   const c=document.createElement("canvas");c.width=w;c.height=h;const x=c.getContext("2d");
+   x.fillStyle="#fff";x.fillRect(0,0,w,h);x.drawImage(img,0,0,w,h);
+   const t=document.createElement("canvas");t.width=12;t.height=12;const tx=t.getContext("2d",{willReadFrequently:true});tx.drawImage(img,0,0,12,12);
+   const d=tx.getImageData(0,0,12,12).data;let r=0,g=0,b=0,n=0;
+   for(let i=0;i<d.length;i+=4){const br=(d[i]+d[i+1]+d[i+2])/3;if(br>245)continue;r+=d[i];g+=d[i+1];b+=d[i+2];n++}
+   if(!n){r=g=b=200;n=1}
+   const col=hex([r/n,g/n,b/n]);
+   ST.wardrobe.unshift({id:"w"+Date.now()+Math.random().toString(36).slice(2,6),src:c.toDataURL("image/jpeg",.62),cat:"상의",name:"내 상의",color:cname(col),hex:col});
+   URL.revokeObjectURL(u);
+  }catch(e){}
+ }
+ wsave();render(true);
+}
+function wardrobeCombos(){
+ const g=c=>ST.wardrobe.filter(i=>i.cat===c);
+ const tops=g("상의"),bots=g("하의"),shoes=g("신발"),outers=g("아우터");
+ if(!tops.length||!bots.length)return{err:"상의와 하의를 각각 1장 이상 등록해 주세요."};
+ const pairs=[];
+ tops.forEach(t=>bots.forEach(b=>{
+  const d=dE(t.hex,b.hex),dl=Math.abs(hsl(t.hex).l-hsl(b.hex).l);
+  let s=100-d/2;
+  if(d<20)s+=4; if(d>72)s-=12; if(dl<.12)s-=6;
+  if(family(t.hex)===family(b.hex))s+=4;
+  s+=Math.random()*4;
+  const sh=shoes.slice().sort((x,y)=>Math.abs(dE(x.hex,b.hex)-14)-Math.abs(dE(y.hex,b.hex)-14))[0]||null;
+  pairs.push({t,b,sh,s});
+ }));
+ pairs.sort((a,b)=>b.s-a.s);
+ const seen=new Set(),picked=[];
+ for(const p of pairs){const k=p.t.id+"|"+p.b.id;if(seen.has(k))continue;seen.add(k);picked.push(p);if(picked.length===3)break}
+ const cold=ST.wea==="cold";
+ return{list:picked.map((p,i)=>{
+  const o=cold?(outers.slice().sort((x,y)=>hsl(x.hex).l-hsl(y.hex).l)[0]||null):null;
+  const pcs=[];
+  if(o)pcs.push(["아우터",o.name||(o.color+" 아우터"),o.hex]);
+  pcs.push(["상의",p.t.name||(p.t.color+" 상의"),p.t.hex],["하의",p.b.name||(p.b.color+" 하의"),p.b.hex]);
+  if(p.sh)pcs.push(["신발",p.sh.name||(p.sh.color+" 신발"),p.sh.hex]);
+  const d=Math.round(dE(p.t.hex,p.b.hex));
+  const why=`${p.t.color} 상의와 ${p.b.color} 하의 조합. 색 거리 ${d}로 ${d<22?"톤온톤에 가까워 차분해요":d>58?"대비가 커서 또렷한 인상이에요":"균형이 잡힌 조합이에요"}.`+(p.sh?` 신발은 ${p.sh.color}로 발끝을 정리했어요.`:"");
+  return{id:"w"+i,title:`${p.t.color} × ${p.b.color}`,occ:"내 옷 조합",pcs,why,score:Math.max(66,Math.min(96,Math.round(p.s))),
+   photos:[p.t,p.b,p.sh,o].filter(Boolean).map(x=>x.src)};
+ })};
+}
+
+/* ---------- 화면 ---------- */
+const V={
+ home:()=>`<div class="top"><span class="logo">LOOK<b> AI</b></span><a href="#auth" style="font-size:14px;color:var(--mute);padding:12px 0 12px 14px;display:inline-block">${ST.user?ST.user.name+"님":"로그인"}</a></div>
+<section class="pad" style="padding-top:44px"><p class="lbl">AI PERSONAL STYLING FOR MEN</p><h2 class="big">사진 한 장으로<br>완성하는<br>나만의 코디</h2><p class="mute">옷 사진을 올리면 컬러와 톤을 분석하고, 체형과 상황에 맞는 코디를 제안해요. 기본 분석은 기기 안에서 처리하고, AI를 연결했을 때만 사진이 AI 서버로 전송돼요.</p>
+<div class="hero" aria-hidden="true"><svg viewBox="0 0 120 120" style="left:-16px;top:8px;color:var(--sand)" fill="currentColor">${shirt}</svg><svg viewBox="0 0 120 120" style="right:-8px;top:32px;color:var(--ink)" fill="currentColor">${shirt}</svg><div class="dots"><i style="background:#FAF8F4"></i><i style="background:#D9CDB8"></i><i style="background:#8C7B65"></i><i style="background:#111"></i></div></div>
+<div style="margin-top:32px;display:grid;gap:12px"><a class="btn p" href="#upload">스타일 분석 시작하기</a>${ST.user?"":'<a class="btn" href="#auth">회원가입 · 로그인</a>'}</div>
+${ST.looks.length?`<a class="btn" style="margin-top:12px" href="#saved">${ic("bookmark")}내 룩북 ${ST.looks.length}개</a>`:""}
+<p class="lbl" style="margin-top:44px">HOW IT WORKS</p><ol class="how">${[["01","사진 업로드","오늘 입은 코디나 옷장 속 아이템을 올려 주세요."],["02","체형 · 상황 입력","어깨·다리 비율과 오늘의 상황, 날씨를 골라요."],["03","코디 추천","핀터레스트 감성 풀코디 3세트와 구매 링크까지 받아보세요."]].map(s=>`<li><em>${s[0]}</em><p><b>${s[1]}</b><br><span class="mute">${s[2]}</span></p></li>`).join("")}</ol></section>`,
+ upload:()=>`${head("옷 사진 업로드","home",1)}<section class="pad"><h2 class="t">분석할 코디 사진을<br>올려주세요</h2>
+${ST.photo?`<div class="ph"><img src="${ST.photo}" alt="업로드한 코디 사진"><button class="x" data-a="del" aria-label="사진 삭제">${ic("x")}</button><span class="m">${ST.meta}</span></div>`:`<div class="drop">${ic("img")}<p>코디 사진을 선택해 주세요</p><small>JPG · PNG · HEIC, 전신 사진이 가장 정확해요</small></div>`}
+<div class="two"><button class="btn sm" data-a="album">${ic("img")}${ST.photo?"다른 사진":"앨범에서 선택"}</button><button class="btn sm" data-a="cam">${ic("cam")}카메라 촬영</button></div>
+${ST.err?`<p class="err" role="alert">${ST.err}</p>`:""}
+<ul class="tips"><li>— 밝은 곳에서 정면으로 촬영해 주세요.</li><li>— 전신이 나오면 상·하의 경계를 자동으로 찾아 분석해요.</li><li>— 배경이 단순할수록 정확도가 높아져요.</li></ul>
+<a class="btn p" href="#profile" ${ST.photo?"":'style="opacity:.35;pointer-events:none"'}>다음 · 체형 입력</a></section>`,
+ profile:()=>`${head("체형 · 오늘 조건","upload",2)}<section class="pad"><h2 class="t">체형과 오늘 상황을<br>알려주세요</h2><p class="mute" style="margin:0">코디를 고르는 기준이 돼요. 나중에 바꿀 수 있어요.</p>
+<p class="lbl" style="margin-top:24px">어깨</p>${seg("shoulder",[["narrow","좁은 편"],["normal","보통"],["wide","넓은 편"]],ST.profile.shoulder)}
+<p class="lbl" style="margin-top:20px">다리 비율</p>${seg("leg",[["short","상체가 길어요"],["normal","보통"],["long","하체가 길어요"]],ST.profile.leg)}
+<p class="lbl" style="margin-top:20px">체형</p>${seg("build",[["slim","슬림"],["normal","보통"],["muscular","근육형"],["heavy","체중관리"]],ST.profile.build)}
+<p class="lbl" style="margin-top:22px">오늘 상황</p>${chips("tpo",[["date","데이트"],["work","출근"],["interview","면접"],["hangout","모임"],["travel","여행"],["daily","외출"]],ST.tpo)}
+<p class="lbl" style="margin-top:20px">날씨</p>${chips("wea",[["hot","28도↑"],["warm","18~27도"],["chill","8~17도"],["cold","7도↓"]],ST.wea)}
+<a class="btn p" style="margin-top:26px" href="#style">다음 · 무드 선택</a></section>`,
+ style:()=>{const Ls=["사진 속 아이템을 살펴보는 중","컬러 팔레트를 추출하는 중","톤과 대비를 분석하는 중","체형에 맞춰 코디를 구성하는 중"];return`${head("스타일 선택","profile",3)}<section class="pad"><h2 class="t">원하는 무드를<br>골라주세요</h2><p class="mute" style="margin:0">최대 3개까지 선택 · <b style="color:var(--ink)">${ST.styles.length}/3</b> · ${TPO[ST.tpo]} / ${WEA[ST.wea]}</p>
+<div class="sg">${STY.map(s=>{const on=ST.styles.includes(s[0]);return`<button class="sc ${on?"on":""} ${!on&&ST.styles.length>=3?"lock":""}" data-a="sty" data-id="${s[0]}" aria-pressed="${on}"><div style="display:flex;justify-content:space-between"><div class="sw">${s[4].map(c=>`<i style="background:${c}"></i>`).join("")}</div>${on?ic("ok"):""}</div><div><small>${s[2]}</small><b>${s[1]}</b><span>${s[3]}</span></div></button>`}).join("")}</div>
+<button class="btn p" style="margin-top:24px" data-a="go" ${ST.styles.length?"":"disabled"}>AI 분석 시작</button>${canAI()||ST.sample?'<p class="mute" style="font-size:11px;text-align:center;margin:12px 0 0">AI 분석 시 사진이 AI 서버로 전송돼요.</p>':""}<p style="text-align:center;margin-top:16px;font-size:12px"><a href="#ai" style="color:var(--taupe);text-decoration:underline;padding:10px;display:inline-block">${SRV.ok?"LOOK AI 서버 · 무료 AI 연결됨":ST.key?"Gemini AI 사용 중":ST.sample?"Claude AI 사용 가능":"실제 AI 연결하기"}</a></p></section>
+${ST.busy?`<div class="ov" role="status"><div class="sp"></div><p class="logo" style="font-size:16px;margin:24px 0 0">ANALYZING</p><p class="mute">${Ls[ST.msg%4]}…</p></div>`:""}`},
+ result:()=>{const r=ST.result,C=2*Math.PI*42,sel=r.outfits[Math.min(Math.max(0,ST.active),r.outfits.length-1)]||r.outfits[0];return`${head("AI 분석 결과","style",3)}<section class="pad"><p class="badge">${({gemini:"Gemini AI가 분석한 결과예요",claude:"Claude AI가 분석한 결과예요"})[r.src]||"기기 안에서 분석한 색상 기반 결과예요"}</p>${ST.note?`<p class="badge" style="color:var(--ink)">${ST.note}</p>`:""}
+<div class="row"><img src="${ST.photo}" alt="분석한 사진"><div class="ring"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="none" stroke="var(--line)" stroke-width="5"/><circle cx="50" cy="50" r="42" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="${C*(1-r.score/100)}"/></svg><div><b>${r.score}</b><small>STYLE SCORE</small></div></div></div>
+<p style="font-size:15px;line-height:1.7;margin:24px 0 0">${r.summary}</p><div class="chips">${r.tags.map(t=>`<span>${t}</span>`).join("")}</div>
+<p class="lbl" style="margin-top:36px">FULL LOOK · 전체 코디</p><p class="mute" style="margin:6px 0 0">조합 탭을 눌러 색조합과 아이템을 바꿔 볼 수 있어요.</p>
+${lookTabs(r.outfits,ST.active,"lk")}
+${lookboard(sel,{photo:ST.photo})}
+<p class="lbl" style="margin-top:28px">ITEMS · 이 조합의 아이템 ${sel.items.length}개</p><p class="mute" style="margin:6px 0 0">아이템마다 무신사 · 네이버쇼핑 · 쿠팡에서 바로 찾아볼 수 있어요.</p>
+${itemCards(sel)}
+<p class="lbl" style="margin-top:26px">WITH THIS</p><p class="mute" style="margin:0 0 10px">이 코디에 함께 입으면 좋은 아이템</p>${compCards(complements(sel.pcs))}
+<div class="two" style="margin-top:28px"><div class="box"><p class="lbl">TONE</p><p>${r.tone}</p></div><div class="box"><p class="lbl">CONTRAST</p><p>${r.contrast}</p></div></div>
+${r.harmony&&r.harmony.score?`<div class="hb"><div class="hb-top"><p class="lbl">COLOR HARMONY</p><b>${r.harmony.score}</b></div><div class="bar"><i style="width:${r.harmony.score}%"></i></div><p class="mute" style="margin:8px 0 0">${r.harmony.note}</p></div>`:""}
+<p class="lbl" style="margin-top:32px">PALETTE</p><div class="pal">${r.palette.map(c=>`<div><i style="background:${c.hex}"></i>${c.color}</div>`).join("")}</div>
+<p class="lbl" style="margin-top:32px">DETECTED ITEMS</p><div style="margin-top:12px">${r.items.map(i=>`<div class="it"><div><span>${i.cat} · ${i.color}</span><small>${i.conf}%</small></div><div class="bar"><i style="width:${i.conf}%"></i></div></div>`).join("")}</div>
+<div class="tipbox"><p class="lbl">STYLING TIPS</p>${r.tips.map(t=>`<div style="margin-top:8px">· ${t}</div>`).join("")}</div>
+${(r.bodyTips&&r.bodyTips.length)||bodyTips().length?`<div class="tipbox"><p class="lbl">BODY FIT</p>${((r.bodyTips&&r.bodyTips.length)?r.bodyTips:bodyTips()).map(t=>`<div style="margin-top:8px">· ${t}</div>`).join("")}</div>`:""}
+<a class="btn p" style="margin-top:28px" href="#outfits">맞춤 코디 전체 보기</a></section>`},
+ outfits:()=>{const o=ST.result.outfits;return`${head("코디 추천","result")}<section class="pad"><h2 class="t">${o.length}가지 색조합으로<br>준비했어요</h2><p class="mute" style="margin:0 0 8px">${TPO[ST.tpo]} · ${WEA[ST.wea]} 기준으로 골랐어요. 조합마다 아우터·상의·하의·신발·액세서리 다섯 가지로 완성돼요.</p>
+${lookTabs(o,ST.active,"jump")}
+${o.map((x,i)=>`<article class="oc" id="set-${i}" style="margin-top:16px"><div class="bd"><p class="lbl" style="margin-bottom:2px">조합 0${i+1} · ${S(x.occ)}${x.score?` · ${x.score}점`:""}</p>
+${lookboard(x,{photo:i===0?ST.photo:""})}
+${ST.images[x.id]?`<img src="${ST.images[x.id]}" alt="${S(x.title)} AI 이미지" style="width:100%;display:block;border-radius:16px;margin-top:12px">`:""}
+<p class="why" style="margin-top:14px">${S(x.why)}</p>
+<div style="margin-top:14px">${itemCards(x)}</div>
+<div class="two" style="margin-top:14px"><button class="btn sm" data-a="save" data-id="${x.id}">${ic("bookmark")}${ST.saved.has(x.id)?"저장됨":"코디 저장"}</button><button class="btn sm" data-a="aiimg" data-id="${x.id}">${ic("spark")}AI 사진</button></div>
+</div></article>`).join("")}
+<div style="display:grid;gap:12px;margin-top:28px"><button class="btn" data-a="shareall">${ic("share")}코디 텍스트로 공유</button><a class="btn" href="#style">다른 무드로 다시 추천</a><button class="btn p" data-a="reset">새 사진으로 분석하기</button></div></section>`},
+wardrobe:()=>{const W=ST.wardrobe,c=wardrobeCombos();return`${head("내 옷장","home")}<section class="pad"><h2 class="t">내 옷 사진으로<br>코디를 짜드려요</h2><p class="mute">옷을 한 장씩 찍어 올리면 그 옷만으로 조합을 만들어요. 카테고리를 눌러 바꿀 수 있어요.</p>
+<div class="two" style="margin-top:20px"><button class="btn sm p" data-a="wadd">${ic("cam")}옷 사진 추가</button><button class="btn sm" data-a="wgo" ${W.length?"":"disabled"}>${ic("spark")}코디 짜기</button></div>
+${W.length?`<div class="wgrid">${W.map(w=>`<div class="witem"><img src="${w.src}" alt="${w.color} 옷"><button class="wdel" data-a="wdel" data-id="${w.id}" aria-label="삭제">${ic("x")}</button><button class="wcat" data-a="wcat" data-id="${w.id}">${w.cat}</button><small style="background:${w.hex}"></small></div>`).join("")}</div>`:`<div class="drop" style="margin-top:18px">${ic("outfit")}<p>아직 등록한 옷이 없어요</p><small>상의·하의·신발을 찍어 올려 주세요</small></div>`}
+${ST.err?`<p class="err" role="alert">${ST.err}</p>`:""}
+${ST.wcombos?(ST.wcombos.err?`<p class="err" role="alert">${ST.wcombos.err}</p>`:ST.wcombos.list.map((x,i)=>`<article class="oc"><div class="wrow">${x.photos.map(src=>`<img src="${src}" alt="">`).join("")}</div><div class="bd"><p class="lbl">MY LOOK 0${i+1} · ${x.score}점</p><h3>${x.title}</h3><div style="margin-top:12px">${x.pcs.map(p=>`<div class="pc"><i style="background:${p[2]}"></i><small>${p[0]}</small><span>${p[1]}</span></div>`).join("")}</div><p class="why">${x.why}</p><p class="lbl" style="margin-top:18px">WITH THIS</p>${compCards(complements(x.pcs),true)}</div></article>`).join("")):""}
+<p class="lbl" style="margin-top:34px">HOW IT WORKS</p><ol class="how"><li><em>01</em><p><b>옷 사진 등록</b><br><span class="mute">상의·하의·신발·아우터를 찍어 올려요. 색은 자동으로 인식해요.</span></p></li><li><em>02</em><p><b>카테고리 확인</b><br><span class="mute">사진 아래 이름을 눌러 상의·하의·아우터·신발을 바꿔요.</span></p></li><li><em>03</em><p><b>조합 받기</b><br><span class="mute">내 옷끼리 색이 맞는 조합 3가지를 만들어요.</span></p></li></ol>
+<p class="mute" style="font-size:11px;margin-top:16px">사진은 이 기기 안에만 저장되고 서버로 전송되지 않아요.</p></section>`},
+ saved:()=>`${head("내 룩북","home")}<section class="pad"><h2 class="t">저장한 코디<br>${ST.looks.length}개</h2>${ST.looks.length?ST.looks.map(l=>`<article class="oc"><div class="cl">${l.pcs.map(p=>`<i style="background:${p[2]}"></i>`).join("")}</div><div class="bd"><p class="lbl">${l.occ||"LOOK"}</p><h3>${l.title}</h3><div style="margin-top:10px">${l.pcs.map(p=>`<div class="pc"><i style="background:${p[2]}"></i><small>${p[0]}</small><span style="flex:1">${p[1]}</span></div>`).join("")}</div><div class="two" style="margin-top:16px"><button class="btn sm" data-a="sharel" data-id="${l.id}">${ic("share")}공유</button><button class="btn sm" data-a="unsave" data-id="${l.id}">${ic("trash")}삭제</button></div></div></article>`).join(""):`<div class="drop" style="margin-top:20px">${ic("bookmark")}<p>아직 저장한 코디가 없어요</p><small>코디 추천에서 북마크를 눌러 저장하세요</small></div>`}
+<a class="btn p" style="margin-top:24px" href="#upload">새로 분석하기</a></section>`,
+ ai:()=>`${head("AI 설정","home")}<section class="pad"><h2 class="t">실제 AI 분석<br>연결하기</h2><p class="mute">${SRV.ok?"LOOK AI 서버가 연결되어 키 없이도 진짜 Gemini AI 분석이 바로 동작해요. 아래 칸은 내 Gemini 키를 직접 쓸 때만 채우면 돼요.":"무료 Gemini 키를 붙여 넣으면 이 기기에서 바로 AI가 옷을 분석해요. 키는 이 브라우저에만 저장되고 우리 서버로 보내지 않아요."}</p>
+<div class="box" style="margin-top:20px"><p class="lbl">현재 분석 방식</p><p>${ST.key?"Gemini AI (내 키 · "+ST.model+")":SRV.ok?"LOOK AI 서버 (무료 AI · gemini-3.5-flash-lite)":SRV.reach?"LOOK AI 서버 (키 미설정)":ST.sample?"Claude AI (내장)":"기기 내 색상 분석"}</p></div>
+${SRV.reach&&!SRV.configured?'<p class="mute" style="font-size:12px;margin-top:8px">서버는 연결됐지만 Gemini 키가 아직 설정되지 않았어요. 배포 환경의 GEMINI_API_KEY를 확인해 주세요.</p>':""}
+<form id="kf" novalidate><input class="fld" name="key" type="password" autocomplete="off" autocapitalize="none" placeholder="Gemini API 키" aria-label="Gemini API 키" value="${ST.key.replace(/[^\w-]/g,"")}"><input class="fld" name="model" type="text" autocapitalize="none" placeholder="모델명" aria-label="모델명" value="${ST.model}"><button class="btn p" style="margin-top:16px" type="submit">저장</button></form>
+${ST.key?`<button class="btn" style="margin-top:12px" data-a="delkey">키 삭제</button>`:""}
+<div class="tipbox"><p class="lbl">키 발급</p>1) aistudio.google.com 접속 후 로그인<br>2) "Get API key"로 키 생성<br>3) 위 칸에 붙여 넣고 저장<br><br><span class="mute">· 무료 티어로 보낸 사진은 Google 제품 개선에 쓰일 수 있어요.<br>· 키는 본인 기기에만 두고, 남에게 공유하지 마세요.<br>· LOOK AI 서버가 연결되면 키 없이 Gemini AI 분석을 쓸 수 있어요.<br>· AI 코디 이미지 생성은 결제가 활성화된 Gemini 키가 있어야 동작해요(1장 약 $0.03~0.07).</span></div></section>`,
+ auth:()=>{if(ST.user)return`${head("계정","home")}<section class="pad" style="padding-top:24px"><div class="tipbox" style="margin:0"><p class="lbl">SIGNED IN</p><p style="font-size:20px;font-weight:300;margin:12px 0 4px">${ST.user.name}님</p><span class="mute">${ST.user.email}</span></div><a class="btn" style="margin-top:16px" href="#saved">내 룩북 ${ST.looks.length}개</a><button class="btn" style="margin-top:12px" data-a="out">로그아웃</button><a class="btn" style="margin-top:12px" href="#ai">AI 설정</a></section>`;
+const s=ST.mode==="signup",e=ST.fe,E=k=>e[k]?`<p class="fe">⚠ ${e[k]}</p>`:"";return`${head(s?"회원가입":"로그인","home")}<section class="pad"><h2 class="t">${s?"나만의 스타일링을<br>시작해 볼까요":"다시 만나서<br>반가워요"}</h2>
+<div class="tab" role="tablist"><button role="tab" class="${s?"":"on"}" data-a="mode" data-id="login">로그인</button><button role="tab" class="${s?"on":""}" data-a="mode" data-id="signup">회원가입</button></div>
+<form id="af" novalidate>${s?`<input class="fld" name="name" placeholder="이름" autocomplete="name" aria-label="이름" value="${ST.f.name}">${E("name")}`:""}
+<input class="fld" name="email" type="email" inputmode="email" autocapitalize="none" autocomplete="email" placeholder="이메일" aria-label="이메일" value="${ST.f.email}">${E("email")}
+<input class="fld" name="pw" type="password" autocomplete="${s?"new-password":"current-password"}" placeholder="비밀번호 (영문+숫자 8자 이상)" aria-label="비밀번호">${E("pw")}
+${s?`<label class="chk"><input type="checkbox" name="ag">이용약관 및 개인정보 처리방침에 동의합니다. (필수)</label>${E("ag")}`:""}
+${ST.err?`<p class="err" role="alert">${ST.err}</p>`:""}<button class="btn p" style="margin-top:20px" type="submit">${s?"가입하기":"로그인"}</button></form>
+<p class="mute" style="font-size:11px;text-align:center;margin-top:24px">데모 계정은 이 기기 안에만 저장돼요.</p><a class="btn" style="margin-top:16px" href="#ai">AI 설정</a></section>`}};
+
+/* ---------- 라우터 · 이벤트 ---------- */
+const go=r=>location.replace("#"+r);
+function render(keep){let r=location.hash.slice(1)||"home";if(!V[r])r="home";
+ if(r==="profile"&&!ST.photo)return go("upload");
+ if(r==="style"&&!ST.photo)return go("upload");
+ if((r==="result"||r==="outfits")&&!ST.result)return go(ST.photo?"style":"upload");
+ const y=scrollY;$("#app").innerHTML=V[r]();
+ $("#nav").innerHTML=[["home","홈","home"],["upload","업로드","upload"],["wardrobe","옷장","outfit"],["result","분석","analysis"],["saved","룩북","bookmark"]].map(n=>`<a href="#${n[0]}" class="${n[0]===r||(r==="profile"&&n[0]==="upload")||(r==="style"&&n[0]==="upload")?"on":""}">${ic(n[2])}${n[1]}</a>`).join("");
+ scrollTo(0,keep===true?y:0)}
+
+addEventListener("hashchange",()=>{ST.err="";ST.fe={};render()});
+
+function saveLooks(){try{localStorage.setItem("lookai:looks",JSON.stringify(ST.looks))}catch(e){}}
+function saveProfile(){try{localStorage.setItem("lookai:profile",JSON.stringify(ST.profile))}catch(e){}}
+async function shareText(t){
+ try{if(navigator.share){await navigator.share({text:t});return true}
+  await navigator.clipboard.writeText(t);alert("클립보드에 복사했어요.");return true}
+ catch(e){try{prompt("복사해서 사용하세요",t)}catch(x){}return false}
+}
+const lookText=l=>`${l.title} (${l.occ})\n`+l.pcs.map(p=>`· ${p[0]} ${p[1]}`).join("\n")+`\n\nLOOK AI`;
+
+async function loadFile(f){ST.err="";if(!f||!f.type.startsWith("image/")){ST.err="이미지 파일만 올릴 수 있어요.";return render(true)}
+ const u=URL.createObjectURL(f);
+ try{
+  const img=await new Promise((ok,no)=>{const i=new Image();i.onload=()=>ok(i);i.onerror=no;i.src=u});
+  const s=Math.min(1,1280/Math.max(img.naturalWidth,img.naturalHeight)),w=Math.round(img.naturalWidth*s),h=Math.round(img.naturalHeight*s),c=document.createElement("canvas");
+  c.width=w;c.height=h;const x=c.getContext("2d");x.fillStyle="#fff";x.fillRect(0,0,w,h);x.drawImage(img,0,0,w,h);
+  ST.photo=c.toDataURL("image/jpeg",.85);
+  const g=document.createElement("canvas");g.width=GW;g.height=GH;
+  const gx=g.getContext("2d",{willReadFrequently:true});gx.fillStyle="#fff";gx.fillRect(0,0,GW,GH);
+  // 중앙 크롭으로 인물 비중을 높임
+  const ar=img.naturalWidth/img.naturalHeight;
+  let sw=img.naturalWidth,sh=img.naturalHeight,sx=0,sy=0;
+  if(ar>0.85){sw=img.naturalHeight*0.85;sx=(img.naturalWidth-sw)/2}
+  gx.drawImage(img,sx,sy,sw,sh,0,0,GW,GH);
+  ST.px=gx.getImageData(0,0,GW,GH).data;
+  ST.result=null;ST.meta=`${w}×${h} · ${Math.round(ST.photo.length*.75/1024)}KB`;
+ }catch(e){ST.err="사진을 읽을 수 없어요. JPG 또는 PNG로 다시 시도해 주세요."}
+ finally{URL.revokeObjectURL(u)}
+ render(true)}
+
+for(const id of["fa","fc"])$("#"+id).addEventListener("change",e=>{loadFile(e.target.files[0]);e.target.value=""});
+$("#fw").addEventListener("change",e=>{addWardrobe(e.target.files);e.target.value=""});
+
+const sha=async s=>[...new Uint8Array(await crypto.subtle.digest("SHA-256",new TextEncoder().encode(s)))].map(x=>x.toString(16).padStart(2,"0")).join("");
+const store=(k,v)=>{try{v===undefined?localStorage.removeItem(k):localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+const users=()=>{try{return JSON.parse(localStorage.getItem("lookai:users"))||{}}catch(e){return{}}};
+
+$("#app").addEventListener("click",async e=>{
+ const b=e.target.closest("[data-a]");if(!b)return;
+ const a=b.dataset.a,id=b.dataset.id;
+ if(a==="album")$("#fa").click();
+ else if(a==="cam")$("#fc").click();
+ else if(a==="del"){ST.photo=null;ST.px=null;ST.result=null;render(true)}
+ else if(a==="pf"){const k=b.dataset.k,v=b.dataset.v;if(k==="tpo"||k==="wea"){ST[k]=v}else{ST.profile[k]=v;saveProfile()}render(true)}
+ else if(a==="sty"){const i=ST.styles.indexOf(id);if(i>=0)ST.styles.splice(i,1);else if(ST.styles.length<3)ST.styles.push(id);render(true)}
+ else if(a==="go"){
+  ST.busy=true;ST.msg=0;render(true);
+  const t=setInterval(()=>{ST.msg++;if(ST.busy)render(true)},1100);
+  ST.note="";
+  const ai=(await Promise.all([runAI().catch(()=>null),new Promise(r=>setTimeout(r,2400))]))[0];
+  clearInterval(t);
+  const base=ai||analyze();
+  if(!base){ST.busy=false;ST.err="사진에서 옷 영역을 찾지 못했어요. 전신 사진으로 다시 시도해 주세요.";ST.result=null;go("upload");return}
+  if(!Array.isArray(base.outfits)||!base.outfits.length)base.outfits=buildOutfits(base);
+  ST.active=0;
+  ST.result=base;ST.busy=false;go("result")}
+ else if(a==="lk"){ST.active=Math.max(0,+id||0);render(true)}
+ else if(a==="jump"){const el=document.getElementById("set-"+id);if(el)el.scrollIntoView({behavior:"smooth",block:"start"})} else if(a==="save"){
+  const x=ST.result.outfits.find(o=>o.id===id);
+  if(x){if(ST.saved.has(id)){ST.saved.delete(id);ST.looks=ST.looks.filter(l=>l.id!==id)}
+   else{ST.saved.add(id);ST.looks.unshift({id,title:x.title,occ:x.occ,why:x.why,pcs:x.pcs,at:Date.now()})}
+   saveLooks()}
+  render(true)}
+ else if(a==="unsave"){ST.saved.delete(id);ST.looks=ST.looks.filter(l=>l.id!==id);saveLooks();render(true)}
+ else if(a==="sharel"){const l=ST.looks.find(x=>x.id===id);if(l)shareText(lookText(l))}
+ else if(a==="shareall"){shareText(ST.result.outfits.map(lookText).join("\n\n")+`\n\n${TPO[ST.tpo]} · ${WEA[ST.wea]}`)}
+ else if(a==="wadd")$("#fw").click();
+ else if(a==="wdel"){ST.wardrobe=ST.wardrobe.filter(w=>w.id!==id);ST.wcombos=null;wsave();render(true)}
+ else if(a==="wcat"){const w=ST.wardrobe.find(x=>x.id===id);if(w){w.cat=cycleCat(w.cat);w.name="내 "+w.cat;wsave();ST.wcombos=null}render(true)}
+ else if(a==="wgo"){ST.wcombos=wardrobeCombos();render(true)}
+ else if(a==="aiimg"){const x=ST.result.outfits.find(o=>o.id===id);if(x){b.disabled=true;b.textContent="생성 중…";await makeImage(x);render(true)}}
+ else if(a==="reset"){ST.photo=null;ST.px=null;ST.result=null;ST.styles=[];go("upload")}
+ else if(a==="mode"){ST.mode=id;ST.fe={};ST.err="";render(true)}
+ else if(a==="delkey"){ST.key="";try{localStorage.removeItem("lookai:gkey")}catch(x){}render(true)}
+ else if(a==="out"){ST.user=null;store("lookai:user");render(true)}
+});
+
+$("#app").addEventListener("submit",async e=>{
+ e.preventDefault();
+ if(e.target.id==="kf"){const k=new FormData(e.target);
+  ST.key=String(k.get("key")||"").trim().replace(/[^\w-]/g,"");
+  ST.model=String(k.get("model")||"").trim().replace(/[^\w.\-]/g,"")||"gemini-3.8-flash";
+  try{ST.key?localStorage.setItem("lookai:gkey",ST.key):localStorage.removeItem("lookai:gkey");localStorage.setItem("lookai:gmodel",ST.model)}catch(x){}
+  return go(ST.photo&&ST.styles.length?"style":"auth")}
+ const f=new FormData(e.target),s=ST.mode==="signup",name=(f.get("name")||"").trim(),email=(f.get("email")||"").trim().toLowerCase(),pw=f.get("pw")||"";
+ ST.f={name,email};ST.err="";const fe={};
+ if(s&&(name.length<2||name.length>20))fe.name="이름은 2~20자로 입력해 주세요.";
+ if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email))fe.email="올바른 이메일 형식이 아니에요.";
+ if(pw.length<8||!/[A-Za-z]/.test(pw)||!/\d/.test(pw))fe.pw="영문과 숫자를 포함해 8자 이상 입력해 주세요.";
+ if(s&&!f.get("ag"))fe.ag="약관에 동의해 주세요.";
+ ST.fe=fe;if(Object.keys(fe).length)return render(true);
+ try{const h=await sha("lookai|"+email+"|"+pw),U=users();
+  if(s){if(U[email]){ST.err="이미 가입된 이메일이에요.";return render(true)}U[email]={name,h};store("lookai:users",U);ST.user={name,email}}
+  else{if(!U[email]||U[email].h!==h){ST.err="이메일 또는 비밀번호가 맞지 않아요.";return render(true)}ST.user={name:U[email].name,email}}
+  store("lookai:user",ST.user);go("home")}
+ catch(x){ST.err="이 환경에서는 계정 기능을 사용할 수 없어요.";render(true)}
+});
+
+render();
+checkServer().then(()=>{const r=location.hash.slice(1);if(r==="style"||r==="ai")render(true)});
+</script>
+</body>
+</html>

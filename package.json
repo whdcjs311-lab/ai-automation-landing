@@ -1,0 +1,7 @@
+{
+  "name": "ai-automation-landing",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "JIN 머시닝 랜딩페이지 + LOOK AI (Vercel 무료 AI 서버 포함)"
+}

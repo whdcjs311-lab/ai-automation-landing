@@ -1,0 +1,543 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>키워드 스팟 | 오늘의 수익형 키워드 대시보드</title>
+<meta name="description" content="매일 04:01·10:15 갱신되는 오늘의 수익형 키워드 대시보드. 쇼핑 커넥트·애드포스트·투자·경제·체험단 키워드를 점수와 수익 경로로 정렬합니다.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+:root{--bg:#0b1020;--card:#131a2e;--card2:#182238;--text:#eef2ff;--muted:#9aa8c7;--accent:#4ade80;--accent2:#38bdf8;--gold:#fbbf24;--red:#f87171}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(1200px 600px at 80% -10%,#1e293b,transparent),var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Malgun Gothic,sans-serif}
+.wrap{max-width:1200px;margin:0 auto;padding:28px 18px 60px}
+header{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:22px}
+h1{margin:0;font-size:clamp(26px,5vw,42px);letter-spacing:-.5px}
+.sub{color:var(--muted);margin-top:8px}
+.badge{display:inline-block;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#04121a;font-weight:800;padding:7px 12px;border-radius:999px;font-size:12px}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+.card{background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid #2b3a5c;border-radius:18px;padding:18px;box-shadow:0 12px 30px rgba(0,0,0,.25)}
+.kpi{grid-column:span 3}
+.kpi .num{font-size:34px;font-weight:900;margin-top:6px}
+.kpi .label{color:var(--muted);font-size:13px}
+.chart{grid-column:span 8;min-height:0}
+.chartbox{position:relative;height:480px}
+.side{grid-column:span 4}
+h2{margin:0 0 12px;font-size:18px}
+h2 .hint{font-size:12px;color:var(--muted);font-weight:400;margin-left:8px}
+.controls{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}
+button{background:#22304d;border:1px solid #3d4f77;color:var(--text);padding:8px 12px;border-radius:999px;cursor:pointer;font-size:13px}
+button:hover{border-color:var(--accent2)}
+button.active{background:var(--accent);border-color:var(--accent);color:#04121a;font-weight:800}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{padding:12px 10px;border-bottom:1px solid #2b3a5c;text-align:left;vertical-align:middle}
+th{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+tbody tr{cursor:pointer;transition:background .15s}
+tbody tr:hover td{background:#1d2842}
+tbody tr.sel td{background:#1b2a4a}
+tbody tr.sel td:first-child{box-shadow:inset 3px 0 0 var(--accent)}
+.kw{font-weight:800;font-size:15px}
+.tag{display:inline-block;padding:3px 8px;border-radius:999px;font-size:11px;font-weight:700;white-space:nowrap}
+.t-invest{background:#164e63;color:#a5f3fc}.t-shop{background:#4c1d95;color:#ddd6fe}.t-ent{background:#831843;color:#fbcfe8}.t-tech{background:#7f1d1d;color:#fecaca}.t-reward{background:#14532d;color:#bbf7d0}
+.bar{height:8px;background:#2b3a5c;border-radius:99px;overflow:hidden;min-width:90px}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2))}
+.stars{color:var(--gold);letter-spacing:1px;white-space:nowrap}
+.top{display:flex;gap:10px;align-items:center;margin-bottom:10px}
+.rank{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font-weight:900;background:#22304d;flex:none}
+.rank.first{background:var(--gold);color:#1a1200}
+.rank.second{background:#cbd5e1;color:#111827}
+.rank.third{background:#d97706;color:#fff}
+footer{color:var(--muted);font-size:12px;margin-top:22px;line-height:1.6}
+/* ---------- AI 분석 ---------- */
+.ai{grid-column:span 12}
+.airow{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.airow input{flex:1;min-width:220px;background:#0d1424;border:1px solid #3d4f77;color:var(--text);padding:11px 15px;border-radius:999px;font-size:14px;font-family:inherit}
+.airow input:focus{outline:none;border-color:var(--accent2);box-shadow:0 0 0 3px rgba(56,189,248,.15)}
+.btn-ai{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#04121a;border:none;font-weight:800;padding:11px 16px}
+.btn-ai:disabled{opacity:.55;cursor:progress}
+.chip{font-size:12px;padding:5px 11px;border-radius:999px;border:1px solid #3d4f77;color:var(--muted);white-space:nowrap}
+.chip.on{color:#04121a;background:var(--accent);border-color:var(--accent);font-weight:800}
+.chip.off{color:#fecaca;background:#3f1d1d;border-color:#7f1d1d}
+.chip.wait{color:#fde68a;border-color:#78350f;background:#3a2a0d}
+.quick{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.quick button{font-size:12px;padding:6px 10px;background:#16203a}
+/* ---------- 상세 패널 ---------- */
+.detail{grid-column:span 12;display:none}
+.detail.on{display:block}
+.dhead{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.dhead h2{margin:0}
+.dmeta{color:var(--muted);font-size:12px;margin-top:6px;line-height:1.7}
+.dgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.dsec{background:#0d1424;border:1px solid #2b3a5c;border-radius:14px;padding:14px}
+.dsec h3{margin:0 0 10px;font-size:13.5px;color:var(--accent2);display:flex;justify-content:space-between;align-items:center;gap:8px;letter-spacing:.01em}
+.dsec ol,.dsec ul{margin:0;padding-left:19px;line-height:1.8;font-size:13.5px}
+.dsec li{margin-bottom:2px}
+.dsec p{margin:0;font-size:13.5px;line-height:1.8;color:#dbe3f7}
+.hook li{color:var(--red);font-weight:800}
+.cp{background:#1b2740;border:1px solid #3d4f77;color:var(--muted);font-size:11px;padding:4px 9px;border-radius:8px;cursor:pointer;font-weight:600}
+.cp:hover{color:var(--text);border-color:var(--accent2)}
+.wide{grid-column:span 2}
+.pill{display:inline-block;font-size:11px;padding:2px 8px;border-radius:999px;background:#22304d;color:#c7d2fe;margin-left:6px;vertical-align:middle}
+.pill.ai{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#04121a;font-weight:800}
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);background:var(--accent);color:#04121a;font-weight:800;padding:11px 18px;border-radius:999px;opacity:0;transition:.25s;z-index:99;pointer-events:none;font-size:13px}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+pre#plan{white-space:pre-wrap;background:#0d1424;border:1px solid #2b3a5c;border-radius:12px;padding:14px;color:#c7d2fe;font-size:13px;line-height:1.75;margin:0;font-family:inherit}
+@media(max-width:900px){.kpi{grid-column:span 6}.chart,.side{grid-column:span 12}}
+@media(max-width:760px){.chartbox{height:620px}}
+@media(max-width:700px){.dgrid{grid-template-columns:1fr}.wide{grid-column:span 1}}
+@media(max-width:600px){.kpi{grid-column:span 12}.hide-mobile{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div>
+<h1>키워드 스팟 <span style="color:var(--accent)">Keyword Spot</span></h1>
+<div class="sub">실시간 이슈를 내 수익 경로(쇼핑 커넥트·애드포스트·투자·체험단) 기준으로 정렬한 대시보드</div>
+</div>
+<div style="text-align:right">
+<div class="badge" id="stamp">2026.11.26 업데이트</div>
+<div class="sub" id="routine" style="font-size:11px;margin-top:6px">매일 04:01 · 10:15 자동 갱신</div>
+</div>
+</header>
+
+<div class="grid">
+<div class="card kpi"><div class="label">추적 키워드</div><div class="num" id="kpi1">–</div></div>
+<div class="card kpi"><div class="label">수익성 A등급</div><div class="num" id="kpi2">–</div></div>
+<div class="card kpi"><div class="label">즉시 발행 추천</div><div class="num" id="kpi3">–</div></div>
+<div class="card kpi"><div class="label">최고 점수</div><div class="num" id="kpi4">–</div></div>
+
+<div class="card chart">
+<h2>키워드 인기·수익성 스코어</h2>
+<div class="chartbox"><canvas id="scoreChart"></canvas></div>
+</div>
+
+<div class="card side">
+<h2>수익 우선순위</h2>
+<div id="side"></div>
+</div>
+
+<!-- AI 분석 -->
+<div class="card ai">
+<h2>AI 키워드·아이템 분석 <span class="hint">뉴스·계절·아이템 키워드를 넣으면 오늘 바로 쓸 콘텐츠로 바꿉니다</span></h2>
+<div class="airow">
+<input id="q" type="text" placeholder="예: 블랙프라이데이 무신사 아우터 / 기준금리 인상 / 청룡영화제" autocomplete="off" enterkeyhint="go">
+<button class="btn-ai" id="go">AI로 오늘 키워드 분석</button>
+<span class="chip wait" id="aiState">AI 서버 확인 중…</span>
+</div>
+<div class="quick" id="quick"></div>
+<div class="sub" id="aiNote" style="font-size:12px;margin-top:10px">AI 서버가 응답하지 않으면 같은 입력으로 로컬 템플릿 분석이 자동 실행됩니다.</div>
+</div>
+
+<!-- 필터 + 테이블 -->
+<div class="card" style="grid-column:span 12">
+<h2>키워드 필터 <span class="hint">행을 누르면 바로 글·쇼츠 쓰기 패널이 열립니다</span></h2>
+<div class="controls" id="filters"></div>
+<div style="overflow:auto">
+<table>
+<thead><tr><th>순위</th><th>키워드</th><th class="hide-mobile">분야</th><th>인기 점수</th><th>수익성</th><th class="hide-mobile">추천 제목</th><th class="hide-mobile">수익 경로</th><th></th></tr></thead>
+<tbody id="tbody"></tbody>
+</table>
+</div>
+</div>
+
+<!-- 상세 패널 -->
+<div class="card detail" id="detail">
+<div class="dhead">
+<div>
+<h2 id="dTitle">–</h2>
+<div class="dmeta" id="dMeta"></div>
+</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap">
+<button id="dAll">전체 복사</button>
+<button id="dClose">닫기</button>
+</div>
+</div>
+<div class="dgrid" id="dBody"></div>
+</div>
+
+<!-- 전략 -->
+<div class="card" style="grid-column:span 12">
+<h2>바로 쓸 콘텐츠 전략</h2>
+<p style="color:var(--muted);margin:0 0 10px">이슈성 키워드는 24~72시간 안에, 시즌·쇼핑 키워드는 링크와 내부링크를 쌓아 장기 트래픽으로 바꾸세요.</p>
+<div class="controls">
+<button onclick="copyPlan()">추천 발행 계획 복사</button>
+</div>
+<pre id="plan"></pre>
+</div>
+
+<footer id="foot">※ 인기 점수는 검색 급상승 규모, 이슈 지속성, 구매·광고 전환 가능성을 반영한 운영용 지표이며 실제 검색량·수익을 보장하지 않습니다. 투자·금융·보안·의료 관련 글은 최신 공식 자료와 출처 확인 후 발행하세요.</footer>
+</div>
+</div>
+
+<script id="data" type="application/json">{"meta":{"updated":"2026-11-26","updatedAt":"2026.11.26 10:20 기준","routines":"매일 04:01 · 10:15 자동 갱신","sources":"다음·네이트·줌 실시간 이슈, 네이버 뉴스 이슈, 구글 트렌드 관측값","disclaimer":"인기 점수는 검색 급상승 규모·이슈 지속성·구매나 광고 전환 가능성을 반영한 운영용 지표이며 실제 검색량과 수익을 보장하지 않습니다. 투자·금융·보안·의료 관련 글은 공식 자료와 출처를 확인한 뒤 발행하세요."},"keywords":[{"rank":1,"kw":"한은 기준금리 인상","cat":"투자·경제","ch":"공통","signal":"금통위 3.00→3.25% · 다음·네이트 1위","score":97,"money":5,"type":"금융 광고·증권 제휴","why":"오늘 1위이면서 광고 단가·검색 지속성 모두 최상","angle":"3.25% 시대, 내 대출이자·예금이 달라지는 지점","trend":[31,44,58,72,86,97],"detail":{"gold":["기준금리 3.25% 인상 대출 이자 계산","2026 마지막 금통위 금리 인상 배경","금리 인상기 예금·적금 갈아타는 순서"],"titles":["기준금리 3.25% 됐습니다, 내 대출이자부터 확인하세요","금리 인상 뉴스만 보고 넘기면 손해인 3가지","한은이 금리를 또 올린 이유, 물가보다 먼저 봐야 할 숫자"],"hook":["기준금리가 3.25%로 올랐습니다.","문제는 다음 달부터 내 통장에서 빠져나갈 돈이 달라진다는 겁니다."],"look":null,"clip":"0~3초: \"기준금리 3.25%, 남 일 아닙니다\" / 3~10초: 1억 원 변동금리 대출이면 0.25%p에 연 약 25만 원 증가 / 10~20초: 은행 앱에서 확인할 3가지(금리 조건·우대금리·중도상환수수료) / 마무리: \"오늘 앱 한 번만 열어보세요\""}},{"rank":2,"kw":"블랙프라이데이 아우터","cat":"쇼핑 커넥트","ch":"쇼핑 커넥트","signal":"추수감사절 11/26 · 블프 11/27 D-1","score":96,"money":5,"type":"쇼핑 커넥트 · 패션 아우터","why":"구매 의도 최상 · 오늘 밤이 세일 피크","angle":"할인율보다 '이 사이즈가 남았나'로 고르는 아우터","trend":[28,40,55,70,85,96],"detail":{"gold":["블랙프라이데이 남자 아우터 득템 리스트","블프 아우터 싸게 사는 기준 3가지","2026 겨울 숏패딩·무스탕 세일 총정리"],"titles":["블프라고 다 싸지 않습니다, 아우터는 이 3개만 보세요","작년에 놓친 아우터, 올해는 이 순서로 담으면 됩니다","할인율 70%보다 중요한 건 결제 전 이 숫자입니다"],"hook":["블랙프라이데이 D-1입니다.","지금 담지 않으면 내 사이즈부터 사라지는 아우터만 골랐습니다."],"look":["아우터 — 숏패딩 또는 무스탕 1벌로 승부","상의 — 기모 맨투맨·단색 니트","하의 — 와이드 슬랙스·기모 데님","신발 — 첼시부츠·청키 스니커즈","액세서리 — 비니·머플러는 아우터 색에 맞추기"],"clip":"0~3초: \"블프에 아우터 사려면 이 순서로 보세요\" / 3~8초: 사이즈 잔여 확인 화면 / 8~15초: 실측·충전재·반품비 3개 체크 / 마무리: \"오늘 밤 12시 이전에 장바구니 정리\""}},{"rank":3,"kw":"청룡영화제","cat":"방송·연예","ch":"애드포스트","signal":"'호프' 작품상 · 설경구·전도연 주연상","score":94,"money":3,"type":"애드포스트 · 연예 이슈 트래픽","why":"하루 최대 트래픽 · 수익 단가는 낮지만 클립 소재 최적","angle":"수상작 정주행 리스트와 배우별 필모 정리","trend":[18,42,66,82,92,94],"detail":{"gold":["청룡영화제 수상작 정주행 순서","2026 청룡영화제 작품상 호프 후기","청룡영화제 남녀주연상 수상작 리스트"],"titles":["청룡영화제 휩쓴 '호프', 아직 안 봤다면 이 순서로","주연상 설경구·전도연, 두 배우 영화 3편만 골랐습니다","청룡영화제 결과만 보고 끝내면 아까운 이유"],"hook":["올해 청룡영화제는 '호프'였습니다.","그런데 정작 이 영화를 안 본 사람이 더 많다는 게 함정입니다."],"look":null,"clip":"0~3초: \"올해 청룡영화제, 이 영화가 다 가져갔습니다\" / 3~8초: 수상 부문 3개 나열 / 8~15초: 정주행 순서 추천 / 마무리: \"주말에 뭐 볼지 고민이면 저장\""}},{"rank":4,"kw":"미국 10월 PCE 물가","cat":"투자·경제","ch":"애드포스트","signal":"PCE 3.8% · 12월 인상 확률 99.8%","score":93,"money":5,"type":"금융 광고·환전 제휴","why":"환율·금리 파급력 큼 · 정보성 검색 지속","angle":"미국 물가가 다시 오르면 달러와 내 주식은","trend":[25,40,56,70,84,93],"detail":{"gold":["미국 10월 PCE 물가 3.8% 의미","연준 12월 금리 인상 확률 정리","미국 금리 인상이 환율·주식에 미치는 영향"],"titles":["미국 물가가 다시 3.8%로 올랐습니다","12월 금리 인상 확률 99.8%, 내 달러는 어떻게 될까","PCE가 뭔데 환율이 흔들리는 걸까요"],"hook":["미국 물가가 연준 목표의 두 배로 올랐습니다.","이 숫자 하나가 다음 달 환율과 대출 금리를 바꿉니다."],"look":null,"clip":"0~3초: \"미국 물가 3.8%, 남 일이 아닙니다\" / 3~9초: PCE와 CPI 차이 한 줄 / 9~18초: 환율·금리에 미치는 경로 / 마무리: \"환전 계획 있으면 이번 주가 변수\""}},{"rank":5,"kw":"경량패딩","cat":"쇼핑 커넥트","ch":"쇼핑 커넥트","signal":"네이버 쇼핑 인기 · 겨울 초입 상승","score":92,"money":5,"type":"쇼핑 커넥트 · 패션 시즌","why":"검증된 시즌 링크 · 5만 원 이하 전환 좋음","angle":"충전재·실측으로 거르는 경량패딩, 가격대별 비교","trend":[34,46,60,74,86,92],"detail":{"gold":["2026 겨울 남자 경량패딩 가성비 추천","경량패딩 숏패딩 차이 뭐가 나을까","경량패딩 사이즈 실패 안 하는 법"],"titles":["경량패딩, 싸게 사면 대부분 실패합니다","3만 원대가 15만 원대보다 나은 경우가 있습니다","출근룩으로 경량패딩 입을 때 코디 3가지"],"hook":["경량패딩은 가격만 보고 사면 한 철 쓰고 버립니다.","충전재보다 먼저 봐야 할 숫자가 따로 있습니다."],"look":["아우터 — 경량패딩은 총장 짧게, 어깨선 확인","상의 — 얇은 니트·기모 맨투맨 한 겹","하의 — 와이드 슬랙스로 부피 상쇄","신발 — 스니커즈로 캐주얼하게","액세서리 — 가방은 작게, 색은 무채색"],"clip":"0~3초: \"경량패딩, 이 숫자 모르면 돈 버립니다\" / 3~10초: 충전재 g수·실측 어깨 확인 / 10~18초: 3만·8만·15만 원대 비교 / 마무리: \"사이즈표 캡처해두세요\""}},{"rank":6,"kw":"코스피 급락","cat":"투자·경제","ch":"애드포스트","signal":"6%대 급락 · 매도 사이드카 · 시총 257조 증발","score":90,"money":4,"type":"증권·ETF 제휴","why":"검색 폭발력 최상 · 단, 매매 조언 금지","angle":"급락장에서 개인이 확인할 건 예측이 아니라 순서","trend":[10,30,55,74,86,90],"detail":{"gold":["코스피 급락 이유 젠슨 황 효과 소멸","매도 사이드카 발동 뜻","급락장에서 개인이 확인할 3가지"],"titles":["하루 만에 6% 빠졌습니다, 지금 필요한 건 예측이 아닙니다","젠슨 황 효과가 사라진 하루, 남은 건 무엇일까","급락장에서 손실 줄이는 건 종목이 아니라 순서입니다"],"hook":["하루 만에 시가총액 257조 원이 사라졌습니다.","이럴 때 필요한 건 예측이 아니라 점검 순서입니다."],"look":null,"clip":"0~3초: \"하루에 6%, 이때 하면 안 되는 행동\" / 3~10초: 사이드카가 뭔지 한 줄 / 10~18초: 계좌 점검 3단계 / 마무리: \"매수·매도 추천은 하지 않습니다, 숫자만 확인\""}},{"rank":7,"kw":"AI 커닝","cat":"자동차·IT·AI","ch":"애드포스트","signal":"삼성·SK·LG 온라인 입사시험 무방비","score":89,"money":3,"type":"애드포스트 · 채용 정보성","why":"취업 독자층 직결 · 12월 공채 시즌까지 수명 김","angle":"AI 커닝 논란과 지원자가 준비할 것","trend":[22,38,54,70,82,89],"detail":{"gold":["삼성 SK LG 온라인 입사시험 AI 커닝","AI 커닝 적발되면 불이익 있나","온라인 인적성 시험 대비 순서"],"titles":["AI 커닝이 뚫린 채용 시험, 지원자는 뭘 준비해야 하나","삼성·SK·LG가 AI 커닝에 긴장하는 이유","온라인 시험 볼 때 절대 하면 안 되는 행동"],"hook":["채용 시험에 AI가 들어왔습니다.","문제는 아직 막을 방법이 명확하지 않다는 겁니다."],"look":null,"clip":"0~3초: \"온라인 시험, 이거 하면 탈락입니다\" / 3~9초: AI 커닝 논란 요약 / 9~18초: 시험 환경 준비 체크 3개 / 마무리: \"공채 준비생이면 저장\""}},{"rank":8,"kw":"연금 개혁","cat":"투자·경제","ch":"애드포스트","signal":"2023 재정계산 vs 2026 전문가 제안","score":88,"money":4,"type":"보험·재무 제휴","why":"10시간 이상 상위 유지 · 검색 수명 긴 정보성","angle":"시나리오별로 내 연금이 달라지는 숫자","trend":[16,30,46,62,78,88],"detail":{"gold":["연금 개혁 2026 전문가 제안 내용","연금 개혁하면 내 연금 얼마나 줄어드나","국민연금 재정계산 시나리오 비교"],"titles":["연금 개혁, 2023년과 2026년이 이렇게 다릅니다","내 연금이 줄어든다면 지금 준비할 3가지","연금 뉴스가 어려운 건 숫자가 두 개이기 때문입니다"],"hook":["연금 개혁 논의가 다시 시작됐습니다.","문제는 3년 전 계산과 지금 숫자가 다르다는 겁니다."],"look":null,"clip":"0~3초: \"내 연금, 3년 전 계산과 다릅니다\" / 3~10초: 2023 vs 2026 차이 한 줄 / 10~20초: 개인이 확인할 3개 숫자 / 마무리: \"제도 확정 전까지는 계산 예시로만\""}},{"rank":9,"kw":"나인 투 식스","cat":"방송·연예","ch":"애드포스트","signal":"박민영·육성재 · 첫 방송 3.6%","score":87,"money":3,"type":"애드포스트 · 드라마 정보성","why":"첫 방송 직후 · 편성·인물관계 검색 집중","angle":"몇부작·공개 시간·원작 차이 정리","trend":[30,52,68,78,84,87],"detail":{"gold":["나인 투 식스 몇부작 공개 시간","나인 투 식스 원작 웹툰 차이","나인 투 식스 등장인물 관계 정리"],"titles":["나인 투 식스 3.6% 출발, 보기 전에 이것부터","박민영·육성재 케미, 원작과 뭐가 달라졌나","볼까 말까 고민이면 이 작품부터 보세요"],"hook":["첫 방송 3.6%로 출발했습니다.","보기 전에 이걸 모르면 초반에 몰입이 끊깁니다."],"look":null,"clip":"0~3초: \"첫 방송 3.6%, 이 드라마 볼까?\" / 3~8초: 배우·장르 한 줄 요약 / 8~15초: 원작과 다른 점 / 마무리: \"몇부작인지 확인하고 시작\""}},{"rank":10,"kw":"기모 와이드팬츠","cat":"쇼핑 커넥트","ch":"쇼핑 커넥트","signal":"겨울 팬츠 검색 상승 · 무신사 랭킹","score":86,"money":4,"type":"쇼핑 커넥트 · 패션 하의","why":"겨울 내내 재사용 가능 · 반품률 낮은 실사 중심","angle":"두께가 아니라 원단으로 고르는 기모 팬츠","trend":[24,38,52,66,78,86],"detail":{"gold":["기모 와이드팬츠 남자 코디","겨울 와이드 슬랙스 핏 비교","기모 팬츠 보풀 없이 오래 입는 법"],"titles":["겨울에 와이드팬츠 입으면 추울까요? 답은 소재에 있습니다","기모 바지 샀다가 다리가 굵어 보인 이유","출근·데이트 둘 다 되는 겨울 팬츠 한 벌"],"hook":["기모 와이드팬츠는 두꺼울수록 좋은 게 아닙니다.","핏이 무너지는 건 원단 두께 때문입니다."],"look":["아우터 — 짧은 패딩·무스탕","상의 — 기모 티셔츠에 니트 한 겹","하의 — 기모 와이드 1벌, 밑단 살짝 접어서","신발 — 첼시부츠·로퍼로 단정하게","액세서리 — 벨트 생략, 가방 미니로"],"clip":"0~3초: \"겨울 와이드팬츠, 두꺼우면 실패합니다\" / 3~9초: 원단·기모 안감 비교 / 9~16초: 실측 허벅지·밑위 확인 / 마무리: \"사이즈표 저장\""}},{"rank":11,"kw":"모두의카드 청소년","cat":"체험단·리워드","ch":"공통","signal":"12/1 만 13~18세 확대 · 정률 20% 환급","score":85,"money":3,"type":"리워드 정보 · 시즌 재발행","why":"12월 1일 시행 직전 · 검색 후 실제 행동 전환 높음","angle":"신청 순서와 환급 기준 정리","trend":[20,34,48,62,76,85],"detail":{"gold":["모두의카드 청소년 신청 방법","모두의카드 20% 환급 기준","청소년 교통비 환급 카드 비교"],"titles":["12월 1일부터 청소년도 모두의카드 씁니다","교통비 20% 돌려받는 카드, 신청 순서 정리","학생이면 놓치면 그냥 사라지는 12월 혜택"],"hook":["12월 1일부터 만 13~18세도 쓸 수 있습니다.","신청하지 않으면 환급은 그냥 사라집니다."],"look":null,"clip":"0~3초: \"학생이면 12월 1일부터 이거 됩니다\" / 3~10초: 대상·환급률 20% / 10~18초: 신청 3단계 / 마무리: \"부모님께 보내기\""}},{"rank":12,"kw":"빗썸 해킹 추가 피해","cat":"자동차·IT·AI","ch":"애드포스트","signal":"피해자 7,159명보다 증가 · 기간 15일","score":83,"money":4,"type":"보안·지갑 제휴","why":"보름간 방치 프레임 · 보안 키워드 광고 단가 높음","angle":"거래소 자산 점검 5단계 (공포 조장 없이)","trend":[26,44,62,74,80,83],"detail":{"gold":["빗썸 해킹 피해 규모 보상","가상자산 거래소 해킹 대비 계좌 점검","빗썸 해킹 이후 내 자산 확인 방법"],"titles":["빗썸 해킹, 피해자가 더 늘었습니다","거래소에 코인 두기 전에 오늘 바꿔야 할 5가지","해킹 뉴스 나올 때마다 해야 하는 계좌 점검"],"hook":["해킹 기간이 1시간이 아니라 15일이었습니다.","거래소에 맡긴 자산은 아직 내 지갑이 아닙니다."],"look":null,"clip":"0~3초: \"해킹 기간 15일, 남 일이 아닙니다\" / 3~10초: 확인된 피해 규모 / 10~20초: 2차 인증·출금 주소 확인 3단계 / 마무리: \"불안 조장 말고 점검만\""}},{"rank":13,"kw":"AI 가짜 의사 광고 금지","cat":"자동차·IT·AI","ch":"애드포스트","signal":"식약처 · 11/27 시행 · 위반 시 영업정지","score":81,"money":3,"type":"애드포스트 · 정책 정보성","why":"내 블로그 리뷰에도 직접 적용 · 오늘 시행","angle":"광고 문구에서 바뀌는 점과 블로거 주의사항","trend":[18,32,48,64,74,81],"detail":{"gold":["AI 가짜 전문가 광고 금지 시행","식약처 의료광고 금지 기준 2026","건강기능식품 후기 광고 문구 주의"],"titles":["오늘부터 AI로 만든 가짜 의사 광고는 못 합니다","블로그 건강 리뷰, 이 문구 쓰면 문제됩니다","광고인 줄 모르고 쓴 문장이 영업정지 사유가 됩니다"],"hook":["27일부터 AI로 만든 가짜 전문가 광고가 금지됩니다.","내 블로그 리뷰도 예외가 아닙니다."],"look":null,"clip":"0~3초: \"오늘부터 이 광고는 금지입니다\" / 3~10초: 가짜 전문가 추천 사례 / 10~18초: 후기 쓸 때 빼야 할 표현 / 마무리: \"광고 표기부터 확인\""}},{"rank":14,"kw":"크리스마스 트리·리빙","cat":"쇼핑 커넥트","ch":"쇼핑 커넥트","signal":"12월 성수기 진입 · 원룸 인테리어 검색","score":80,"money":4,"type":"쇼핑 커넥트 · 시즌 리빙","why":"12월 초 급등 전 선점 · 단가 낮지만 다품 전환","angle":"1만 원대 소품으로 만드는 크리스마스 무드","trend":[14,26,42,58,72,80],"detail":{"gold":["크리스마스 트리 소형 추천","원룸 크리스마스 인테리어 소품","크리스마스 전구 색 조합"],"titles":["원룸에 1만 원대로 크리스마스 만드는 법","트리보다 먼저 사야 하는 소품이 있습니다","12월에 사면 비싼 것들, 지금 사면 다른 가격입니다"],"hook":["크리스마스 분위기는 트리보다 조명에서 갈립니다.","같은 소품도 12월 첫째 주에는 더 비쌉니다."],"look":null,"clip":"0~3초: \"1만 원으로 크리스마스 만드는 법\" / 3~10초: 전구 3색 비교 / 10~18초: 소품 배치 3곳 / 마무리: \"장바구니 미리 담기\""}},{"rank":15,"kw":"엘리시안강촌 스키장 개장","cat":"체험단·리워드","ch":"공통","signal":"계획보다 엿새 앞당겨 개장 · 하단 슬로프","score":78,"money":3,"type":"체험단·리조트 제휴","why":"12월 초 체험단 모집 시즌 · 예약 전환 좋음","angle":"얼리버드·체험단 신청 타이밍 정리","trend":[12,24,40,56,70,78],"detail":{"gold":["엘리시안강촌 스키장 개장일","12월 스키장 얼리버드 할인","스키장 체험단 신청 방법"],"titles":["스키장이 예년보다 엿새 일찍 문을 열었습니다","12월 스키장, 지금 예약하면 다른 가격입니다","체험단으로 스키장 가는 사람들의 공통점"],"hook":["올해 스키장은 예년보다 빨리 열었습니다.","12월 첫 주는 가장 비싸고 가장 빨리 찹니다."],"look":null,"clip":"0~3초: \"스키장 벌써 열었습니다\" / 3~10초: 개장일·운영 슬로프 / 10~18초: 얼리버드·체험단 신청 순서 / 마무리: \"주말권은 지금\""}}],"strategy":["1. 오늘 1순위는 '기준금리 3.25%' — 애드포스트 개시 전까지는 정보성 글로 검색 유입을 쌓고, 12월 2일 이후 광고 수익으로 회수","2. 블랙프라이데이는 오늘 밤~내일이 피크 — 쇼핑 커넥트 링크는 아우터 2개·팬츠 1개로 압축해 5건 중 2건 배분","3. 경량패딩은 이미 발급된 링크가 있으면 재사용, 신규는 5만 원 이하만 (반품비·실측 확인된 상품)","4. 청룡영화제는 클립 19:30 슬롯에 3초 훅으로 — 수상 장면 컷 + 정주행 순서 자막","5. 나인 투 식스는 첫 방송 직후라 '몇부작·인물관계' 정보성 글이 검색을 가장 잘 잡음","6. 빗썸 해킹은 피해자 수·기간 등 확인된 사실만 인용하고 공포 조장·수익 인증은 금지","7. AI 커닝·현대차 인사는 자동차·IT 애드포스트 개시 후 장기 트래픽용으로 비축","8. 모두의카드·스키장은 12월 1일 전후 재발행 — 시즌 키워드는 한 번 쓴 글을 날짜만 바꿔 재활용","9. 투자·경제 글은 매수·매도 추천 금지, 계산 예시와 체크리스트만 — 유사투자자문 리스크 회피","10. 매일 04:01·10:15 루틴에서는 keyword/data.json만 갱신 — index.html은 그대로 두면 대시보드·클립 소재가 함께 바뀜"]}</script>
+<script>
+/* ================= 기본 데이터 (data.json 로드 실패 시 사용) ================= */
+const EMBEDDED = (function(){ try { return JSON.parse(document.getElementById('data').textContent); } catch(e){ return {keywords:[],strategy:[],meta:{}}; } })();
+let META = Object.assign({}, EMBEDDED.meta||{});
+let DATA = (EMBEDDED.keywords||[]).slice();
+let STRATEGY = (EMBEDDED.strategy||[]).slice();
+
+/* ?data=off 로 열면 data.json 을 읽지 않고 내장 데이터만 사용 (폴백 점검용) */
+const NO_DATA = (function(){ try{ return new URLSearchParams(location.search).get('data')==='off'; }catch(e){ return false; } })();
+
+/* ================= AI 서버 ================= */
+const AI_URL = (function(){
+  try { const q = new URLSearchParams(location.search).get('api'); if(q) return new URL(q, location.href).href; } catch(e){}
+  return 'https://ai-automation-landing-kohl.vercel.app/api/gemini';
+})();
+const AI = { reach:false, ready:false, checked:false };
+function aiChip(){
+  const el = document.getElementById('aiState');
+  if(!AI.checked){ el.className='chip wait'; el.textContent='AI 서버 확인 중…'; return; }
+  if(AI.ready){ el.className='chip on'; el.textContent='AI 연결됨'; }
+  else if(AI.reach){ el.className='chip off'; el.textContent='AI 키 미설정 · 로컬 분석'; }
+  else { el.className='chip off'; el.textContent='AI 미연결 · 로컬 분석'; }
+}
+async function aiCheck(){
+  aiChip();
+  try{
+    const r = await fetch(AI_URL, {method:'GET', cache:'no-store', signal:AbortSignal.timeout(6000)});
+    const j = await r.json().catch(()=>null);
+    AI.reach = !!(r.ok && j && j.ok === true);
+    AI.ready = AI.reach && !!j.configured;
+  }catch(e){ AI.reach=false; AI.ready=false; }
+  AI.checked = true; aiChip();
+  return AI.ready;
+}
+
+/* ================= 공통 ================= */
+const CATS = ['쇼핑 커넥트','방송·연예','자동차·IT·AI','투자·경제','체험단·리워드'];
+const CATCLS = {'쇼핑 커넥트':'t-shop','방송·연예':'t-ent','자동차·IT·AI':'t-tech','투자·경제':'t-invest','체험단·리워드':'t-reward'};
+const esc = s => String(s==null?'':s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const stars = n => '★'.repeat(Math.max(0,Math.min(5,n|0)))+'☆'.repeat(Math.max(0,5-(n|0)));
+let curCat = 'all';
+let curList = [];
+let chart = null;
+
+function toast(msg){
+  const t = document.getElementById('toast') || (function(){ const d=document.createElement('div'); d.id='toast'; d.className='toast'; document.body.appendChild(d); return d; })();
+  t.textContent = msg; t.classList.add('on');
+  clearTimeout(t._t); t._t = setTimeout(()=>t.classList.remove('on'), 1600);
+}
+async function copy(text, label){
+  try{ await navigator.clipboard.writeText(text); toast((label||'복사')+' 완료'); return; }
+  catch(e){}
+  try{
+    const ta = document.createElement('textarea'); ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta); toast((label||'복사')+' 완료');
+  }catch(e){ toast('복사가 막혔습니다. 길게 눌러 선택해 주세요.'); }
+}
+
+/* ================= 렌더 ================= */
+function sorted(){
+  return DATA.slice().sort((a,b)=> (b.score||0)-(a.score||0));
+}
+function money5(){ return DATA.filter(d=>d.money>=5).length; }
+function renderKPI(){
+  const s = sorted();
+  document.getElementById('kpi1').textContent = DATA.length;
+  document.getElementById('kpi2').textContent = money5();
+  document.getElementById('kpi3').textContent = DATA.filter(d=>d.score>=86).length;
+  document.getElementById('kpi4').textContent = s.length ? s[0].score : '–';
+}
+function renderSide(){
+  const top = sorted().slice(0,4);
+  document.getElementById('side').innerHTML = top.map((d,i)=>{
+    const cls = i===0?'first':i===1?'second':i===2?'third':'';
+    return `<div class="top" data-kw="${esc(d.kw)}"><div class="rank ${cls}">${i+1}</div><div><b>${esc(d.kw)}</b><div class="sub" style="font-size:12px;line-height:1.6">${esc(d.why||d.type||'')}</div></div></div>`;
+  }).join('');
+  document.querySelectorAll('#side .top').forEach(el=>{
+    el.style.cursor='pointer';
+    el.onclick = ()=>{ const d = DATA.find(x=>x.kw===el.dataset.kw); if(d) openDetail(d); };
+  });
+}
+function renderFilters(){
+  const box = document.getElementById('filters');
+  const cats = ['all'].concat(CATS.filter(c=>DATA.some(d=>d.cat===c)));
+  box.innerHTML = cats.map(c=>`<button class="${c===curCat?'active':''}" data-cat="${esc(c)}">${c==='all'?'전체':esc(c)}</button>`).join('');
+}
+function renderTable(){
+  const tbody = document.getElementById('tbody');
+  const list = sorted().filter(d=> curCat==='all' || d.cat===curCat);
+  curList = list;
+  tbody.innerHTML = list.map((d,i)=>{
+    const rc = i===0?'first':i===1?'second':i===2?'third':'';
+    const pill = d.src==='ai' ? '<span class="pill ai">AI</span>' : (d.src==='local' ? '<span class="pill">로컬</span>' : '');
+    return `<tr data-i="${i}">
+    <td><div class="rank ${rc}">${i+1}</div></td>
+    <td><div class="kw">${esc(d.kw)}${pill}</div><div style="color:var(--muted);font-size:12px;margin-top:3px">${esc(d.signal)}</div></td>
+    <td class="hide-mobile"><span class="tag ${CATCLS[d.cat]||''}">${esc(d.cat||'')}</span></td>
+    <td><div class="bar"><i style="width:${Math.max(0,Math.min(100,d.score||0))}%"></i></div><div style="font-size:12px;color:var(--muted);margin-top:4px">${d.score||0}/100</div></td>
+    <td><span class="stars">${stars(d.money)}</span></td>
+    <td class="hide-mobile" style="max-width:280px">${esc(d.angle||'')}</td>
+    <td class="hide-mobile" style="font-size:12.5px;color:#c7d2fe">${esc(d.type||'')}</td>
+    <td><button class="cp" style="padding:6px 10px;font-size:11px">글·쇼츠 →</button></td>
+    </tr>`;
+  }).join('') || '<tr><td colspan="8" style="color:var(--muted);padding:26px 10px">이 분야의 키워드가 없습니다. 위 AI 분석으로 추가해 보세요.</td></tr>';
+  tbody.querySelectorAll('tr[data-i]').forEach(tr=>{
+    tr.onclick = ()=> openDetail(curList[+tr.dataset.i]);
+  });
+}
+function renderChart(){
+  const list = sorted();
+  const ctx = document.getElementById('scoreChart');
+  if(!window.Chart || !ctx) return;
+  if(chart) chart.destroy();
+  chart = new Chart(ctx, {
+    type:'bar',
+    data:{ labels:list.map(d=>d.kw), datasets:[
+      {label:'인기·수익 종합점수', data:list.map(d=>d.score), backgroundColor:'rgba(74,222,128,.75)', borderRadius:6},
+      {label:'수익성(20점 환산)', data:list.map(d=>(d.money||0)*20), backgroundColor:'rgba(56,189,248,.65)', borderRadius:6}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',
+      plugins:{legend:{labels:{color:'#c7d2fe',boxWidth:12}},tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.x}}},
+      scales:{x:{min:0,max:100,grid:{color:'#26324d'},ticks:{color:'#9aa8c7'}},y:{grid:{display:false},ticks:{color:'#eef2ff',font:{size:11.5}}}}
+    }
+  });
+}
+function renderAll(){
+  renderKPI(); renderSide(); renderFilters(); renderTable(); renderChart();
+  const m = META||{};
+  if(m.updatedAt) document.getElementById('stamp').textContent = m.updatedAt.replace(' 기준','');
+  if(m.routines) document.getElementById('routine').textContent = m.routines;
+  if(m.disclaimer) document.getElementById('foot').textContent = '※ '+m.disclaimer;
+  document.getElementById('plan').textContent = STRATEGY.join('\n');
+  document.getElementById('quick').innerHTML = (META.quick||['블랙프라이데이 아우터','기준금리 인상','청룡영화제 수상작','겨울 경량패딩']).map(q=>`<button type="button" data-q="${esc(q)}">${esc(q)}</button>`).join('');
+  document.querySelectorAll('#quick button').forEach(b=>b.onclick=()=>{ document.getElementById('q').value=b.dataset.q; analyze(); });
+}
+
+/* ================= 상세 패널 ================= */
+function skeleton(d){
+  if(Array.isArray(d.outline) && d.outline.length) return d.outline;
+  const g = (d.detail&&d.detail.gold)||[];
+  return [
+    `도입 200자 — "${(d.detail&&d.detail.hook&&d.detail.hook[0])||d.kw}"로 시작해 문제 제기`,
+    `현황 400자 — ${d.signal||''} 확인된 사실 3개와 출처`,
+    `분석 600자 — 소제목 3개: ${g.slice(0,3).join(' / ')||d.kw}`,
+    `실행 500자 — 독자가 오늘 바로 하는 체크리스트 ${(d.detail&&d.detail.look)?'5개(코디 슬롯)':'3개'}`,
+    `마무리 300자 — 요약 한 줄 + 다음 글 내부링크 + 이미지 3~4장 배치`
+  ];
+}
+function detailHTML(d){
+  const t = d.detail||{};
+  let html = '';
+  html += `<div class="dsec"><h3>① 황금 롱테일 키워드<button class="cp" data-copy="gold">복사</button></h3><ol>${(t.gold||[]).map(x=>`<li>${esc(x)}</li>`).join('')||'<li>-</li>'}</ol></div>`;
+  html += `<div class="dsec"><h3>② 후킹 제목 3안<button class="cp" data-copy="titles">복사</button></h3><ol>${(t.titles||[]).map(x=>`<li>${esc(x)}</li>`).join('')||'<li>-</li>'}</ol></div>`;
+  html += `<div class="dsec wide"><h3>③ 쇼핑 글 상단 빨간 글씨 2줄 후킹<button class="cp" data-copy="hook">복사</button></h3><ul class="hook" style="list-style:none;padding-left:0">${(t.hook||[]).map(x=>`<li>${esc(x)}</li>`).join('')||'<li>-</li>'}</ul></div>`;
+  if(Array.isArray(t.look) && t.look.length){
+    const slots = ['아우터','상의','하의','신발','액세서리'];
+    html += `<div class="dsec wide"><h3>④ LOOK AI 5슬롯 코디 포인트<button class="cp" data-copy="look">복사</button></h3><ol style="list-style:none;padding-left:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:6px">${t.look.map((x,i)=>`<li><b style="color:var(--gold);font-size:12px">${slots[i]||'슬롯'+(i+1)}</b><div>${esc(x)}</div></li>`).join('')}</ol></div>`;
+  }
+  html += `<div class="dsec"><h3>⑤ 클립 3초 훅 대본<button class="cp" data-copy="clip">복사</button></h3><p>${esc(t.clip||'-')}</p></div>`;
+  html += `<div class="dsec"><h3>⑥ 블로그 2,000자 뼈대<button class="cp" data-copy="outline">복사</button></h3><ol>${skeleton(d).map(x=>`<li>${esc(x)}</li>`).join('')}</ol></div>`;
+  return html;
+}
+let opened = null;
+function openDetail(d){
+  if(!d) return;
+  opened = d;
+  const el = document.getElementById('detail');
+  el.classList.add('on');
+  document.getElementById('dTitle').innerHTML = esc(d.kw) + (d.src==='ai'?'<span class="pill ai">AI 분석</span>':(d.src==='local'?'<span class="pill">로컬 분석</span>':''));
+  document.getElementById('dMeta').innerHTML = [
+    `<span class="tag ${CATCLS[d.cat]||''}">${esc(d.cat||'')}</span>`,
+    `인기 ${d.score||0}/100`, `수익성 ${stars(d.money)}`,
+    esc(d.type||''), esc(d.signal||'')
+  ].filter(Boolean).join(' · ');
+  const body = document.getElementById('dBody');
+  body.innerHTML = detailHTML(d);
+  body.querySelectorAll('.cp[data-copy]').forEach(b=>{
+    b.onclick = (ev)=>{ ev.stopPropagation(); const k=b.dataset.copy; const t=d.detail||{}; copy(fieldText(d,k), k==='hook'?'후킹 2줄':k==='clip'?'클립 대본':k==='look'?'코디 5슬롯':k==='outline'?'2,000자 뼈대':'복사'); };
+  });
+  el.scrollIntoView({behavior:'smooth', block:'start'});
+}
+function fieldText(d,k){
+  const t = d.detail||{};
+  if(k==='gold') return (t.gold||[]).join('\n');
+  if(k==='titles') return (t.titles||[]).map((x,i)=>`${i+1}. ${x}`).join('\n');
+  if(k==='hook') return (t.hook||[]).join('\n');
+  if(k==='look') return (t.look||[]).map((x,i)=>`${['아우터','상의','하의','신발','액세서리'][i]||'슬롯'+(i+1)}: ${x}`).join('\n');
+  if(k==='clip') return t.clip||'';
+  if(k==='outline') return skeleton(d).map((x,i)=>`${i+1}. ${x}`).join('\n');
+  return '';
+}
+function fullText(d){
+  const t = d.detail||{};
+  return [
+    `【${d.kw}】 ${d.cat||''} · 인기 ${d.score||0} · 수익성 ${'★'.repeat(d.money||0)}`,
+    `검색 신호: ${d.signal||''}`,
+    `수익 경로: ${d.type||''}`,
+    ``,
+    `① 황금 롱테일 키워드`,
+    fieldText(d,'gold'),
+    ``,
+    `② 후킹 제목 3안`,
+    fieldText(d,'titles'),
+    ``,
+    `③ 상단 빨간 2줄`,
+    fieldText(d,'hook'),
+    ...(Array.isArray(t.look)&&t.look.length?[``,`④ LOOK AI 5슬롯 코디`,fieldText(d,'look')]:[]),
+    ``,
+    `⑤ 클립 3초 훅 대본`,
+    fieldText(d,'clip'),
+    ``,
+    `⑥ 블로그 2,000자 뼈대`,
+    fieldText(d,'outline')
+  ].join('\n');
+}
+document.getElementById('dAll').onclick = ()=> opened && copy(fullText(opened), '전체 복사');
+document.getElementById('dClose').onclick = ()=>{ document.getElementById('detail').classList.remove('on'); opened=null; };
+function copyPlan(){ copy(document.getElementById('plan').textContent, '발행 계획'); }
+document.getElementById('filters').addEventListener('click', e=>{
+  if(e.target.tagName!=='BUTTON') return;
+  document.querySelectorAll('#filters button').forEach(b=>b.classList.remove('active'));
+  e.target.classList.add('active');
+  curCat = e.target.dataset.cat;
+  renderTable();
+});
+
+/* ================= AI 분석 ================= */
+const SYS = [
+'너는 네이버 블로그·클립·쇼핑 커넥트로 수익화하는 한국어 콘텐츠 편집자다.',
+'사용자가 준 뉴스·계절·아이템 키워드 하나로 오늘 바로 발행할 수 있는 콘텐츠 설계를 만든다.',
+'규칙:',
+'- 쿠팡 파트너스 추천은 쓰지 않는다. 수익 경로는 "쇼핑 커넥트(패션·뷰티·계절/리빙)", "애드포스트(방송·연예)", "애드포스트(자동차·IT·AI)", "투자·경제", "체험단·리워드" 중 하나로 고른다.',
+'- 확인되지 않은 사실, 허위·과장, 직접 써본 척하는 표현, 매수·매도 추천, 의료 효능 단정은 쓰지 않는다.',
+'- gold는 검색 롱테일 키워드 3개, titles는 호기심·역발상·이슈형 제목 3개(각 32자 안팎), hook은 쇼핑 글 상단 빨간 글씨 2줄.',
+'- look은 패션·뷰티 아이템일 때만 아우터/상의/하의/신발/액세서리 5개로 채우고, 아니면 빈 배열.',
+'- clip은 0~3초 훅으로 시작하는 20초 클립 대본 한 줄.',
+'- outline은 2,000자 블로그 뼈대 5개(도입·현황·분석·실행·마무리, 각 글자수 포함).',
+'- cat은 반드시 다음 중 하나: 쇼핑 커넥트, 방송·연예, 자동차·IT·AI, 투자·경제, 체험단·리워드.',
+'- money는 1~5 정수. 5=구매 전환 높은 쇼핑·금융, 4=정보성 높은 경제·리빙, 3=연예·정책 이슈.',
+'- type은 수익 경로를 "채널 · 분야" 한 줄로 쓴다. 예: "쇼핑 커넥트 · 패션 아우터", "애드포스트 · 연예 이슈 트래픽", "증권·ETF 제휴".',
+'아래 JSON 하나만 출력한다.',
+'{"kw":"","cat":"","signal":"","score":0,"money":1,"type":"","why":"","angle":"","gold":["","",""],"titles":["","",""],"hook":["",""],"look":["","","","",""],"clip":"","outline":["","","","",""]}'
+].join('\n');
+
+const MODELS = ['gemini-3.5-flash-lite','gemini-3.6-flash'];
+async function gcall(model, text){
+  const base = {
+    model,
+    systemInstruction:{parts:[{text:SYS}]},
+    contents:[{role:'user', parts:[{text:'키워드: "'+text+'"\n오늘('+ (META.updated||'') +') 기준으로 바로 발행할 수 있는 콘텐츠 설계를 JSON으로.'}]}]
+  };
+  const configs = [{responseMimeType:'application/json', temperature:0.7}, {responseMimeType:'application/json'}, null];
+  let lastErr = null;
+  for(const gc of configs){
+    const body = Object.assign({}, base);
+    if(gc) body.generationConfig = gc;
+    const r = await fetch(AI_URL, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body), signal:AbortSignal.timeout(55000)});
+    const j = await r.json().catch(()=>null);
+    if(!r.ok || !j){ const e = new Error('server '+r.status); e.detail = JSON.stringify(j||{}).slice(0,200); lastErr = e; if(r.status===400) continue; throw e; }
+    const t = ((j.candidates&&j.candidates[0]&&j.candidates[0].content&&j.candidates[0].content.parts)||[]).map(p=>p.text||'').join('');
+    const clean = t.replace(/^```(?:json)?\s*/i,'').replace(/```\s*$/,'').trim();
+    try { return JSON.parse(clean); } catch(e){ lastErr = new Error('bad json'); continue; }
+  }
+  throw lastErr || new Error('ai-fail');
+}
+function guessCat(text, look){
+  const t = text||'';
+  if(/패딩|코트|니트|팬츠|슬랙스|가방|신발|화장|크림|뷰티|인테리어|리빙|트리|무스탕|스니커|향수/.test(t)) return '쇼핑 커넥트';
+  if(/드라마|영화|예능|배우|아이돌|방송|청룡|연예|솔로|노래|콘서트/.test(t)) return '방송·연예';
+  if(/AI|반도체|자동차|현대차|기아|보안|해킹|휴대폰|전기차|로봇|앱/.test(t)) return '자동차·IT·AI';
+  if(/금리|주가|코스피|코스닥|환율|물가|연금|부동산|투자|증시|달러|비트코인/.test(t)) return '투자·경제';
+  if(/체험단|리워드|환급|할인|쿠폰|카드|포인트|이벤트|공모/.test(t)) return '체험단·리워드';
+  return (Array.isArray(look)&&look.length) ? '쇼핑 커넥트' : '투자·경제';
+}
+function normalize(o, q, src){
+  const n = {};
+  n.kw = String(o.kw||q||'새 키워드').slice(0,60);
+  n.look = Array.isArray(o.look) ? o.look.filter(Boolean).slice(0,5) : [];
+  n.cat = CATS.indexOf(o.cat)>=0 ? o.cat : guessCat(n.kw+' '+(o.signal||''), n.look);
+  n.signal = String(o.signal||'AI 분석').slice(0,90);
+  n.score = Math.max(1,Math.min(100, parseInt(o.score,10)||80));
+  n.money = Math.max(1,Math.min(5, parseInt(o.money,10)||3));
+  n.type = String(o.type||(n.cat==='쇼핑 커넥트'?'쇼핑 커넥트 · 패션/리빙':'애드포스트')).slice(0,60);
+  n.why = String(o.why||'AI 분석 · 오늘 바로 발행 후보').slice(0,90);
+  n.angle = String(o.angle||'').slice(0,90);
+  const g = Array.isArray(o.gold)?o.gold.filter(Boolean):[];
+  const ti = Array.isArray(o.titles)?o.titles.filter(Boolean):[];
+  const hk = Array.isArray(o.hook)?o.hook.filter(Boolean):[];
+  n.detail = {
+    gold: g.length?g.slice(0,4):[n.kw+' 검색 전 확인할 것', n.kw+' 초보자 정리', n.kw+' 비교 기준'],
+    titles: ti.length?ti.slice(0,3):[n.kw+', 지금 알아야 할 것', n.kw+' 제대로 고르는 법', n.kw+' 놓치면 손해인 이유'],
+    hook: hk.length?hk.slice(0,2):[n.kw+' 관련해서 정리했습니다.', '확인하지 않고 넘기면 나중에 후회합니다.'],
+    look: n.look,
+    clip: String(o.clip||('0~3초: "'+n.kw+'", 이건 알아두세요 / 3~10초: 핵심 사실 2개 / 10~18초: 오늘 할 일 1개 / 마무리: 저장 유도')).slice(0,400)
+  };
+  n.outline = Array.isArray(o.outline)?o.outline.filter(Boolean).slice(0,6):null;
+  n.trend = [40,52,63,72,80,n.score];
+  n.src = src;
+  return n;
+}
+function localAnalyze(q){
+  const look = /패딩|코트|니트|팬츠|슬랙스|가방|신발|화장|크림|뷰티|무스탕|스니커|향수|옷|코디/.test(q)
+    ? ['아우터 — 오늘 날씨에 맞는 두께 1벌','상의 — 단색 니트·맨투맨','하의 — 와이드 핏으로 균형','신발 — 무채색 스니커즈·부츠','액세서리 — 가방·머플러 톤 맞추기']
+    : [];
+  return normalize({
+    kw:q, signal:'로컬 템플릿 분석 (AI 미연결)',
+    score:82, money: look.length?4:3,
+    type: look.length?'쇼핑 커넥트 · 패션/리빙':'애드포스트',
+    why:'로컬 생성 · 발행 전 사실 확인 필요',
+    angle:q+' 바로 쓰는 구성',
+    gold:[q+' 검색 전 확인할 것', q+' 초보자 정리', q+' 비교 기준 3가지'],
+    titles:[q+', 지금 알아야 할 것', q+' 제대로 고르는 법', q+' 놓치면 손해인 이유'],
+    hook:[q+' 관련해서 정리했습니다.', '확인하지 않고 넘기면 그냥 지나갑니다.'],
+    look
+  }, q, 'local');
+}
+async function analyze(){
+  const q = document.getElementById('q').value.trim();
+  if(!q){ document.getElementById('q').focus(); toast('키워드를 먼저 입력해 주세요'); return; }
+  const btn = document.getElementById('go');
+  btn.disabled = true; btn.textContent = '분석 중…';
+  let item = null, used = 'local';
+  try{
+    const ready = AI.checked ? AI.ready : await aiCheck();
+    if(!ready) throw new Error('no-ai');
+    let lastErr = null;
+    for(const m of MODELS){
+      try{ const o = await gcall(m, q); item = normalize(o, q, 'ai'); used='ai'; break; }
+      catch(e){ lastErr = e; }
+    }
+    if(!item) throw lastErr || new Error('ai-fail');
+  }catch(e){
+    item = localAnalyze(q);
+    used = 'local';
+  }finally{
+    btn.disabled = false; btn.textContent = 'AI로 오늘 키워드 분석';
+  }
+  DATA.unshift(item);
+  renderAll();
+  openDetail(item);
+  toast(used==='ai' ? 'AI 분석 완료 · 대시보드 맨 위에 추가' : 'AI 미연결 · 로컬 분석으로 추가');
+  if(used!=='ai') document.getElementById('aiNote').textContent = '이번 분석은 로컬 템플릿으로 만들었습니다. AI 서버 연결 시 더 구체적인 제목·대본이 생성됩니다.';
+}
+document.getElementById('go').onclick = analyze;
+document.getElementById('q').addEventListener('keydown', e=>{ if(e.key==='Enter') analyze(); });
+
+/* ================= 시작 ================= */
+(function boot(){
+  renderAll();
+  if(window.Chart){ renderChart(); }
+  else { const c=document.createElement('script'); c.src='https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js'; c.onload=renderChart; document.head.appendChild(c); }
+  if(!NO_DATA){
+    fetch('./data.json', {cache:'no-store'})
+      .then(r=> r.ok ? r.json() : Promise.reject(new Error('no json')))
+      .then(j=>{
+        if(j && Array.isArray(j.keywords) && j.keywords.length){
+          DATA = j.keywords.slice();
+          META = Object.assign({}, j.meta||{});
+          if(Array.isArray(j.strategy)) STRATEGY = j.strategy.slice();
+          renderAll();
+        }
+      })
+      .catch(()=>{ /* 로컬 파일로 열었거나 data.json 이 없으면 내장 기본 데이터 사용 */ });
+  }
+  aiCheck();
+})();
+</script>
+</body>
+</html>
