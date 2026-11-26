@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>숏컷 — 쇼츠 제작 스튜디오</title>
+<meta name="description" content="대본만 붙여넣으면 2초 자막 분할, 캡컷 스타일 템플릿, TTS, 다국어 확장, 9:16 영상 내보내기까지 한 번에. 촬영·편집 없이 만드는 유튜브 쇼츠 제작 스튜디오." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Do+Hyeon&family=Jua&family=Noto+Serif+KR:wght@600;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230b0b0e'/%3E%3Cpath d='M12 9v14l10-7-10-7Z' fill='%23d8ff3e'/%3E%3C/svg%3E" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div class="app-shell">
+
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="숏컷 홈">
+      <span class="brand-mark">숏컷</span>
+      <span class="brand-sub">SHORTS&nbsp;STUDIO</span>
+    </a>
+
+    <div class="project-field">
+      <span class="dot-live" aria-hidden="true"></span>
+      <label class="sr-only" for="projectName">프로젝트 이름</label>
+      <input id="projectName" type="text" value="오늘의 쇼츠 01" maxlength="40" spellcheck="false" />
+      <span class="save-state" id="saveState">자동 저장</span>
+    </div>
+
+    <div class="top-actions">
+      <button class="btn ghost" id="helpBtn" type="button">사용법</button>
+      <button class="btn ghost" id="saveProjectBtn" type="button">프로젝트 저장</button>
+      <button class="btn primary" id="exportTopBtn" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0 4.5-4.5M12 15 7.5 10.5M4 17v2.5A1.5 1.5 0 0 0 5.5 21h13a1.5 1.5 0 0 0 1.5-1.5V17"/></svg>
+        영상 내보내기
+      </button>
+    </div>
+  </header>
+
+  <main class="workspace">
+
+    <!-- LEFT: STEP RAIL -->
+    <nav class="step-rail" aria-label="제작 단계">
+      <div class="rail-inner">
+        <button class="step-item is-active" data-step="source" type="button">
+          <span class="step-no">01</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m10 9 5 3-5 3V9Z"/></svg>
+          <span class="step-label">소스</span>
+        </button>
+        <button class="step-item" data-step="script" type="button">
+          <span class="step-no">02</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h14M5 10h14M5 15h9M5 20h6"/></svg>
+          <span class="step-label">대본 · 자막</span>
+        </button>
+        <button class="step-item" data-step="design" type="button">
+          <span class="step-no">03</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18h1.6a2.2 2.2 0 0 0 .4-4.36 2 2 0 0 1 1.3-3.64H17A4 4 0 0 0 21 9c0-3.3-4-6-9-6Z"/><circle cx="7.5" cy="10" r="1.2"/><circle cx="10.5" cy="7" r="1.2"/></svg>
+          <span class="step-label">디자인</span>
+        </button>
+        <button class="step-item" data-step="audio" type="button">
+          <span class="step-no">04</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6"/></svg>
+          <span class="step-label">보이스 · BGM</span>
+        </button>
+        <button class="step-item" data-step="lang" type="button">
+          <span class="step-no">05</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.4 2.4 3.8 5.5 3.8 9S14.4 18.6 12 21c-2.4-2.4-3.8-5.5-3.8-9S9.6 5.4 12 3Z"/></svg>
+          <span class="step-label">다국어</span>
+        </button>
+        <button class="step-item" data-step="publish" type="button">
+          <span class="step-no">06</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v10m0-10 4 4m-4-4-4 4M4 15v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4"/></svg>
+          <span class="step-label">내보내기</span>
+        </button>
+      </div>
+      <div class="rail-foot">
+        <span class="rail-note">촬영 0분<br/>편집 0분</span>
+      </div>
+    </nav>
+
+    <!-- CENTER: STAGE -->
+    <section class="stage" aria-label="쇼츠 미리보기">
+      <div class="stage-head">
+        <div class="stage-meta">
+          <span class="chip">9:16</span>
+          <span class="chip dim">1080 × 1920</span>
+          <span class="stage-count" id="stageCount">자막 8개 · 0.0초</span>
+        </div>
+        <div class="stage-tools">
+          <button class="icon-btn" id="toggleSafeBtn" type="button" aria-pressed="false" title="안전 영역 표시">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2" stroke-dasharray="4 3"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18" opacity=".45"/></svg>
+          </button>
+          <button class="icon-btn" id="resetPlayBtn" type="button" title="처음으로">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4v16M19 5 9 12l10 7V5Z"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="stage-body">
+        <div class="phone" id="phoneFrame">
+          <canvas id="preview" width="1080" height="1920" aria-label="쇼츠 미리보기 캔버스"></canvas>
+          <div class="safe-area" id="safeArea" aria-hidden="true"></div>
+          <div class="phone-shine" aria-hidden="true"></div>
+        </div>
+      </div>
+
+      <div class="player">
+        <button class="play-btn" id="playBtn" type="button" aria-label="재생">
+          <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7L8 5Z"/></svg>
+          <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zM14 5h4v14h-4z"/></svg>
+        </button>
+        <div class="player-time"><span id="timeNow">00:00.0</span><span class="sep">/</span><span id="timeTotal">00:00.0</span></div>
+        <div class="scrub-wrap" id="scrubWrap">
+          <div class="scrub-track">
+            <div class="scrub-fill" id="scrubFill"></div>
+            <div class="scrub-head" id="scrubHead"></div>
+          </div>
+        </div>
+        <button class="icon-btn" id="muteBtn" type="button" aria-pressed="false" title="소리 끄기">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4Z"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg>
+        </button>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-head">
+          <span>타임라인</span>
+          <span class="timeline-hint">블록을 누르면 해당 자막으로 이동</span>
+        </div>
+        <div class="timeline-track" id="timelineTrack" role="listbox" aria-label="자막 타임라인"></div>
+      </div>
+    </section>
+
+    <!-- RIGHT: INSPECTOR -->
+    <aside class="inspector" aria-label="편집 패널">
+      <div class="inspector-head">
+        <div>
+          <p class="eyebrow" id="panelEyebrow">STEP 01</p>
+          <h2 id="panelTitle">소스</h2>
+        </div>
+        <p class="panel-desc" id="panelDesc">배경이 될 영상이나 이미지를 올리고 톤을 잡으세요.</p>
+      </div>
+
+      <div class="inspector-body">
+
+        <!-- 01 SOURCE -->
+        <section class="panel is-active" data-panel="source">
+          <div class="drop-zone" id="mediaDrop">
+            <input type="file" id="mediaInput" accept="video/*,image/*" multiple hidden />
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M4 16v2.5A1.5 1.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5V16"/></svg>
+            <strong>영상 · 이미지 업로드</strong>
+            <span>이미지를 여러 장 고르면 컷이 자동으로 넘어갑니다 · MP4, MOV, JPG, PNG</span>
+          </div>
+          <div class="slide-block" id="slideBlock" hidden>
+            <div class="group-head"><h3>이미지 컷 <span class="count-badge" id="slideCount">0</span></h3><span>자막 구간에 맞춰 자동 전환</span></div>
+            <div class="slide-strip" id="slideStrip"></div>
+            <div class="inline-row">
+              <button class="mini-btn" id="addSlideBtn" type="button">+ 컷 추가</button>
+              <button class="mini-btn danger" id="clearSlidesBtn" type="button">컷 비우기</button>
+            </div>
+            <label class="range-row">
+              <span>켄번즈 줌</span>
+              <input type="range" id="kentRange" min="0" max="20" value="10" />
+              <output id="kentOut">10%</output>
+            </label>
+          </div>
+          <div class="file-row" id="fileRow" hidden>
+            <div class="file-thumb" id="fileThumb"></div>
+            <div class="file-meta"><strong id="fileName">clip.mp4</strong><span id="fileType">동영상</span></div>
+            <button class="mini-btn" id="removeMedia" type="button">교체</button>
+          </div>
+
+          <div class="field-group">
+            <div class="group-head"><h3>배경 프리셋</h3><span>업로드 없이 바로</span></div>
+            <div class="bg-grid" id="bgGrid"></div>
+          </div>
+
+          <div class="field-group">
+            <div class="group-head"><h3>톤 조절</h3></div>
+            <label class="range-row">
+              <span>어둡게</span>
+              <input type="range" id="dimRange" min="0" max="80" value="28" />
+              <output id="dimOut">28%</output>
+            </label>
+            <label class="range-row">
+              <span>블러</span>
+              <input type="range" id="blurRange" min="0" max="14" value="0" />
+              <output id="blurOut">0px</output>
+            </label>
+            <label class="switch-row">
+              <span>필름 그레인</span>
+              <input type="checkbox" id="grainToggle" checked />
+              <i></i>
+            </label>
+            <label class="switch-row">
+              <span>비네트</span>
+              <input type="checkbox" id="vignetteToggle" checked />
+              <i></i>
+            </label>
+          </div>
+
+          <p class="note">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>
+            재사용이 허가된 소스만 사용하세요. 타사 영상을 그대로 올리면 수익화가 제한될 수 있습니다.
+          </p>
+        </section>
+
+        <!-- 02 SCRIPT -->
+        <section class="panel" data-panel="script">
+          <div class="field-group ai-block">
+            <div class="group-head"><h3>🤖 AI 대본 생성</h3><span id="aiState">영화 제목만 넣으면 완성</span></div>
+            <input class="text-input" id="aiTopic" type="text" maxlength="60" placeholder="영화 제목 또는 주제 · 예) 트루먼 쇼" />
+            <div class="inline-row">
+              <label class="mini-field" style="flex:0 0 104px">
+                <span>톤</span>
+                <select id="aiTone">
+                  <option value="cinematic" selected>영화 요약</option>
+                  <option value="thriller">스릴러 반전</option>
+                  <option value="info">정보형</option>
+                  <option value="story">사연 · 감동</option>
+                </select>
+              </label>
+              <label class="mini-field" style="flex:0 0 76px">
+                <span>문장 수</span>
+                <select id="aiLines">
+                  <option value="9">9문장</option>
+                  <option value="11" selected>11문장</option>
+                  <option value="13">13문장</option>
+                </select>
+              </label>
+              <button class="btn accent" id="aiGenBtn" type="button">대본 생성</button>
+            </div>
+            <details class="ai-adv">
+              <summary>연결 설정</summary>
+              <label class="mini-field full"><span>Gemini 프록시 주소</span><input class="text-input sm" id="aiApi" type="text" spellcheck="false" /></label>
+              <label class="mini-field full"><span>모델 (auto = 자동 폴백)</span><input class="text-input sm" id="aiModel" type="text" value="auto" spellcheck="false" /></label>
+              <p class="note thin">비우면 기본 프록시를 씁니다. 모델이 auto면 응답이 막힌 모델을 건너뛰고 다음 모델로 넘어갑니다.</p>
+            </details>
+          </div>
+
+          <div class="field-group">
+            <div class="group-head"><h3>상단 고정 타이틀</h3><span id="titleCount">0 / 24</span></div>
+            <input class="text-input" id="titleInput" type="text" maxlength="24" placeholder="예) 30년 인생이 전부 거짓말이었던 남자" />
+            <div class="hook-presets" id="titlePresets"></div>
+          </div>
+
+          <div class="field-group">
+            <div class="group-head"><h3>훅 문구</h3><span id="hookCount">0 / 40</span></div>
+            <input class="text-input" id="hookInput" type="text" maxlength="40" placeholder="3초 안에 시선을 잡는 한 줄" />
+            <div class="hook-presets" id="hookPresets"></div>
+          </div>
+
+          <div class="field-group">
+            <div class="group-head"><h3>대본</h3>            <span style="display:flex;gap:10px">
+              <button class="link-btn" id="movieSampleBtn" type="button">영화 요약 예시</button>
+              <button class="link-btn" id="sampleScriptBtn" type="button">정리 습관 예시</button>
+            </span></div>
+            <textarea class="text-area" id="scriptInput" rows="6" placeholder="대본을 붙여넣으세요. 문장은 자동으로 끊어서 자막이 됩니다."></textarea>
+            <div class="inline-row">
+              <label class="mini-field">
+                <span>자막 최대 글자</span>
+                <select id="maxChars">
+                  <option value="12">12자</option>
+                  <option value="16" selected>16자</option>
+                  <option value="20">20자</option>
+                  <option value="24">24자</option>
+                </select>
+              </label>
+              <button class="btn dark" id="splitBtn" type="button">2초 자동 분할</button>
+            </div>
+            <button class="btn accent wide" id="oneClickBtn" type="button">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m13 2-8 12h6l-1 8 9-13h-6l1-7Z"/></svg>
+              대본으로 쇼츠 한 번에 만들기
+            </button>
+          </div>
+
+          <div class="field-group">
+            <div class="group-head">
+              <h3>자막 <span class="count-badge" id="capCount">0</span></h3>
+              <span id="capTotal">0.0초</span>
+            </div>
+            <div class="cap-list" id="capList"></div>
+            <div class="cap-actions">
+              <button class="mini-btn" id="addCapBtn" type="button">+ 자막 추가</button>
+              <button class="mini-btn danger" id="clearCapsBtn" type="button">전체 비우기</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- 03 DESIGN -->
+        <section class="panel" data-panel="design">
+          <div class="field-group">
+            <div class="group-head"><h3>템플릿</h3><span>캡컷 스타일</span></div>
+            <div class="tpl-grid" id="tplGrid"></div>
+          </div>
+
+          <div class="field-group">
+            <div class="group-head"><h3>강조색 프리셋</h3><span>영화 · 스릴러 무드</span></div>
+            <div class="mood-row" id="moodRow"></div>
+          </div>
+
+          <div class="field-group">
+            <div class="group-head"><h3>타이포</h3></div>
+            <label class="select-row"><span>폰트</span>
+              <select id="fontSelect">
+                <option value="Black Han Sans">검은고딕 (임팩트)</option>
+                <option value="Pretendard">프리텐다드 (깔끔)</option>
+                <option value="Do Hyeon">도현 (부드러운 고딕)</option>
+                <option value="Jua">주아 (친근함)</option>
+                <option value="Noto Serif KR">노토 명조 (정보형)</option>
+              </select>
+            </label>
+            <label class="range-row">
+              <span>크기</span>
+              <input type="range" id="fontSize" min="40" max="96" value="62" />
+              <output id="fontSizeOut">62</output>
+            </label>
+            <div class="color-row">
+              <label class="color-field"><span>글자</span><input type="color" id="textColor" value="#ffffff" /></label>
+              <label class="color-field"><span>강조</span><input type="color" id="accentColor" value="#d8ff3e" /></label>
+              <label class="color-field"><span>박스</span><input type="color" id="boxColor" value="#0b0b0e" /></label>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <div class="group-head"><h3>배치</h3></div>
+            <div class="seg-row" id="posSeg" role="group" aria-label="자막 위치">
+              <button type="button" data-pos="top">상단</button>
+              <button type="button" data-pos="center">중앙</button>
+              <button type="button" data-pos="bottom" class="is-on">하단</button>
+            </div>
+            <label class="select-row"><span>정렬</span>
+              <select id="alignSelect"><option value="center">가운데</option><option value="left">왼쪽</option></select>
+            </label>
+            <label class="select-row"><span>등장 효과</span>
+              <select id="animSelect">
+                <option value="pop">팝 (기본)</option>
+                <option value="karaoke">카라오케 강조</option>
+                <option value="fade">페이드</option>
+                <option value="none">없음</option>
+              </select>
+            </label>
+            <label class="select-row"><span>훅 스타일</span>
+              <select id="hookStyle">
+                <option value="box">강조 박스</option>
+                <option value="underline">밑줄</option>
+                <option value="plain">텍스트만</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="field-group">
+            <div class="group-head"><h3>디테일</h3></div>
+            <label class="switch-row"><span>자막 배경 박스</span><input type="checkbox" id="capBox" checked /><i></i></label>
+            <label class="switch-row"><span>외곽선</span><input type="checkbox" id="capStroke" /><i></i></label>
+            <label class="switch-row"><span>하단 진행바</span><input type="checkbox" id="progressBar" checked /><i></i></label>
+            <label class="switch-row"><span>훅 표시</span><input type="checkbox" id="showHook" checked /><i></i></label>
+            <label class="switch-row"><span>상단 고정 타이틀</span><input type="checkbox" id="showTitle" /><i></i></label>
+            <label class="input-row"><span>워터마크</span><input class="text-input sm" id="watermark" type="text" maxlength="24" placeholder="@my_channel" /></label>
+          </div>
+        </section>
+
+        <!-- 04 AUDIO -->
+        <section class="panel" data-panel="audio">
+          <div class="field-group">
+            <div class="group-head"><h3>AI 보이스 미리듣기</h3><span>브라우저 TTS</span></div>
+            <label class="select-row"><span>목소리</span><select id="voiceSelect"></select></label>
+            <label class="range-row"><span>속도</span><input type="range" id="ttsRate" min="0.7" max="1.4" step="0.05" value="1.05" /><output id="ttsRateOut">1.05x</output></label>
+            <div class="inline-row">
+              <button class="btn dark" id="speakCurrentBtn" type="button">현재 자막 듣기</button>
+              <label class="switch-row compact"><span>재생 시 읽기</span><input type="checkbox" id="ttsFollow" /><i></i></label>
+            </div>
+            <p class="note thin">미리듣기 용도입니다. 최종 파일에는 아래에 올린 음성 파일이 합성됩니다.</p>
+          </div>
+
+          <div class="field-group">
+            <div class="group-head"><h3>나레이션 파일</h3><span>타입캐스트 · 보이스복스</span></div>
+            <label class="audio-drop" id="voiceDrop">
+              <input type="file" id="voiceInput" accept="audio/*" hidden />
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M4 16v2.5A1.5 1.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5V16"/></svg>
+              <span id="voiceDropText">MP3 · WAV 업로드</span>
+            </label>
+            <label class="range-row"><span>볼륨</span><input type="range" id="voiceVol" min="0" max="100" value="100" /><output id="voiceVolOut">100%</output></label>
+          </div>
+
+          <div class="field-group">
+            <div class="group-head"><h3>배경음악</h3><span>BGM</span></div>
+            <label class="audio-drop" id="bgmDrop">
+              <input type="file" id="bgmInput" accept="audio/*" hidden />
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></svg>
+              <span id="bgmDropText">음악 파일 업로드</span>
+            </label>
+            <label class="range-row"><span>볼륨</span><input type="range" id="bgmVol" min="0" max="100" value="35" /><output id="bgmVolOut">35%</output></label>
+          </div>
+
+          <p class="note">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>
+            보이스복스(VOICEVOX)로 일본어 음성을 만들면 같은 영상을 일본 채널로 바로 확장할 수 있습니다.
+          </p>
+        </section>
+
+        <!-- 05 LANG -->
+        <section class="panel" data-panel="lang">
+          <div class="field-group">
+            <div class="group-head"><h3>언어 버전</h3><span>같은 디자인, 다른 언어</span></div>
+            <div class="lang-list" id="langList"></div>
+            <button class="mini-btn" id="addLangBtn" type="button">+ 언어 버전 추가</button>
+          </div>
+
+          <div class="field-group" id="langEditor">
+            <div class="group-head"><h3 id="langEditorTitle">한국어 대본</h3><span id="langVoiceHint">TTS: 한국어</span></div>
+            <label class="mini-field full" style="margin-bottom:8px"><span>훅 문구</span><input class="text-input sm" id="langHook" type="text" maxlength="40" placeholder="해당 언어의 훅" /></label>
+            <textarea class="text-area" id="langScript" rows="5" placeholder="해당 언어 대본을 붙여넣으세요"></textarea>
+            <button class="btn dark wide" id="applyLangBtn" type="button">이 언어로 자막 만들기</button>
+            <p class="note thin">번역은 파파고 · DeepL에서 옮긴 뒤 붙여넣으면 됩니다. 자막 · 훅 · 내보내기가 이 언어 기준으로 바뀝니다.</p>
+          </div>
+
+          <div class="field-group">
+            <div class="group-head"><h3>확장 체크</h3></div>
+            <ul class="check-list">
+              <li>같은 영상, 언어만 바꿔 채널 3개 운영</li>
+              <li>언어별 워터마크 · 채널명 변경</li>
+              <li>업로드 시 언어 · 자막 언어 설정</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- 06 PUBLISH -->
+        <section class="panel" data-panel="publish">
+          <div class="field-group">
+            <div class="group-head"><h3>내보내기 설정</h3></div>
+            <dl class="spec-list">
+              <div><dt>해상도</dt><dd>1080 × 1920 (9:16)</dd></div>
+              <div><dt>프레임</dt><dd>30fps</dd></div>
+              <div><dt>길이</dt><dd id="specDuration">0.0초</dd></div>
+              <div><dt>형식</dt><dd id="specFormat">MP4 (지원 시)</dd></div>
+            </dl>
+          </div>
+
+          <div class="field-group">
+            <button class="btn accent wide lg" id="exportBtn" type="button">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0 4.5-4.5M12 15 7.5 10.5M4 17v2.5A1.5 1.5 0 0 0 5.5 21h13a1.5 1.5 0 0 0 1.5-1.5V17"/></svg>
+              지금 영상 만들기
+            </button>
+            <div class="export-progress" id="exportProgress" hidden>
+              <div class="export-bar"><i id="exportBar"></i></div>
+              <div class="export-status"><span id="exportStatus">렌더링 준비 중…</span><span id="exportPct">0%</span></div>
+              <button class="link-btn" id="cancelExport" type="button">취소</button>
+            </div>
+            <div class="inline-row">
+              <button class="mini-btn" id="srtBtn" type="button">자막 .srt</button>
+              <button class="mini-btn" id="jsonBtn" type="button">프로젝트 .json</button>
+              <button class="mini-btn" id="copyScriptBtn" type="button">대본 복사</button>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <div class="group-head"><h3>업로드 패키지</h3><button class="link-btn" id="regenMetaBtn" type="button">다시 생성</button></div>
+            <label class="mini-field full"><span>제목</span><input class="text-input sm" id="metaTitle" type="text" /></label>
+            <label class="mini-field full"><span>설명 + 해시태그</span><textarea class="text-area sm" id="metaDesc" rows="4"></textarea></label>
+            <button class="mini-btn wide" id="copyMetaBtn" type="button">제목 · 설명 복사</button>
+          </div>
+
+          <div class="field-group">
+            <div class="group-head"><h3>예약 업로드 체크</h3><span id="checkCount">0 / 5</span></div>
+            <div class="check-list interactive" id="uploadChecks">
+              <label><input type="checkbox" data-check="kids" /><span>아동용 아님으로 설정</span></label>
+              <label><input type="checkbox" data-check="time" /><span>예약 업로드 시간 지정</span></label>
+              <label><input type="checkbox" data-check="meta" /><span>제목 · 해시태그 붙여넣기</span></label>
+              <label><input type="checkbox" data-check="rights" /><span>소스 · 음악 저작권 확인</span></label>
+              <label><input type="checkbox" data-check="lang" /><span>언어 · 자막 언어 설정</span></label>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </aside>
+  </main>
+</div>
+
+<!-- EXPORT MODAL -->
+<div class="modal" id="exportModal" hidden>
+  <div class="modal-card">
+    <div class="modal-head">
+      <div>
+        <p class="eyebrow">RENDER</p>
+        <h2>영상으로 굽는 중</h2>
+      </div>
+      <button class="icon-btn" id="closeExportModal" type="button" aria-label="닫기">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+      </button>
+    </div>
+    <div class="render-frame">
+      <canvas id="exportPreview" width="270" height="480"></canvas>
+      <div class="render-overlay">
+        <div class="render-ring"><span id="renderPct">0%</span></div>
+        <p id="renderStatus">프레임을 그리고 있어요</p>
+      </div>
+    </div>
+    <p class="modal-note">탭을 전환하면 렌더링이 느려질 수 있습니다. 이 창을 열어둔 채로 기다려 주세요.</p>
+    <div class="export-result" id="exportResult" hidden>
+      <video id="resultVideo" playsinline controls muted></video>
+      <a class="btn accent wide" id="saveVideoLink" download>파일 저장하기</a>
+      <p class="result-meta" id="resultMeta"></p>
+      <button class="btn ghost wide" id="finishExport" type="button">닫기</button>
+    </div>
+    <div class="modal-actions" id="exportActions">
+      <button class="btn ghost" id="cancelExportBtn" type="button">취소</button>
+    </div>
+  </div>
+</div>
+
+<!-- HELP MODAL -->
+<div class="modal" id="helpModal" hidden>
+  <div class="modal-card help-card">
+    <div class="modal-head">
+      <div>
+        <p class="eyebrow">HOW IT WORKS</p>
+        <h2>5분 안에 첫 쇼츠</h2>
+      </div>
+      <button class="icon-btn" id="closeHelpModal" type="button" aria-label="닫기">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+      </button>
+    </div>
+    <ol class="help-steps">
+      <li><b>대본 붙여넣기</b><span>훅 한 줄과 30~60자 본문이면 충분합니다.</span></li>
+      <li><b>AI 대본 · 2초 분할</b><span>영화 제목만 넣고 ‘대본 생성’을 누르면 상단 타이틀 · 훅 · 11문장 대본이 한 번에 채워집니다.</span></li>
+      <li><b>템플릿 고르기</b><span>‘영화 요약’ 템플릿은 상단 고정 타이틀 + 하단 강조 자막으로 영화 요약 쇼츠에 맞춰져 있습니다.</span></li>
+      <li><b>이미지 여러 장</b><span>사진을 5~8장 올리면 자막 구간마다 컷이 넘어가고 켄번즈 줌이 자동으로 걸립니다.</span></li>
+      <li><b>보이스 · BGM</b><span>타입캐스트에서 받은 MP3를 올리면 영상에 그대로 합성됩니다.</span></li>
+      <li><b>내보내기</b><span>9:16 MP4/WebM으로 저장하고 업로드 체크리스트를 확인하세요.</span></li>
+    </ol>
+    <div class="help-foot">
+      <p>브라우저에서 바로 렌더링합니다. 업로드한 파일은 서버로 전송되지 않습니다.</p>
+      <button class="btn primary" id="helpStartBtn" type="button">바로 시작하기</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="app.js"></script>
+<script data-pplx-inline-edit>
+(function () {
+  if (window === window.top) return;
+
+  const allowedParentOrigins = ["https://www.perplexity.ai","https://perplexity.ai","https://testing.perplexity.ai","https://staging.perplexity.ai","https://*.preview.i.perplexity.ai","http://perplexity.localhost","http://localhost:1420","http://127.0.0.1:1420","http://localhost:3000","http://127.0.0.1:3000","http://localhost:5173","http://127.0.0.1:5173"];
+  const MAX_FONT_BYTES = 500 * 1024;
+  const MAX_TOTAL_FONT_BYTES = 2 * 1024 * 1024;
+  const DEFAULT_LINE_HEIGHT = 16;
+  let scrollForwarding = false;
+  let scrollRaf = 0;
+  let trustedTopOrigin = null;
+
+  // Allow entries like "https://*.preview.i.perplexity.ai" — the wildcard
+  // matches a single DNS label (no dots), so "https://*.foo" cannot stretch
+  // across multiple labels.
+  function matchesAllowedOrigin(origin) {
+    if (!origin) return false;
+    for (const entry of allowedParentOrigins) {
+      if (!entry.includes("*")) {
+        if (entry === origin) return true;
+        continue;
+      }
+      const pattern = new RegExp(
+        "^" +
+          entry.replace(/[.+?^${}()|[\]\\]/g, "\\$&").replace(/\*/g, "[^.]+") +
+          "$",
+      );
+      if (pattern.test(origin)) return true;
+    }
+    return false;
+  }
+
+  // Trust decision: when the sender is same-origin-visible (event.origin is a
+  // real origin like https://www.perplexity.ai) we trust event.origin directly.
+  // When event.origin is "null" (opaque broker srcdoc), we fall back to the
+  // broker's stamped `parentOrigin` to identify the top window. The fallback
+  // is claim-only — we rely on the browser's native `targetOrigin` enforcement
+  // on the response path (see postToTrustedTop) to ensure replies can't be
+  // delivered to anyone but the actual top window of that claimed origin.
+  function getTrustedParentOrigin(event) {
+    const forwardedParentOrigin =
+      typeof event.data.parentOrigin === "string" ? event.data.parentOrigin : null;
+    const parentOrigin = event.origin === "null" ? forwardedParentOrigin : event.origin;
+    return matchesAllowedOrigin(parentOrigin) ? parentOrigin : null;
+  }
+
+  // All responses go to window.top with targetOrigin = the allowlisted origin.
+  // An attacker that iframes us inside their own null-origin broker can claim
+  // any parentOrigin they like, but the browser will drop the reply whenever
+  // the real top's origin doesn't match — so the screenshot never leaves.
+  function postToTrustedTop(message) {
+    if (!trustedTopOrigin) return;
+    try {
+      window.top.postMessage(message, trustedTopOrigin);
+    } catch (_error) {}
+  }
+
+  const PICK_CAPABILITIES = ["pick"];
+  const PICK_CHAIN_LENGTH = 4;
+  const PICK_MAX_TEXT_CHARS = 120;
+  const PICK_MAX_HTML_CHARS = 300;
+
+  function truncate(value, maxChars) {
+    return value.length > maxChars ? value.slice(0, maxChars - 1) + "…" : value;
+  }
+
+  function isPickableElement(element) {
+    return (
+      element instanceof Element &&
+      element !== document.documentElement &&
+      element !== document.body
+    );
+  }
+
+  function resolvePickTarget(x, y) {
+    if (!Number.isFinite(x) || !Number.isFinite(y)) return null;
+    const element = document.elementFromPoint(x, y);
+    return isPickableElement(element) ? element.closest("svg") || element : null;
+  }
+
+  function pickLabel(element) {
+    if (element.id) return element.localName + "#" + element.id;
+    return [element.localName].concat(Array.from(element.classList).slice(0, 2)).join(".");
+  }
+
+  // Only attributes that help find the element in source. data-* values and URL
+  // query strings or fragments can carry tokens.
+  const PICK_ATTRIBUTES = new Set([
+    "id",
+    "class",
+    "name",
+    "type",
+    "role",
+    "alt",
+    "aria-label",
+    "href",
+    "src",
+  ]);
+
+  function pickAttributeValue(attribute) {
+    return attribute.name === "href" || attribute.name === "src"
+      ? attribute.value.split(/[?#]/)[0]
+      : attribute.value;
+  }
+
+  function describePickElement(element) {
+    const chain = [];
+    for (
+      let current = element;
+      isPickableElement(current) && chain.length < PICK_CHAIN_LENGTH;
+      current = current.parentElement
+    ) {
+      chain.unshift(current);
+    }
+    const attributes = Array.from(element.attributes)
+      .filter((attribute) => PICK_ATTRIBUTES.has(attribute.name))
+      .map((attribute) => ` ${attribute.name}="${pickAttributeValue(attribute).replace(/"/g, "&quot;")}"`)
+      .join("");
+    const text = (element.innerText || element.textContent || "").replace(/\s+/g, " ").trim();
+    return {
+      chain: chain.map(pickLabel),
+      html: truncate(`<${element.localName}${attributes}>`, PICK_MAX_HTML_CHARS),
+      text: text ? truncate(text, PICK_MAX_TEXT_CHARS) : undefined,
+    };
+  }
+
+  // Hover asks once per frame, and innerText on a large section forces layout,
+  // so only the rect is re-read while the pointer stays on the same element.
+  // Clicks ask for fresh details since the page may have changed the element.
+  let lastPick = null;
+
+  function describePickTarget(element, fresh) {
+    if (fresh || lastPick?.element !== element) {
+      lastPick = { element, details: describePickElement(element) };
+    }
+    const rect = element.getBoundingClientRect();
+    return {
+      rect: { x: rect.left, y: rect.top, width: rect.width, height: rect.height },
+      ...lastPick.details,
+    };
+  }
+
+  function inlineAll(original, clone) {
+    if (original.nodeType !== 1 || clone.nodeType !== 1) return;
+
+    try {
+      const computedStyle = getComputedStyle(original);
+      // cssText on a computed style is the serialized declaration in modern
+      // Chromium/Safari — a single read beats enumerating ~400 longhand
+      // properties. Firefox returns "" here, so we fall back on empty.
+      const serialized = computedStyle.cssText;
+      if (serialized) {
+        clone.style.cssText = serialized;
+      } else {
+        const parts = new Array(computedStyle.length);
+        for (let index = 0; index < computedStyle.length; index += 1) {
+          const property = computedStyle[index];
+          parts[index] = `${property}:${computedStyle.getPropertyValue(property)};`;
+        }
+        clone.style.cssText = parts.join("");
+      }
+    } catch (_error) {}
+
+    const originalChildren = original.children;
+    const clonedChildren = clone.children;
+    for (
+      let index = 0;
+      index < originalChildren.length && index < clonedChildren.length;
+      index += 1
+    ) {
+      inlineAll(originalChildren[index], clonedChildren[index]);
+    }
+  }
+
+  function extractFontUrl(srcValue) {
+    const matches = [
+      ...srcValue.matchAll(
+        /url\(["']?([^"')]+)["']?\)(?:\s*format\(["']?([^"')]+)["']?\))?/gi,
+      ),
+    ];
+    if (matches.length === 0) return null;
+    const woff2 = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff2"));
+    if (woff2) return woff2[1];
+    const woff = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff"));
+    if (woff) return woff[1];
+    return matches[0][1];
+  }
+
+  // Cache resolved font URL -> data URI across captures. Fonts on a page
+  // essentially never change, and a batch run emits multiple captures back to
+  // back — without this we'd refetch + re-base64 every time.
+  const fontDataUriCache = new Map();
+  const SRC_DECLARATION_RE = /src\s*:\s*[^;}]+/i;
+
+  async function fetchAsDataUri(url) {
+    if (fontDataUriCache.has(url)) return fontDataUriCache.get(url);
+    let dataUri = null;
+    try {
+      const response = await fetch(url, { mode: "cors", credentials: "omit" });
+      if (response.ok) {
+        const blob = await response.blob();
+        if (blob.size <= MAX_FONT_BYTES) {
+          dataUri = await new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onloadend = () =>
+              resolve(typeof reader.result === "string" ? reader.result : null);
+            reader.onerror = () => resolve(null);
+            reader.readAsDataURL(blob);
+          });
+        }
+      }
+    } catch (_error) {
+      dataUri = null;
+    }
+    fontDataUriCache.set(url, dataUri);
+    return dataUri;
+  }
+
+  function collectFontFaceRuleTexts() {
+    const rules = [];
+    for (const sheet of document.styleSheets) {
+      let cssRules;
+      try {
+        cssRules = sheet.cssRules;
+      } catch (_error) {
+        continue;
+      }
+      if (!cssRules) continue;
+      for (const rule of cssRules) {
+        const cssText = rule.cssText || "";
+        if (cssText.startsWith("@font-face")) rules.push(cssText);
+      }
+    }
+    return rules;
+  }
+
+  async function buildInlinedFontCss() {
+    const ruleTexts = collectFontFaceRuleTexts();
+    if (ruleTexts.length === 0) return null;
+
+    const resolved = ruleTexts.map((cssText) => {
+      if (!SRC_DECLARATION_RE.test(cssText)) return null;
+      const srcMatch = cssText.match(/src\s*:\s*([^;}]+)[;}]/i);
+      if (!srcMatch) return null;
+      const url = extractFontUrl(srcMatch[1]);
+      if (!url) return null;
+      try {
+        return { cssText, url: new URL(url, document.baseURI).href };
+      } catch (_error) {
+        return null;
+      }
+    });
+
+    const dataUris = await Promise.all(
+      resolved.map((entry) => (entry ? fetchAsDataUri(entry.url) : Promise.resolve(null))),
+    );
+
+    const inlined = [];
+    let totalBytes = 0;
+    for (let index = 0; index < resolved.length; index += 1) {
+      const entry = resolved[index];
+      const dataUri = dataUris[index];
+      if (!entry || !dataUri) continue;
+      const approxBytes = dataUri.length * 0.75;
+      if (totalBytes + approxBytes > MAX_TOTAL_FONT_BYTES) break;
+      totalBytes += approxBytes;
+      inlined.push(entry.cssText.replace(SRC_DECLARATION_RE, `src: url("${dataUri}")`));
+    }
+    return inlined.length > 0 ? inlined.join("\n") : null;
+  }
+
+  function stripExternal(clone) {
+    const images = clone.querySelectorAll("img");
+    for (let index = 0; index < images.length; index += 1) {
+      const src = images[index].getAttribute("src");
+      if (src && !src.startsWith("data:")) images[index].removeAttribute("src");
+    }
+
+    const elements = clone.querySelectorAll("*");
+    for (let index = 0; index < elements.length; index += 1) {
+      const style = elements[index].style.cssText;
+      if (style && style.includes("url(")) {
+        elements[index].style.cssText = style.replace(
+          /url\(["']?(?!data:)[^)"']*["']?\)/gi,
+          "none",
+        );
+      }
+    }
+  }
+
+  function emitScroll() {
+    scrollRaf = 0;
+    if (!scrollForwarding) return;
+    postToTrustedTop({
+      type: "INLINE_EDIT_SCROLL",
+      scrollX: window.scrollX,
+      scrollY: window.scrollY,
+      capabilities: PICK_CAPABILITIES,
+    });
+  }
+
+  window.addEventListener(
+    "scroll",
+    function () {
+      if (!scrollForwarding || scrollRaf) return;
+      scrollRaf = requestAnimationFrame(emitScroll);
+    },
+    { passive: true, capture: true },
+  );
+
+  async function handleCaptureRequest(event) {
+    const requestId = event.data.requestId;
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    function postResult(dataUrl) {
+      postToTrustedTop({
+        type: "INLINE_EDIT_SCREENSHOT_RESULT",
+        requestId,
+        dataUrl,
+        scrollX,
+        scrollY,
+      });
+    }
+
+    try {
+      // Wait for any pending web fonts to resolve so both inline metrics and
+      // the @font-face inlining below see the same loaded faces.
+      if (document.fonts && document.fonts.ready) {
+        try {
+          await document.fonts.ready;
+        } catch (_error) {}
+      }
+
+      const clone = document.documentElement.cloneNode(true);
+      inlineAll(document.documentElement, clone);
+
+      const removedNodes = clone.querySelectorAll("script,link[rel=\"stylesheet\"],style");
+      for (let index = 0; index < removedNodes.length; index += 1) {
+        removedNodes[index].remove();
+      }
+
+      stripExternal(clone);
+
+      // Re-embed web fonts as data-URI @font-face rules so the SVG rasterizer
+      // can resolve them — external font URLs aren't fetched during
+      // foreignObject rendering, which would otherwise force a fallback face
+      // and change text metrics.
+      const inlinedFontCss = await buildInlinedFontCss();
+      if (inlinedFontCss) {
+        const styleEl = document.createElement("style");
+        styleEl.textContent = inlinedFontCss;
+        const head = clone.querySelector("head");
+        if (head) head.appendChild(styleEl);
+        else clone.insertBefore(styleEl, clone.firstChild);
+      }
+
+      const html = new XMLSerializer().serializeToString(clone);
+      const svg =
+        `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">` +
+        '<foreignObject width="100%" height="100%">' +
+        `<div xmlns="http://www.w3.org/1999/xhtml" style="width:${width}px;height:${height}px;overflow:hidden">` +
+        `<div style="position:relative;left:-${scrollX}px;top:-${scrollY}px">` +
+        html +
+        "</div></div></foreignObject></svg>";
+      const svgUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+      const image = new Image();
+      image.onload = function () {
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        canvas.getContext("2d").drawImage(image, 0, 0);
+        postResult(canvas.toDataURL("image/png"));
+      };
+      image.onerror = function () {
+        postResult(null);
+      };
+      image.src = svgUrl;
+    } catch (_error) {
+      postResult(null);
+    }
+  }
+
+  window.addEventListener("message", function (event) {
+    if (!event.data) return;
+    // Only accept messages from the direct parent frame. Blocks sibling /
+    // unrelated-window postMessage senders that could otherwise reach us.
+    if (event.source !== window.parent) return;
+
+    const trustedParentOrigin = getTrustedParentOrigin(event);
+    if (!trustedParentOrigin) return;
+    trustedTopOrigin = trustedParentOrigin;
+
+    if (event.data.type === "INLINE_EDIT_PICK") {
+      const element = resolvePickTarget(event.data.x, event.data.y);
+      postToTrustedTop({
+        type: "INLINE_EDIT_PICK_RESULT",
+        seq: event.data.seq,
+        target: element ? describePickTarget(element, event.data.fresh === true) : null,
+      });
+      return;
+    }
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_START") {
+      scrollForwarding = true;
+      emitScroll();
+      return;
+    }
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_STOP") {
+      scrollForwarding = false;
+      if (scrollRaf) cancelAnimationFrame(scrollRaf);
+      scrollRaf = 0;
+      return;
+    }
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_BY") {
+      const { deltaX, deltaY, deltaMode } = event.data;
+      if (!scrollForwarding || !Number.isFinite(deltaX) || !Number.isFinite(deltaY)) return;
+      if (deltaMode !== 0 && deltaMode !== 1 && deltaMode !== 2) return;
+      const lineHeight =
+        parseFloat(getComputedStyle(document.documentElement).lineHeight) || DEFAULT_LINE_HEIGHT;
+      const scaleX = deltaMode === 1 ? lineHeight : deltaMode === 2 ? window.innerWidth : 1;
+      const scaleY = deltaMode === 1 ? lineHeight : deltaMode === 2 ? window.innerHeight : 1;
+      // The selection overlay receives the wheel event instead of this iframe.
+      // Instant scrolling preserves trackpad deltas even on smooth-scroll sites.
+      window.scrollBy({ left: deltaX * scaleX, top: deltaY * scaleY, behavior: "instant" });
+      emitScroll();
+      return;
+    }
+
+    if (event.data.type !== "INLINE_EDIT_CAPTURE_REQUEST") return;
+
+    handleCaptureRequest(event);
+  });
+})();
+
+
+</script></body>
+</html>
