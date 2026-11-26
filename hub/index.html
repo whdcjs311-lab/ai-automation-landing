@@ -710,6 +710,16 @@ function localTail(f, need) {
       p: "장바구니에 담아 두고 하루만 지나도 판단이 달라집니다. 그때도 필요하다고 느껴지면 사고, 아니면 지우면 됩니다. 후기에서 확인한 단점이 내 생활에서 문제가 되는지 스스로에게 한 번 물어보세요."
     }
   ];
+  const off = f.price > f.sale ? f.price - f.sale : 0;
+  const check = [
+    "• 정가 " + fmt(f.price) + "원, 할인가 " + fmt(f.sale) + "원, 차액 " + fmt(off) + "원이 맞는지",
+    "• 리뷰 " + (f.reviews ? fmt(f.reviews) + "건" : "수") + " 중 최근 후기 5개를 직접 읽었는지",
+    "• 교환·반품 배송비와 기간을 확인했는지",
+    "• 원하는 색상과 사이즈의 재고가 남아 있는지"
+  ].concat((f.points.length ? f.points : []).map(p => "• \"" + p + "\" 항목을 상세 컷에서 확인했는지"))
+   .concat((f.bad.length ? f.bad : []).map(b => "• \"" + b + "\" 를 감수할 수 있는지"))
+   .join("\n");
+  extra.push({ h: "결제 전 마지막 체크리스트", p: check });
   let out = "", i = 0;
   const need0 = need;
   while (countChars(out) < need0 && i < extra.length) { out += (out ? "\n\n" : "") + "## " + extra[i].h + "\n" + extra[i].p; i++; }
@@ -847,7 +857,7 @@ async function generate(kind) {
       }
       const flat = body.replace(/\s/g, "");
       if (fmt(f.sale) && flat.indexOf(fmt(f.sale) + "원") < 0) note += " · ⚠ 본문 금액이 입력값(" + fmt(f.sale) + "원)과 다릅니다. 붙여넣기 전에 확인하세요.";
-      if (/직접\s*(써|씁|입어|착용|사용|느껴|살펴)|첫인상|만나볼\s*수\s*있|기\s*마련/.test(body + " " + hook.join(" "))) note += " · ⚠ 직접 사용 표현이 섞였습니다. 후기 근거 표현으로 고쳐 주세요.";
+      if (/직접\s*(써|씁|입어|착용|사용|느껴|살펴)|첫인상|만나(볼|실)?\s*수\s*있|기\s*마련/.test(body + " " + hook.join(" "))) note += " · ⚠ 직접 사용 표현이 섞였습니다. 후기 근거 표현으로 고쳐 주세요.";
       const plain = body.split("\n").filter(t => /[가-힣]다[.。]?\s*$/.test(t.trim()) && !/(니다|합니다|됩니다|십니다|습니다|겁니다)[.。]?\s*$/.test(t.trim()));
       if (plain.length >= 2) note += " · ⚠ '~다'로 끝나는 문장 " + plain.length + "곳(존댓말 통일 필요)";
       AI.reach = true; AI.ready = true; AI.checked = true; aiChip();
