@@ -1417,9 +1417,19 @@ async function callGemini(prompt) {
   throw new Error(lastError);
 }
 
+function tidyAiText(v) {
+  return String(v || '')
+    .replace(/\\n/g, '\n')
+    .replace(/\\"/g, '"')
+    .replace(/^[\s"'“”]+|[\s"'“”]+$/g, '')
+    .trim();
+}
+
 function parseAiResult(raw) {
   let text = String(raw || '').trim();
   text = text.replace(/^```(?:json)?\s*/i, '').replace(/```\s*$/, '').trim();
+
+  // 1) 정상 JSON
   let obj = null;
   try { obj = JSON.parse(text); } catch { obj = null; }
   if (!obj) {
@@ -1428,14 +1438,28 @@ function parseAiResult(raw) {
   }
   if (obj && (obj.script || obj.title || obj.hook)) {
     const script = Array.isArray(obj.script) ? obj.script.join('\n') : String(obj.script || '');
-    return {
-      title: String(obj.title || '').replace(/^["'“”]|["'“”]$/g, '').trim(),
-      hook: String(obj.hook || '').replace(/^["'“”]|["'“”]$/g, '').trim(),
-      script: script.trim()
-    };
+    const out = { title: tidyAiText(obj.title), hook: tidyAiText(obj.hook), script: tidyAiText(script) };
+    if (out.script) return out;
   }
-  const rows = text.split(/\n+/).map((s) => s.replace(/^[-*\d.\s]+/, '').trim()).filter(Boolean);
-  return { title: '', hook: rows[0] || '', script: rows.slice(1).join('\n') || text };
+
+  // 2) 깨진 JSON — 키별 값만 정규식으로 추출
+  const grab = (key) => {
+    const re = new RegExp('"' + key + '"\\s*:\\s*"((?:[^"\\\\]|\\\\.)*)"');
+    const m = text.match(re);
+    return m ? m[1] : '';
+  };
+  const gTitle = tidyAiText(grab('title'));
+  const gHook = tidyAiText(grab('hook'));
+  const gScript = tidyAiText(grab('script'));
+  if (gScript || gTitle || gHook) {
+    return { title: gTitle, hook: gHook, script: gScript || gHook };
+  }
+
+  // 3) 마지막 수단 — 줄 단위
+  const rows = text.split(/\n+/)
+    .map((s) => s.replace(/^[-*\d.\s]+/, '').trim())
+    .filter((s) => s && s !== '{' && s !== '}');
+  return { title: '', hook: rows[0] || '', script: rows.join('\n') || text };
 }
 
 async function generateScript() {
