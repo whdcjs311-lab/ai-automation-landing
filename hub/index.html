@@ -45,6 +45,7 @@ h1{margin:0;font-size:clamp(24px,4.6vw,38px);letter-spacing:-.5px}
 .tab.on{display:block;animation:fade .25s ease}
 @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
 .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+#tab-writer .grid,#tab-tracker .grid{align-items:start}
 .card{background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 12px 30px rgba(0,0,0,.25)}
 .card.span12{grid-column:span 12}
 .card.span8{grid-column:span 8}
@@ -627,7 +628,7 @@ function localBlocks(f) {
   });
   blocks.push({
     h: "구매자 후기가 말하는 것",
-    p: (f.rating ? "현재 평점은 " + f.rating.toFixed(2) + "점" : "평점") + (f.reviews ? ", 리뷰 " + fmt(f.reviews) + "건" : "") + "입니다. 후기에서 자주 나온 만족점으로 꼽힌 것은 " + goods.slice(0, 2).join(", ") + "입니다. 반대로 아쉬운 점으로 꼽힌 것은 " + bads.join(", ") + "입니다. 어느 쪽이든 여러 후기에서 반복된다는 점이 중요합니다. 한두 명의 취향이 아니라 같은 쓰임에서 나온 평가라는 뜻이기 때문입니다.\n" +
+    p: (f.rating ? "현재 평점은 " + f.rating.toFixed(2) + "점" : "평점") + (f.reviews ? ", 리뷰 " + fmt(f.reviews) + "건" : "") + "입니다. 후기에서 만족점으로 자주 언급된 것은 " + goods.slice(0, 2).join(", ") + "입니다. 반대로 아쉬운 점으로 자주 언급된 것은 " + bads.join(", ") + "입니다. 어느 쪽이든 여러 후기에서 반복된다는 점이 중요합니다. 한두 명의 취향이 아니라 같은 쓰임에서 나온 평가라는 뜻이기 때문입니다.\n" +
       "후기를 읽을 때는 별점 평균보다 최근 30일 후기를 먼저 보는 편이 정확합니다. 배송이 빨랐다는 문장, 포장이 예뻤다는 문장은 상품의 품질과 무관한 경우가 많습니다. 사이즈, 소재, 세탁 후 변화처럼 시간이 지나도 남는 문장만 골라 읽으면 판단이 빨라집니다."
   });
   const why = [
