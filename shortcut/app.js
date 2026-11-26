@@ -85,7 +85,7 @@ const LANGS = {
 };
 
 const TEMPLATES = [
-  { id: 'movie', name: '영화 요약', d: { font: 'Black Han Sans', size: 78, pos: 'bottom', anim: 'pop', hookStyle: 'box', capBox: true, stroke: true, align: 'center', accent: '#d8ff3e', showTitle: true } },
+  { id: 'movie', name: '영화 요약', d: { font: 'Black Han Sans', size: 78, pos: 'bottom', anim: 'pop', hookStyle: 'box', capBox: true, stroke: true, align: 'center', accent: '#d8ff3e', showTitle: true, emph: 'last' } },
   { id: 'news', name: '속보형', d: { font: 'Black Han Sans', size: 64, pos: 'bottom', anim: 'pop', hookStyle: 'box', capBox: true, stroke: false, align: 'center', accent: '#d8ff3e' } },
   { id: 'karaoke', name: '카라오케', d: { font: 'Black Han Sans', size: 78, pos: 'center', anim: 'karaoke', hookStyle: 'plain', capBox: false, stroke: true, align: 'center', accent: '#d8ff3e' } },
   { id: 'pen', name: '형광펜', d: { font: 'Pretendard', size: 60, pos: 'bottom', anim: 'karaoke', hookStyle: 'underline', capBox: false, stroke: false, align: 'left', accent: '#ffd43b' } },
@@ -131,6 +131,7 @@ const state = {
     progressBar: true,
     showHook: true,
     showTitle: false,
+    emph: 'none',
     watermark: '@my_channel'
   },
   bg: {
@@ -662,9 +663,23 @@ function drawCaption(ctx, caption, design, t, start, dur, progress) {
   const reveal = Math.ceil(progress * totalChars * 1.35);
   let charCursor = 0;
 
+  // 핵심 단어 강조 (영화 요약 템플릿)
+  let emphWord = '';
+  if (design.emph && design.emph !== 'none') {
+    const words = String(caption).replace(/[,.!?'"”’…]/g, ' ').split(/\s+/).filter(Boolean);
+    if (words.length) emphWord = design.emph === 'first' ? words[0] : words[words.length - 1];
+  }
+
   layout.lines.forEach((line, i) => {
     const y = blockTop + lineH * (i + 0.5);
     const x = design.align === 'left' ? 90 : (W - line.width) / 2;
+
+    let emphAt = -1;
+    if (emphWord) {
+      const plain = line.text;
+      const at = design.emph === 'first' ? plain.indexOf(emphWord) : plain.lastIndexOf(emphWord);
+      if (at === 0 || (at > 0 && plain[at - 1] === ' ')) emphAt = at;
+    }
 
     if (design.stroke) {
       ctx.font = font;
@@ -697,6 +712,8 @@ function drawCaption(ctx, caption, design, t, start, dur, progress) {
       let color = design.textColor;
       if (highlight) {
         color = charCursor < reveal ? design.accent : hexA(design.textColor, 0.42);
+      } else if (emphAt >= 0 && charCursor >= emphAt && charCursor < emphAt + emphWord.length) {
+        color = design.accent;
       }
       ctx.fillStyle = color;
       if (c.ch !== ' ') ctx.fillText(c.ch, cx, y);
@@ -1043,6 +1060,7 @@ function updateDesignUI() {
   $('#progressBar').checked = d.progressBar;
   $('#showHook').checked = d.showHook;
   if ($('#showTitle')) $('#showTitle').checked = Boolean(d.showTitle);
+  if ($('#emphSelect')) $('#emphSelect').value = d.emph || 'none';
   $('#watermark').value = d.watermark;
   $$('#posSeg button').forEach((b) => b.classList.toggle('is-on', b.dataset.pos === d.pos));
   $$('.tpl-card').forEach((c) => c.classList.toggle('is-on', c.dataset.tpl === d.template));
@@ -2124,6 +2142,10 @@ function bind() {
   }));
   [['capBox', 'capBox'], ['capStroke', 'stroke'], ['progressBar', 'progressBar'], ['showHook', 'showHook']].forEach(([id, key]) => {
     $('#' + id).addEventListener('change', (e) => { state.design[key] = e.target.checked; designChanged(); });
+  });
+  if ($('#emphSelect')) $('#emphSelect').addEventListener('change', (e) => {
+    state.design.emph = e.target.value;
+    designChanged();
   });
   $('#watermark').addEventListener('input', (e) => { state.design.watermark = e.target.value; renderPreview(); saveLater(); });
 
