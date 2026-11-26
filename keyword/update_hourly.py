@@ -615,11 +615,6 @@ def has_batchim(word: str) -> bool:
     return False
 
 
-def josa(word: str, with_b: str, without_b: str) -> str:
-    """받침 유무에 맞는 조사를 붙인다 (word + 조사)."""
-    return word + (with_b if has_batchim(word) else without_b)
-
-
 def clean_title(t: str) -> str:
     t = re.sub(r"^\[[^\]]{1,12}\]\s*", "", t)
     t = re.sub(r"^【[^】]{1,12}】\s*", "", t)
@@ -865,7 +860,7 @@ def clip_text(s: str, limit: int) -> str:
     return cut.rstrip(" ,·…") + "…"
 
 
-def make_entry(idx, b, raw, raw_max, now):
+def make_entry(idx, b, ratio, now):
     prof = b["profile"] or {}
     cat = b["cat"]
     kw = b["kw"]
@@ -923,7 +918,7 @@ def make_entry(idx, b, raw, raw_max, now):
     if not prof and re.search(r"가격|할인|세일|구매|추천|출시|상품", " ".join(a["title"] for a in arts[:4])):
         money = min(5, money + 1)
 
-    score = int(round(58 + 41 * (raw / raw_max if raw_max else 0)))
+    score = int(round(58 + 41 * ratio))
     score = max(58, min(99, score))
 
     outline = [
@@ -1010,9 +1005,7 @@ def main(argv):
     raw_max = max(s for _, s in picked) or 1
     raw_min = min(s for _, s in picked)
     span = max(1e-6, raw_max - raw_min)
-    entries = [
-        make_entry(i, b, (s - raw_min) / span, 1.0, now) for i, (b, s) in enumerate(picked)
-    ]
+    entries = [make_entry(i, b, (s - raw_min) / span, now) for i, (b, s) in enumerate(picked)]
 
     prev = load_prev()
     meta = dict(prev.get("meta") or {})
