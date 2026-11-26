@@ -301,7 +301,7 @@ footer{color:var(--muted);font-size:11.5px;margin-top:20px;line-height:1.7}
           <span class="chip" id="musinsaNext">–</span>
         </div>
         <details open>
-          <summary>응모 목록 · 발표일 (12/1 13건 · 12/2 5건 · 12/3 6건)</summary>
+          <summary>응모 목록 · 발표일 (12/1 13건 · 12/2 5건 · 12/3 3건)</summary>
           <div class="list" id="musinsaList"></div>
         </details>
       </div>
@@ -446,7 +446,8 @@ function brandTotals() {
 function renderDash() {
   const t = D.today || {}, g = D.goal || {}, bt = brandTotals();
   const blog = t.blog || {}, clip = t.clip || {};
-  $("#stamp").textContent = ((D.meta && D.meta.updatedAt) || "데이터") + " 기준";
+  const stampTxt = (D.meta && D.meta.updatedAt) || "데이터";
+  $("#stamp").textContent = /기준$/.test(stampTxt) ? stampTxt : stampTxt + " 기준";
   $("#srcNote").textContent = DATA_SRC + (D.meta && D.meta.updated ? " · " + D.meta.updated : "");
 
   /* 목표 바 */
@@ -466,7 +467,7 @@ function renderDash() {
   /* KPI */
   const kpis = [
     {
-      label: "월 목표 (최소)", value: fmt(confirmed) + "원", cls: "hero-kpi",
+      label: "이번 달 확정 수익", value: fmt(confirmed) + "원", cls: "hero-kpi",
       foot: "목표 " + fmt(minGoal) + "~" + fmt(maxGoal) + "원 · 달성 " + (confirmed / minGoal * 100).toFixed(1) + "%"
     },
     {
@@ -616,25 +617,31 @@ function localBlocks(f) {
   const blocks = [];
   blocks.push({
     h: "",
-    p: name + "을(를) 검색하면 같은 가격대의 상품이 한 화면에 십여 개씩 올라옵니다. 그중 이 상품이 눈에 남는 이유는 가격도 있지만, 구매자 후기에서 비슷한 말이 반복되기 때문입니다. 상세페이지에 적힌 문장보다 후기에 남은 생활 속 문장이 실제 쓰임을 더 정확하게 보여줍니다.\n" +
+    p: name + " 검색 결과를 보면 같은 가격대의 상품이 한 화면에 십여 개씩 올라옵니다. 그중 이 상품이 눈에 남는 이유는 가격도 있지만, 구매자 후기에서 비슷한 말이 반복되기 때문입니다. 상세페이지에 적힌 문장보다 후기에 남은 생활 속 문장이 실제 쓰임을 더 정확하게 보여줍니다.\n" +
       "그래서 이 글은 스펙을 나열하는 대신, 후기에서 공통으로 나온 만족점과 아쉬운 점을 먼저 꺼내 놓고 시작하겠습니다. 사기 전에 확인할 것과 사고 나서 후회하는 지점을 순서대로 정리했으니, 결제 화면까지 열어 두고 비교해 보시면 됩니다."
   });
   blocks.push({
     h: "가격부터 계산했습니다",
-    p: "정가는 " + fmt(f.price) + "원, 지금 판매가는 " + fmt(f.sale) + "원입니다. 차액은 " + fmt(off) + "원이고 할인율은 약 " + rate + "%입니다. 숫자만 보면 큰 차이처럼 보이지 않지만, 한 철 입고 끝나는 옷이라면 하루 기준으로 다시 계산해 볼 필요가 있습니다.\n" +
-      "겨울 한 철을 90일로 잡으면 하루 " + Math.max(1, Math.round(f.sale / 90)) + "원꼴입니다. 같은 값을 커피 한 잔과 비교하면 판단이 조금 쉬워집니다. 다만 가격은 옵션과 쿠폰, 판매처에 따라 달라지므로 결제 화면에서 최종 금액과 배송비를 다시 확인하세요. 정가 대비 할인율이 높다는 이유만으로 급하게 결제할 필요는 없습니다."
+    p: "정가는 " + fmt(f.price) + "원, 지금 판매가는 " + fmt(f.sale) + "원입니다. 차액은 " + fmt(off) + "원이고 할인율은 약 " + rate + "%입니다. 숫자만 보면 큰 차이처럼 보이지 않지만, 쓰는 기간이 짧은 물건이라면 하루 기준으로 다시 계산해 볼 필요가 있습니다.\n" +
+      "값을 90일로 나눠 보면 하루 " + Math.max(1, Math.round(f.sale / 90)) + "원꼴입니다. 같은 값을 커피 한 잔과 비교하면 판단이 조금 쉬워집니다. 다만 가격은 옵션과 쿠폰, 판매처에 따라 달라지므로 결제 화면에서 최종 금액과 배송비를 다시 확인하세요. 정가 대비 할인율이 높다는 이유만으로 급하게 결제할 필요는 없습니다."
   });
   blocks.push({
     h: "구매자 후기가 말하는 것",
-    p: (f.rating ? "현재 평점은 " + f.rating.toFixed(2) + "점" : "평점") + (f.reviews ? ", 리뷰 " + fmt(f.reviews) + "건" : "") + "입니다. 후기에서 가장 자주 나온 만족점은 " + goods[0] + ", " + (goods[1] || goods[0]) + "입니다. 반대로 아쉬운 점으로는 " + bads[0] + (bads[1] ? ", " + bads[1] : "") + "이(가) 반복해서 언급됩니다.\n" +
+    p: (f.rating ? "현재 평점은 " + f.rating.toFixed(2) + "점" : "평점") + (f.reviews ? ", 리뷰 " + fmt(f.reviews) + "건" : "") + "입니다. 후기에서 자주 나온 만족점으로 꼽힌 것은 " + goods.slice(0, 2).join(", ") + "입니다. 반대로 아쉬운 점으로 꼽힌 것은 " + bads.join(", ") + "입니다. 어느 쪽이든 여러 후기에서 반복된다는 점이 중요합니다. 한두 명의 취향이 아니라 같은 쓰임에서 나온 평가라는 뜻이기 때문입니다.\n" +
       "후기를 읽을 때는 별점 평균보다 최근 30일 후기를 먼저 보는 편이 정확합니다. 배송이 빨랐다는 문장, 포장이 예뻤다는 문장은 상품의 품질과 무관한 경우가 많습니다. 사이즈, 소재, 세탁 후 변화처럼 시간이 지나도 남는 문장만 골라 읽으면 판단이 빨라집니다."
   });
+  const why = [
+    "이 부분은 상세페이지에서 한 줄로 지나가지만, 실제 사용에서는 만족도가 갈리는 지점입니다. 확인할 방법은 상세 컷의 확대 이미지와 실측표를 함께 보는 것입니다. 색상별로 느낌이 다르므로 후기 사진에서 원하는 색을 한 번 더 확인해 보세요.\n" +
+      "구매 전에는 비슷한 조건에서 쓴 후기를 찾아보세요. 같은 체형이나 같은 사용 환경에서 남긴 문장이 한두 개라도 있으면 실패 확률이 크게 줄어듭니다.",
+    "광고 문구보다 후기 사진이 더 정확할 때가 많습니다. 같은 색상이라도 조명에 따라 다르게 보이므로, 낮에 찍은 후기 사진을 먼저 확인하세요.\n" +
+      "가능하면 최근 한 달 안에 올라온 후기를 보세요. 생산 시점이 바뀌면 소재나 마감이 달라질 수 있기 때문입니다.",
+    "이 부분이 내 생활에서 얼마나 중요한지 먼저 따져보세요. 자주 쓰는 물건이라면 작은 차이도 크게 느껴지고, 가끔 쓰는 물건이라면 넘어가도 됩니다.\n" +
+      "판단이 어려우면 같은 옵션을 산 사람의 후기만 모아 읽어보세요. 옵션에 따라 만족도가 갈리는 경우가 의외로 많습니다."
+  ];
   pts.forEach((p, i) => {
     blocks.push({
       h: (i + 1) + ". " + p,
-      p: "후기에서 \"" + p + "\"와(과) 같은 표현이 반복해서 나옵니다. 이 부분은 상세페이지에서 한 줄로 지나가지만 실제 사용에서는 만족도가 갈리는 지점입니다. " +
-        "직접 확인할 수 있는 방법은 상세 컷의 확대 이미지와 실측표를 함께 보는 것입니다. 컬러별로 느낌이 다르므로 후기 사진에서 원하는 색을 한 번 더 확인하세요.\n" +
-        "구매 전에는 같은 고민을 한 사람이 남긴 문장을 찾아보세요. 비슷한 체형이나 사용 환경에서 쓴 후기가 한두 개라도 있으면 실패 확률이 크게 줄어듭니다."
+      p: "후기에서 \"" + p + "\" 같은 표현이 반복해서 나옵니다. " + why[i % why.length]
     });
   });
   blocks.push({
@@ -658,7 +665,7 @@ function localBlocks(f) {
   });
   blocks.push({
     h: "정리",
-    p: name + "은(는) " + (rate ? rate + "% 할인된 " + fmt(f.sale) + "원" : fmt(f.sale) + "원") + "이라는 가격과 " + goods[0] + "라는 후기 평가가 만나는 지점에서 선택할 만한 상품입니다. 다만 " + bads[0] + "은(는) 구매 전에 반드시 확인하세요.\n" +
+    p: name + " — " + (rate ? rate + "% 할인된 " + fmt(f.sale) + "원" : fmt(f.sale) + "원") + "이라는 가격과, 후기에서 반복된 \"" + goods[0] + "\"라는 평가가 만나는 지점에서 선택할 만한 상품입니다. 다만 \"" + bads[0] + "\" — 이 부분은 결제 전에 꼭 확인하세요.\n" +
       "결론은 단순합니다. 필요한 시점에, 후기에서 확인한 조건이 내 기준과 맞으면 사고, 아니면 넘기면 됩니다. 가격이 더 내려갈 수 있지만 재고와 사이즈는 보장되지 않습니다."
   });
   return blocks;
@@ -687,6 +694,12 @@ function localTail(f, need) {
   const need0 = need;
   while (countChars(out) < need0 && i < extra.length) { out += (out ? "\n\n" : "") + "## " + extra[i].h + "\n" + extra[i].p; i++; }
   return out;
+}
+function withTail(body, tail) {
+  if (!tail) return body;
+  const i = body.lastIndexOf("## 정리");
+  if (i > 0) return body.slice(0, i) + tail + "\n\n" + body.slice(i);
+  return body + "\n\n" + tail;
 }
 function setGenState(msg, cls) {
   const el = $("#genState");
@@ -806,20 +819,20 @@ async function generate(kind) {
       let body = String(out.body || "").trim();
       let note = "AI 초안 · " + fmt(countChars(body)) + "자";
       if (countChars(body) < 2000) {
-        body = body + "\n\n" + localTail(f, 2050 - countChars(body));
+        body = withTail(body, localTail(f, 2050 - countChars(body)));
         note = "AI 초안 + 로컬 보강 · " + fmt(countChars(body)) + "자 (2,000자 미달분 보충)";
       }
       renderDoc(f, hook, body, note);
     } else {
       const blocks = localBlocks(f);
       let body = blocksToBody(blocks);
-      if (countChars(body) < 2000) body = body + "\n\n" + localTail(f, 2050 - countChars(body));
+      if (countChars(body) < 2000) body = withTail(body, localTail(f, 2050 - countChars(body)));
       renderDoc(f, localHook(f), body, "로컬 템플릿 · " + fmt(countChars(body)) + "자");
     }
   } catch (e) {
     const blocks = localBlocks(f);
     let body = blocksToBody(blocks);
-    if (countChars(body) < 2000) body = body + "\n\n" + localTail(f, 2050 - countChars(body));
+    if (countChars(body) < 2000) body = withTail(body, localTail(f, 2050 - countChars(body)));
     renderDoc(f, localHook(f), body, "AI 실패(" + String(e.message || e).slice(0, 40) + ") → 로컬 템플릿 · " + fmt(countChars(body)) + "자");
   } finally {
     btn.disabled = false; btn.textContent = old;
