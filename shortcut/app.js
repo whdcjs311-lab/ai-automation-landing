@@ -521,12 +521,36 @@ function drawScene(ctx, o) {
   ctx.restore();
 }
 
+function balanceLines(ctx, text, font, maxW) {
+  const words = String(text).trim().split(/\s+/).filter(Boolean);
+  if (words.length < 2) return [String(text).trim()];
+  ctx.save();
+  ctx.font = font;
+  const full = ctx.measureText(words.join(' ')).width;
+  if (full <= maxW) { ctx.restore(); return [words.join(' ')]; }
+  let best = null;
+  for (let i = 1; i < words.length; i++) {
+    const a = words.slice(0, i).join(' ');
+    const b = words.slice(i).join(' ');
+    const wa = ctx.measureText(a).width;
+    const wb = ctx.measureText(b).width;
+    if (wa <= maxW && wb <= maxW) {
+      const score = Math.abs(wa - wb);
+      if (!best || score < best.score) best = { a, b, score };
+    }
+  }
+  ctx.restore();
+  if (best) return [best.a, best.b];
+  return wrapLines(text, font, maxW).lines.map((l) => l.text);
+}
+
 function drawTitle(ctx, title, design) {
   const tag = '영화 요약';
   const tagFont = '800 26px "Pretendard Variable", "Pretendard", sans-serif';
   const size = 74;
   const font = `400 ${size}px "Black Han Sans", "Pretendard Variable", sans-serif`;
-  const layout = wrapLines(String(title), font, 900);
+  const lines = balanceLines(ctx, title, font, 940);
+  const layout = { lines: lines.map((text) => ({ text, width: 0 })) };
   const lineH = size * 1.18;
   ctx.save();
   // 상단 스크림 — 밝은 컷에서도 타이틀이 읽히게
