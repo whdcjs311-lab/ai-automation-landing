@@ -1,7 +1,7 @@
 {
   "meta": {
     "updated": "2026-11-26",
-    "updatedAt": "2026.11.26 17:45 기준",
+    "updatedAt": "2026.11.26 20:05 기준",
     "source": "scheduled-actions/🎁-매일-오전-10시-체험단-자동-신청-및-추천-보고/notes.md · scheduled-actions/📝-네이버-블로그-매일-5건-자동-발행/notes.md · scheduled-actions/🎬-네이버-클립-매일-3건-자동-발행/notes.md",
     "disclaimer": "표시된 리워드는 신청·응모 단계의 예정 금액이며 선정 전에는 수익이 아닙니다. 후기·발표 일정은 캠페인 공지 기준입니다."
   },
@@ -16,10 +16,10 @@
   "channels": [
     {
       "name": "네이버 쇼핑 커넥트",
-      "state": "오늘 클릭 13회",
+      "state": "오늘 클릭 13회 · 링크 8건 발급",
       "value": 25405,
       "valueLabel": "예상 수익(발급 기준)",
-      "note": "링크 5건 발급 · 블로그 myblog · 링크 발급만으로는 수익 아님"
+      "note": "링크 8건 발급(블로그 5·클립 3) · 블로그 myblog · 클립 @pickstyle_daily · 링크 발급만으로는 수익 아님"
     },
     {
       "name": "쿠팡 파트너스",
@@ -52,9 +52,23 @@
   ],
   "today": {
     "date": "2026-11-26",
-    "blog": { "target": 5, "published": 5, "pending": 0 },
-    "clip": { "target": 3, "published": 0, "scheduledAt": "19:30", "channel": "https://clip.naver.com/@pickstyle_daily" },
-    "clicks": { "shoppingConnect": 13, "coupang": 3, "checkedAt": "2026-11-26 16:00" },
+    "blog": {
+      "target": 5,
+      "published": 5,
+      "pending": 0
+    },
+    "clip": {
+      "target": 3,
+      "published": 3,
+      "scheduledAt": "19:30",
+      "channel": "https://clip.naver.com/@pickstyle_daily",
+      "publishedAt": "2026-11-26 19:52~19:57"
+    },
+    "clicks": {
+      "shoppingConnect": 13,
+      "coupang": 3,
+      "checkedAt": "2026-11-26 16:00"
+    },
     "posts": [
       {
         "no": 1,
@@ -104,12 +118,44 @@
     ],
     "drafts": [],
     "clips": [
-      { "title": "오늘 19:30 예약 발행 3건 (아직 업로드 전)", "url": "https://clip.naver.com/@pickstyle_daily", "status": "예약" }
+      {
+        "title": "디키즈 남성 인슐레이티드 아이젠하워 누빔 워크 자켓 (루나웨이) 129,000→89,000",
+        "url": "https://naver.me/xllNfvrK",
+        "productUrl": "https://naver.me/FvTqvneP",
+        "status": "공개 발행",
+        "length": "0:10"
+      },
+      {
+        "title": "[후아유] 스티브 와이드 팬츠(브러쉬드) WHTMG4T51U 49,900→44,900",
+        "url": "https://naver.me/FSv8rxeW",
+        "productUrl": "https://naver.me/GYDRhpKM",
+        "status": "공개 발행",
+        "length": "0:10"
+      },
+      {
+        "title": "올리즌 남자 맨투맨 오버핏 남녀공용 기모 긴팔티 14,800→10,800",
+        "url": "https://naver.me/FORUHSRC",
+        "productUrl": "https://naver.me/Ix0mMv6Z",
+        "status": "공개 발행",
+        "length": "0:10"
+      }
     ],
     "clipsYesterday": [
-      { "title": "[N배송] 스파오 파스텔 퍼퍼 SPJPG4TG11", "url": "https://naver.me/GjyjqA1F" },
-      { "title": "남자 라드 2단기장 겨울 기모안감 코듀로이 밴딩팬츠", "url": "https://naver.me/Gzd3FPbD" },
-      { "title": "미라클뮤즈 아하바하 메디크림", "url": "https://naver.me/GKIA3jIe" }
+      {
+        "title": "[N배송] 스파오 파스텔 퍼퍼 SPJPG4TG11",
+        "url": "https://naver.me/GjyjqA1F",
+        "views": "3"
+      },
+      {
+        "title": "남자 라드 2단기장 겨울 기모안감 코듀로이 밴딩팬츠",
+        "url": "https://naver.me/Gzd3FPbD",
+        "views": "23"
+      },
+      {
+        "title": "미라클뮤즈 아하바하 메디크림",
+        "url": "https://naver.me/GKIA3jIe",
+        "views": "4"
+      }
     ]
   },
   "brand": {
@@ -233,47 +279,158 @@
     "url": "https://www.musinsa.com/preuser",
     "note": "앱 전용 신청 · 당첨 시 사진 5장 + 200자 후기 (12/4~12/18)",
     "items": [
-      { "name": "소닉플로우 미니 드라이기", "announce": "2026-12-01" },
-      { "name": "듀얼아르기닌 플러스 180정", "announce": "2026-12-01" },
-      { "name": "KOIN SEOUL SKELETON WIDE LOW DENIM M", "announce": "2026-12-01" },
-      { "name": "TX203 세미플레어 데님 30", "announce": "2026-12-01" },
-      { "name": "26FW 논페이드 세미 커브드 데님 M", "announce": "2026-12-01" },
-      { "name": "TX304 커브드 배기 벌룬 데님 30", "announce": "2026-12-01" },
-      { "name": "780G 솔리드 크롭 후디집업 M", "announce": "2026-12-01" },
-      { "name": "울 더블버튼 피코트 M", "announce": "2026-12-01" },
-      { "name": "워셔블 케이블 크롭 헨리넥 M", "announce": "2026-12-01" },
-      { "name": "26FW 워셔블 소프트터치 라운드 레이어드 크롭니트 M", "announce": "2026-12-01" },
-      { "name": "FW 워셔블 소프트터치 라운드 크롭니트 M", "announce": "2026-12-01" },
-      { "name": "26FW 골지 헨리넥 크롭티 M", "announce": "2026-12-01" },
-      { "name": "UNIFORM Balance Derby 41.5", "announce": "2026-12-01" },
-      { "name": "아투 모카 260", "announce": "2026-12-02" },
-      { "name": "아투 카멜 260", "announce": "2026-12-02" },
-      { "name": "UKKA NERO 260", "announce": "2026-12-02" },
-      { "name": "UKKA STONE 260", "announce": "2026-12-02" },
-      { "name": "UKKA WOOD 260", "announce": "2026-12-02" },
-      { "name": "FW 오버핏 헤비 앙고라 브이넥 니트 M", "announce": "2026-12-03" },
-      { "name": "퍼펙트 콜라드 그린 진정 장벽크림 80ml", "announce": "2026-12-03" },
-      { "name": "미닉 콜라드 그린 올인원 200ml + 크림", "announce": "2026-12-03" }
+      {
+        "name": "소닉플로우 미니 드라이기",
+        "announce": "2026-12-01"
+      },
+      {
+        "name": "듀얼아르기닌 플러스 180정",
+        "announce": "2026-12-01"
+      },
+      {
+        "name": "KOIN SEOUL SKELETON WIDE LOW DENIM M",
+        "announce": "2026-12-01"
+      },
+      {
+        "name": "TX203 세미플레어 데님 30",
+        "announce": "2026-12-01"
+      },
+      {
+        "name": "26FW 논페이드 세미 커브드 데님 M",
+        "announce": "2026-12-01"
+      },
+      {
+        "name": "TX304 커브드 배기 벌룬 데님 30",
+        "announce": "2026-12-01"
+      },
+      {
+        "name": "780G 솔리드 크롭 후디집업 M",
+        "announce": "2026-12-01"
+      },
+      {
+        "name": "울 더블버튼 피코트 M",
+        "announce": "2026-12-01"
+      },
+      {
+        "name": "워셔블 케이블 크롭 헨리넥 M",
+        "announce": "2026-12-01"
+      },
+      {
+        "name": "26FW 워셔블 소프트터치 라운드 레이어드 크롭니트 M",
+        "announce": "2026-12-01"
+      },
+      {
+        "name": "FW 워셔블 소프트터치 라운드 크롭니트 M",
+        "announce": "2026-12-01"
+      },
+      {
+        "name": "26FW 골지 헨리넥 크롭티 M",
+        "announce": "2026-12-01"
+      },
+      {
+        "name": "UNIFORM Balance Derby 41.5",
+        "announce": "2026-12-01"
+      },
+      {
+        "name": "아투 모카 260",
+        "announce": "2026-12-02"
+      },
+      {
+        "name": "아투 카멜 260",
+        "announce": "2026-12-02"
+      },
+      {
+        "name": "UKKA NERO 260",
+        "announce": "2026-12-02"
+      },
+      {
+        "name": "UKKA STONE 260",
+        "announce": "2026-12-02"
+      },
+      {
+        "name": "UKKA WOOD 260",
+        "announce": "2026-12-02"
+      },
+      {
+        "name": "FW 오버핏 헤비 앙고라 브이넥 니트 M",
+        "announce": "2026-12-03"
+      },
+      {
+        "name": "퍼펙트 콜라드 그린 진정 장벽크림 80ml",
+        "announce": "2026-12-03"
+      },
+      {
+        "name": "미닉 콜라드 그린 올인원 200ml + 크림",
+        "announce": "2026-12-03"
+      }
     ]
   },
   "tasks": [
-    { "id": "t1", "text": "세스코(현금 10만 원) 발표 확인 — 브랜드 커넥트 > 캠페인 관리 > 대기 중", "url": "https://brandconnect.naver.com/****/campaign/1021074708020450" },
-    { "id": "t2", "text": "1번 글 글자색 문제 → 삭제 후 재발행 완료 (224492793992)", "url": "https://blog.naver.com/myblog/224492793992", "done": true },
-    { "id": "t3", "text": "2·3번 글에 상품 사진 보충 완료 (5장·4장)", "url": "https://blog.naver.com/myblog/224492759251", "done": true },
-    { "id": "t4", "text": "아누아 세럼 글 발행 완료 (224492814895)", "url": "https://blog.naver.com/myblog/224492814895", "done": true },
-    { "id": "t5", "text": "핫이슈 AI 일자리 글 발행 완료 (224492820279)", "url": "https://blog.naver.com/myblog/224492820279", "done": true },
-    { "id": "t6", "text": "19:30 클립 3건 예약 발행 확인", "url": "https://clip.naver.com/@pickstyle_daily" },
-    { "id": "t7", "text": "이웃 품앗이 공감·댓글 4건 (PC 페이지에서 진행)", "url": "https://blog.naver.com/hl-henry/224480622249" },
-    { "id": "t8", "text": "쇼핑 커넥트·쿠팡 클릭 수 내일 오후 4시 재확인", "url": "https://sell.shopping.naver.com/" }
+    {
+      "id": "t1",
+      "text": "세스코(현금 10만 원) 발표 확인 — 브랜드 커넥트 > 캠페인 관리 > 대기 중",
+      "url": "https://brandconnect.naver.com/****/campaign/1021074708020450"
+    },
+    {
+      "id": "t2",
+      "text": "1번 글 글자색 문제 → 삭제 후 재발행 완료 (224492793992)",
+      "url": "https://blog.naver.com/myblog/224492793992",
+      "done": true
+    },
+    {
+      "id": "t3",
+      "text": "2·3번 글에 상품 사진 보충 완료 (5장·4장)",
+      "url": "https://blog.naver.com/myblog/224492759251",
+      "done": true
+    },
+    {
+      "id": "t4",
+      "text": "아누아 세럼 글 발행 완료 (224492814895)",
+      "url": "https://blog.naver.com/myblog/224492814895",
+      "done": true
+    },
+    {
+      "id": "t5",
+      "text": "핫이슈 AI 일자리 글 발행 완료 (224492820279)",
+      "url": "https://blog.naver.com/myblog/224492820279",
+      "done": true
+    },
+    {
+      "id": "t6",
+      "text": "19:30 클립 3건 발행 완료 (디키즈 누빔·후아유 와이드·올리즌 맨투맨) — 조회수 48시간 뒤 확인",
+      "url": "https://clip.naver.com/@pickstyle_daily",
+      "done": true
+    },
+    {
+      "id": "t7",
+      "text": "이웃 품앗이 공감·댓글 4건 (PC 페이지에서 진행)",
+      "url": "https://blog.naver.com/hl-henry/224480622249"
+    },
+    {
+      "id": "t8",
+      "text": "쇼핑 커넥트·쿠팡 클릭 수 내일 오후 4시 재확인",
+      "url": "https://sell.shopping.naver.com/"
+    }
   ],
   "reviewSample": {
     "product": "스파오 베이직 퍼플리스 집업 SPFZG4TC01",
     "price": 29900,
     "sale": 26910,
-    "points": ["도톰한 기모 안감으로 11월 저녁에도 춥지 않음", "어깨선이 자연스러워 니트 위에 겹쳐 입기 편함", "9가지 컬러로 아우터와 톤 맞추기 쉬움"],
+    "points": [
+      "도톰한 기모 안감으로 11월 저녁에도 춥지 않음",
+      "어깨선이 자연스러워 니트 위에 겹쳐 입기 편함",
+      "9가지 컬러로 아우터와 톤 맞추기 쉬움"
+    ],
     "rating": 4.85,
     "reviewCount": 10363,
-    "good": ["보온성 대비 가벼움", "기장이 골반을 덮어 체형 커버", "세탁 후에도 보풀이 적음"],
-    "bad": ["신축성이 거의 없어 정사이즈가 안전", "밝은 색은 안감 비침 있음"]
+    "good": [
+      "보온성 대비 가벼움",
+      "기장이 골반을 덮어 체형 커버",
+      "세탁 후에도 보풀이 적음"
+    ],
+    "bad": [
+      "신축성이 거의 없어 정사이즈가 안전",
+      "밝은 색은 안감 비침 있음"
+    ]
   }
 }
