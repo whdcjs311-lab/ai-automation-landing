@@ -1287,12 +1287,14 @@ function queueFontSync() {
    AI SCRIPT (Gemini 프록시 · /api/gemini)
    ============================================================ */
 const AI_DEFAULT_API = 'https://ai-automation-landing-kohl.vercel.app/api/gemini';
+// 응답이 막힌 모델(503·404)은 건너뛰고 다음 모델로 넘어간다.
+// 앞쪽 모델이 대기열이 길 때가 있어, 지금 잘 응답하는 모델을 먼저 둔다.
 const AI_MODELS = [
-  'gemini-3.8-flash',
-  'gemini-3.6-flash',
   'gemini-3-flash-preview',
+  'gemini-3.8-flash',
   'gemini-3.5-flash-lite',
-  'gemini-3.1-flash-lite'
+  'gemini-3.1-flash-lite',
+  'gemini-3.6-flash'
 ];
 
 const AI_TONES = {
@@ -1344,10 +1346,15 @@ async function callGemini(prompt) {
   const models = pinned && pinned !== 'auto' ? [pinned] : AI_MODELS;
   let lastError = 'AI 서버에 연결하지 못했습니다';
 
+  const stateEl = $('#aiState');
   for (const model of models) {
+    if (stateEl) stateEl.textContent = `생성 중 · ${model.replace('gemini-', '').replace('-flash', '')}`;
     for (let attempt = 0; attempt < 2; attempt++) {
+      const ctrl = new AbortController();
+      const timer = setTimeout(() => ctrl.abort(), 30000);
       try {
         const res = await fetch(api, {
+          signal: ctrl.signal,
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -1375,8 +1382,11 @@ async function callGemini(prompt) {
           await new Promise((r) => setTimeout(r, 600 * (attempt + 1)));
         }
       } catch (err) {
-        lastError = '네트워크 오류: ' + (err && err.message ? err.message : 'unknown');
-        await new Promise((r) => setTimeout(r, 500));
+        lastError = err && err.name === 'AbortError'
+          ? 'AI 응답이 늦어 시간 초과'
+          : '네트워크 오류: ' + (err && err.message ? err.message : 'unknown');
+      } finally {
+        clearTimeout(timer);
       }
     }
   }
