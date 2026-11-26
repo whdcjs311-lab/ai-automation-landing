@@ -222,7 +222,19 @@ footer{text-align:center;font-size:11px;color:rgba(154,161,174,.65);padding:22px
 </style>
 </head>
 <body>
+<style>
+.xnav{padding:8px 12px;background:rgba(11,16,32,.94);border-bottom:1px solid #2b3a5c;overflow-x:auto;scrollbar-width:none;}
+.xnav::-webkit-scrollbar{display:none}
+.xnav .xwrap{display:flex;gap:6px;align-items:center;max-width:1200px;margin:0 auto}
+.xnav a{white-space:nowrap;font-size:12.5px;font-weight:600;color:#9aa8c7;text-decoration:none;padding:6px 10px;border-radius:999px;border:1px solid transparent}
+.xnav a:hover{color:#eef2ff;border-color:#3d4f77;text-decoration:none}
+.xnav a.on{background:linear-gradient(90deg,#4ade80,#38bdf8);color:#04121a;font-weight:800}
+</style>
 <div class="app">
+<div class="xnav"><div class="xwrap" id="xnav">
+<a href="../hub/">💰 수익화 허브</a><a href="../keyword/">📊 키워드 스팟</a><a href="../shorts/" class="on">🎬 쇼츠 생성기</a><a href="../look/">👗 LOOK AI</a>
+</div></div>
+<script>(function(){try{var q=new URLSearchParams(location.search).get('api');if(!q)return;var b=document.getElementById('xnav');if(!b)return;b.querySelectorAll('a').forEach(function(a){a.href+=(a.href.indexOf('?')>=0?'&':'?')+'api='+encodeURIComponent(q);});}catch(e){}})();</script>
 
   <header class="top">
     <div class="brand"><i></i> 쇼츠 스튜디오 <small>CUT · CAP</small></div>

@@ -1,0 +1,276 @@
+{
+  "meta": {
+    "updated": "2026-11-26",
+    "updatedAt": "2026.11.26 11:30 기준",
+    "source": "scheduled-actions/🎁-매일-오전-10시-체험단-자동-신청-및-추천-보고/notes.md · scheduled-actions/📝-네이버-블로그-매일-5건-자동-발행/notes.md · scheduled-actions/🎬-네이버-클립-매일-3건-자동-발행/notes.md",
+    "disclaimer": "표시된 리워드는 신청·응모 단계의 예정 금액이며 선정 전에는 수익이 아닙니다. 후기·발표 일정은 캠페인 공지 기준입니다."
+  },
+  "goal": {
+    "min": 1000000,
+    "max": 10000000,
+    "confirmed": 0,
+    "pendingCash": 100000,
+    "pendingGoods": 342900,
+    "note": "월 100만~1,000만 원 목표 · 확정 수익 0원 · 선정 대기 리워드 442,900원"
+  },
+  "channels": [
+    {
+      "name": "네이버 쇼핑 커넥트",
+      "state": "링크 6개 발급",
+      "value": 25405,
+      "valueLabel": "예상 수익(발급 기준)",
+      "note": "내 블로그 myblog · 링크 발급만으로는 수익 아님"
+    },
+    {
+      "name": "쿠팡 파트너스",
+      "state": "최종 승인 진행 중",
+      "value": 0,
+      "valueLabel": "확정 수익",
+      "note": "**** · 승인 + 누계 1만 원 이상 시 매월 15일 정산"
+    },
+    {
+      "name": "네이버 브랜드 커넥트",
+      "state": "8건 선정 대기",
+      "value": 442900,
+      "valueLabel": "선정 대기 리워드",
+      "note": "현금 100,000원 + 상품 342,900원"
+    },
+    {
+      "name": "무신사 체험단",
+      "state": "21건 응모",
+      "value": 0,
+      "valueLabel": "응모 단계",
+      "note": "발표 12/1~12/3 · 후기 12/4~12/18"
+    },
+    {
+      "name": "네이버 애드포스트",
+      "state": "12/02 신청 점검",
+      "value": 0,
+      "valueLabel": "미개시",
+      "note": "2026-12-02 11:00 신청 가능 여부 확인 예약"
+    }
+  ],
+  "today": {
+    "date": "2026-11-26",
+    "blog": { "target": 5, "published": 3, "pending": 2 },
+    "clip": { "target": 3, "published": 0, "scheduledAt": "19:30", "channel": "https://clip.naver.com/@pickstyle_daily" },
+    "posts": [
+      {
+        "no": 1,
+        "title": "🧥 무진장 상의데이, 니트는 '깃 2cm'만 | 11월 26일 남자 카라니트 3만원대",
+        "url": "https://blog.naver.com/myblog/224492743701",
+        "product": "비스코스 니트티 9color (비욘드마이셀프) 42,800 → 32,800",
+        "productUrl": "https://naver.me/FTduD2wm",
+        "status": "게시",
+        "warn": "본문 글자색이 빨강으로 올라감 · 수정 필요",
+        "photos": 4
+      },
+      {
+        "no": 2,
+        "title": "👖 와이드 팬츠는 '통'이 아니라 기장입니다 | 하의데이에 4만 원대 스파오 코튼 팬츠",
+        "url": "https://blog.naver.com/myblog/224492759251",
+        "product": "스파오 와이드 코튼 팬츠 SPTCG49G01 49,900 → 39,900",
+        "productUrl": "https://naver.me/F4WzHC8D",
+        "status": "게시",
+        "warn": "상품 사진 1장 더 필요",
+        "photos": 3
+      },
+      {
+        "no": 3,
+        "title": "🧸 2만 7천 원 플리스가 1만 건 리뷰를 받은 이유 | 스파오 퍼플리스 겨울 레이어링",
+        "url": "https://blog.naver.com/myblog/224492765653",
+        "product": "스파오 베이직 퍼플리스 집업 SPFZG4TC01 29,900 → 26,910",
+        "productUrl": "https://naver.me/xeFTS4vk",
+        "status": "게시",
+        "warn": "상품 사진 1장 더 필요",
+        "photos": 2
+      }
+    ],
+    "drafts": [
+      {
+        "title": "[1+1] 아누아 PDRN 히알루론산 캡슐 세럼 30ml 2개",
+        "product": "78,000 → 33,900 (최대 30,900)",
+        "productUrl": "https://naver.me/F2Lybamh",
+        "status": "발급 완료 · 발행 전",
+        "file": "work/blog-2026-11-26/text-p4.txt"
+      },
+      {
+        "title": "AI 일자리 쇼크, 은행권 희망퇴직 20% 늘듯 (핫이슈 · 쇼핑 링크 없음)",
+        "product": "동아일보 2026-11-26 기사 기반",
+        "productUrl": "",
+        "status": "초안 완료 · 발행 전",
+        "file": "work/blog-2026-11-26/text-p5.txt"
+      }
+    ],
+    "clips": [
+      { "title": "오늘 19:30 예약 발행 3건 (아직 업로드 전)", "url": "https://clip.naver.com/@pickstyle_daily", "status": "예약" }
+    ],
+    "clipsYesterday": [
+      { "title": "[N배송] 스파오 파스텔 퍼퍼 SPJPG4TG11", "url": "https://naver.me/GjyjqA1F" },
+      { "title": "남자 라드 2단기장 겨울 기모안감 코듀로이 밴딩팬츠", "url": "https://naver.me/Gzd3FPbD" },
+      { "title": "미라클뮤즈 아하바하 메디크림", "url": "https://naver.me/GKIA3jIe" }
+    ]
+  },
+  "brand": {
+    "space": "****",
+    "creator": "myblog님의 블로그",
+    "appliedAt": "2026-11-26",
+    "announceWindow": "2026-11-26~2026-12-04",
+    "items": [
+      {
+        "id": "sesco",
+        "name": "[세스코] 정보형 파워블로그 운영건",
+        "reward": "현금 100,000원",
+        "cash": 100000,
+        "goods": 0,
+        "apply": "6명 / 249명",
+        "announce": "2026-11-26",
+        "submitStart": "2026-11-26",
+        "submitEnd": "2026-12-07",
+        "mission": "블로그 1건 정보성 원고 1,500자 이상 · 사진 10장 · 세스코 링크 삽입 · 3개월 공개 유지",
+        "url": "https://brandconnect.naver.com/****/campaign/1021074708020450"
+      },
+      {
+        "id": "incense",
+        "name": "인센스 홀더 브릭스",
+        "reward": "상품 30,000원",
+        "cash": 0,
+        "goods": 30000,
+        "apply": "5명 / 18명",
+        "announce": null,
+        "submitStart": "2026-12-01",
+        "submitEnd": "2026-12-28",
+        "mission": "블로그 1건 · 사진 5~10장 · 6개월 공개 유지 (인센스 스틱 동봉 요청)",
+        "url": "https://brandconnect.naver.com/****/campaign/1021353381850147"
+      },
+      {
+        "id": "terdi-oil",
+        "name": "[떼르디] 고보습 페이스&바디 오일",
+        "reward": "상품 60,000원",
+        "cash": 0,
+        "goods": 60000,
+        "apply": "30명 / 17명",
+        "announce": "2026-12-01",
+        "submitStart": "2026-12-02",
+        "submitEnd": "2026-12-10",
+        "mission": "블로그 1건 · 6개월 공개 유지 · 지정 키워드 사용",
+        "url": "https://brandconnect.naver.com/****/campaign/1020745209833826"
+      },
+      {
+        "id": "terdi-gwalsa",
+        "name": "[떼르디&아로망] 괄사&오일 선물 세트",
+        "reward": "상품 150,000원",
+        "cash": 0,
+        "goods": 150000,
+        "apply": "30명 / 18명",
+        "announce": null,
+        "submitStart": "2026-12-02",
+        "submitEnd": "2026-12-10",
+        "mission": "블로그 1건 · 6개월 공개 유지 · 페이스/바디 랜덤 제공",
+        "url": "https://brandconnect.naver.com/****/campaign/1020742356330914"
+      },
+      {
+        "id": "betterskin",
+        "name": "[잡티/미백] 비더스킨 다크스팟 크림 + 여행용 스킨 키트 4종",
+        "reward": "상품 42,000원",
+        "cash": 0,
+        "goods": 42000,
+        "apply": "20명 / 55명",
+        "announce": null,
+        "submitStart": "2026-12-02",
+        "submitEnd": "2026-12-18",
+        "mission": "블로그 1건 · 선정 시 무료 쿠폰으로 직접 주문(자부담 0원)",
+        "url": "https://brandconnect.naver.com/****/campaign/1020410717763878"
+      },
+      {
+        "id": "scotch",
+        "name": "[블로그] 스콧해미쉬 클레이모어 모이스처 핸드크림 50ml",
+        "reward": "상품 22,000원",
+        "cash": 0,
+        "goods": 22000,
+        "apply": "20명 / 99명",
+        "announce": null,
+        "submitStart": "2026-12-07",
+        "submitEnd": "2026-12-20",
+        "mission": "블로그 1건 · 200자 이상 · 사진 5장 · 지정 키워드",
+        "url": "https://brandconnect.naver.com/****/campaign/1021106557348866"
+      },
+      {
+        "id": "popo",
+        "name": "포포래유 수제 포포청 & 포포잼",
+        "reward": "상품 27,000원",
+        "cash": 0,
+        "goods": 27000,
+        "apply": "20명 / 64명",
+        "announce": null,
+        "submitStart": "2026-12-03",
+        "submitEnd": "2026-12-10",
+        "mission": "블로그 1건 · 1,500자 · 사진 10장 · GIF/숏영상 2개 · 필수 키워드·구매링크",
+        "url": "https://brandconnect.naver.com/****/campaign/1021139613183362"
+      },
+      {
+        "id": "killpaf",
+        "name": "킬파프 무향 모기 에어졸",
+        "reward": "상품 11,900원",
+        "cash": 0,
+        "goods": 11900,
+        "apply": "50명 / 14명",
+        "announce": null,
+        "submitStart": "2026-12-07",
+        "submitEnd": "2026-12-20",
+        "mission": "블로그 1건 · 200자 · 사진 5장 · 해시태그 3회 이상 · 6개월 유지",
+        "url": "https://brandconnect.naver.com/****/campaign/1021346509257796"
+      }
+    ]
+  },
+  "musinsa": {
+    "account": "private-account",
+    "total": 21,
+    "appliedAt": "2026-11-25",
+    "announceRange": "2026-12-01~2026-12-03",
+    "reviewPeriod": "2026-12-04~2026-12-18",
+    "url": "https://www.musinsa.com/preuser",
+    "note": "앱 전용 신청 · 당첨 시 사진 5장 + 200자 후기 (12/4~12/18)",
+    "items": [
+      { "name": "소닉플로우 미니 드라이기", "announce": "2026-12-01" },
+      { "name": "듀얼아르기닌 플러스 180정", "announce": "2026-12-01" },
+      { "name": "KOIN SEOUL SKELETON WIDE LOW DENIM M", "announce": "2026-12-01" },
+      { "name": "TX203 세미플레어 데님 30", "announce": "2026-12-01" },
+      { "name": "26FW 논페이드 세미 커브드 데님 M", "announce": "2026-12-01" },
+      { "name": "TX304 커브드 배기 벌룬 데님 30", "announce": "2026-12-01" },
+      { "name": "780G 솔리드 크롭 후디집업 M", "announce": "2026-12-01" },
+      { "name": "울 더블버튼 피코트 M", "announce": "2026-12-01" },
+      { "name": "워셔블 케이블 크롭 헨리넥 M", "announce": "2026-12-01" },
+      { "name": "26FW 워셔블 소프트터치 라운드 레이어드 크롭니트 M", "announce": "2026-12-01" },
+      { "name": "FW 워셔블 소프트터치 라운드 크롭니트 M", "announce": "2026-12-01" },
+      { "name": "26FW 골지 헨리넥 크롭티 M", "announce": "2026-12-01" },
+      { "name": "UNIFORM Balance Derby 41.5", "announce": "2026-12-01" },
+      { "name": "아투 모카 260", "announce": "2026-12-02" },
+      { "name": "아투 카멜 260", "announce": "2026-12-02" },
+      { "name": "UKKA NERO 260", "announce": "2026-12-02" },
+      { "name": "UKKA STONE 260", "announce": "2026-12-02" },
+      { "name": "UKKA WOOD 260", "announce": "2026-12-02" },
+      { "name": "FW 오버핏 헤비 앙고라 브이넥 니트 M", "announce": "2026-12-03" },
+      { "name": "퍼펙트 콜라드 그린 진정 장벽크림 80ml", "announce": "2026-12-03" },
+      { "name": "미닉 콜라드 그린 올인원 200ml + 크림", "announce": "2026-12-03" }
+    ]
+  },
+  "tasks": [
+    { "id": "t1", "text": "세스코(현금 10만 원) 발표 확인 — 브랜드 커넥트 > 캠페인 관리 > 대기 중", "url": "https://brandconnect.naver.com/****/campaign/1021074708020450" },
+    { "id": "t2", "text": "1번 글(224492743701) 본문 글자색 수정 — 상단 2줄만 빨강, 본문은 기본색", "url": "https://blog.naver.com/myblog/224492743701" },
+    { "id": "t3", "text": "2·3번 글에 순수 상품 사진 1장씩 추가", "url": "https://blog.naver.com/myblog/224492759251" },
+    { "id": "t4", "text": "아누아 세럼 글 발행 (초안 work/blog-2026-11-26/text-p4.txt)", "url": "https://naver.me/F2Lybamh" },
+    { "id": "t5", "text": "핫이슈 글 발행 (동아일보 AI 일자리 쇼크 · text-p5.txt)", "url": "" },
+    { "id": "t6", "text": "19:30 클립 3건 예약 발행 확인", "url": "https://clip.naver.com/@pickstyle_daily" }
+  ],
+  "reviewSample": {
+    "product": "스파오 베이직 퍼플리스 집업 SPFZG4TC01",
+    "price": 29900,
+    "sale": 26910,
+    "points": ["도톰한 기모 안감으로 11월 저녁에도 춥지 않음", "어깨선이 자연스러워 니트 위에 겹쳐 입기 편함", "9가지 컬러로 아우터와 톤 맞추기 쉬움"],
+    "rating": 4.85,
+    "reviewCount": 10363,
+    "good": ["보온성 대비 가벼움", "기장이 골반을 덮어 체형 커버", "세탁 후에도 보풀이 적음"],
+    "bad": ["신축성이 거의 없어 정사이즈가 안전", "밝은 색은 안감 비침 있음"]
+  }
+}
