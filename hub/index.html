@@ -409,16 +409,20 @@ function aiChip() {
   if (!AI.checked) { el.className = "chip wait"; el.textContent = "AI 서버 확인 중…"; return; }
   if (AI.ready) { el.className = "chip on"; el.textContent = "AI 연결됨"; }
   else if (AI.reach) { el.className = "chip off"; el.textContent = "AI 키 미설정 · 로컬 생성"; }
-  else { el.className = "chip off"; el.textContent = "AI 미연결 · 로컬 생성"; }
+  else { el.className = "chip off"; el.textContent = "AI 상태 확인 실패 · 생성 시도 가능"; }
 }
 async function aiCheck() {
   aiChip();
-  try {
-    const r = await fetch(AI_URL, { method: "GET", cache: "no-store", signal: AbortSignal.timeout(7000) });
-    const j = await r.json().catch(() => null);
-    AI.reach = !!(r.ok && j && j.ok === true);
-    AI.ready = AI.reach && !!j.configured;
-  } catch (e) { AI.reach = false; AI.ready = false; }
+  for (let i = 0; i < 2; i++) {
+    try {
+      const r = await fetch(AI_URL, { method: "GET", cache: "no-store", signal: AbortSignal.timeout(8000) });
+      const j = await r.json().catch(() => null);
+      AI.reach = !!(r.ok && j && j.ok === true);
+      AI.ready = AI.reach && !!j.configured;
+      if (AI.ready) break;
+    } catch (e) { AI.reach = false; AI.ready = false; }
+    if (i === 0) await new Promise(res => setTimeout(res, 2500));
+  }
   AI.checked = true; aiChip();
   return AI.ready;
 }
@@ -758,7 +762,9 @@ const SYS_DOC = [
   "너는 네이버 블로그 쇼핑 리뷰 원고를 쓰는 한국어 편집자다.",
   "제공된 상품 정보와 실제 구매자 후기 요약만 근거로, 공백 제외 2,000자 이상의 본문을 쓴다.",
   "규칙:",
-  "- 직접 써본 척하는 허위 표현, 의료 효능 단정, 확인되지 않은 수치·순위를 쓰지 않는다.",
+  "- 상품을 직접 사용해본 적이 없다. '직접 써봤다·입어봤다·느꼈다·첫인상·착용했을 때' 같은 1인칭 체험 표현을 쓰지 않고, 후기에서 확인된 내용만 쓴다.",
+  "- 금지 표현: '기 마련입니다', '~라는 점은 ~요소입니다', '만나볼 수 있습니다', '여러분', '살펴보려 합니다', '오늘은 ~'. 대신 짧고 단정한 문장으로 쓴다(문단 2~4문장).",
+  "- hook은 각 40자 이내 2줄. 숫자·가격·반전·후기 인용으로 시작하고, 인사말이나 감상으로 시작하지 않는다.",
   "- 가격은 입력값만 사용하고, 할인율과 차액은 계산해서 적는다. 원 단위 숫자를 반올림하거나 바꾸지 않는다(예: 26,910원을 26,900원으로 쓰지 않는다).",
   "- 본문은 소제목 6~9개로 구조화하고, 각 소제목 줄은 '## '로 시작한다. 목록은 '• '로 시작한다.",
   "- 문단은 3~5문장, 존댓말. 광고 문구·과장·이모지·느낌표 남발 금지.",
@@ -825,6 +831,8 @@ async function generate(kind) {
       }
       const flat = body.replace(/\s/g, "");
       if (fmt(f.sale) && flat.indexOf(fmt(f.sale) + "원") < 0) note += " · ⚠ 본문 금액이 입력값(" + fmt(f.sale) + "원)과 다릅니다. 붙여넣기 전에 확인하세요.";
+      if (/직접\s*(써|씁|입어|착용|사용|느껴|살펴)|첫인상|만나볼\s*수\s*있|기\s*마련/.test(body + " " + hook.join(" "))) note += " · ⚠ 직접 사용 표현이 섞였습니다. 후기 근거 표현으로 고쳐 주세요.";
+      AI.reach = true; AI.ready = true; AI.checked = true; aiChip();
       renderDoc(f, hook, body, note);
     } else {
       const blocks = localBlocks(f);
