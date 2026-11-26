@@ -1181,8 +1181,10 @@ function boot() {
   const h = (location.hash || "").replace("#", "");
   if (TABS.indexOf(h) >= 0) showTab(h);
 }
+const NO_DATA = (function () { try { return new URLSearchParams(location.search).get("data") === "off"; } catch (e) { return false; } })();
 (async function init() {
   try {
+    if (NO_DATA) throw new Error("data=off");
     const r = await fetch("./data.json", { cache: "no-store", signal: AbortSignal.timeout(5000) });
     if (!r.ok) throw new Error("http " + r.status);
     const j = await r.json();
