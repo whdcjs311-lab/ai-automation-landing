@@ -1,7 +1,7 @@
 {
  "meta": {
   "updated": "2026-11-27",
-  "updatedAt": "2026.11.27 12:00 기준 (11/27 10:20 블로그 5건 발행 후)",
+  "updatedAt": "2026.11.27 20:20 기준 (11/27 20:10~20:15 클립 3건 발행 후)",
   "source": "scheduled-actions/🎁-매일-오전-10시-체험단-자동-신청-및-추천-보고/notes.md · scheduled-actions/📝-네이버-블로그-매일-5건-자동-발행/notes.md · scheduled-actions/🎬-네이버-클립-매일-3건-자동-발행/notes.md",
   "disclaimer": "표시된 리워드는 신청·응모 단계의 예정 금액이며 선정 전에는 수익이 아닙니다. 후기·발표 일정은 캠페인 공지 기준입니다."
  },
@@ -59,10 +59,10 @@
   },
   "clip": {
    "target": 3,
-   "published": 0,
+   "published": 3,
    "scheduledAt": "19:30",
    "channel": "https://clip.naver.com/@pickstyle_daily",
-   "publishedAt": "-"
+   "publishedAt": "2026-11-27 20:10~20:15"
   },
   "clicks": {
    "shoppingConnect": 13,
@@ -124,42 +124,42 @@
   "drafts": [],
   "clips": [
    {
-    "title": "디키즈 남성 인슐레이티드 아이젠하워 누빔 워크 자켓 (루나웨이) 129,000→89,000",
-    "url": "https://naver.me/xllNfvrK",
-    "productUrl": "https://naver.me/FvTqvneP",
+    "title": "스파오 [소프트얀] 립 헨리넥 니트 SPKWG49G02 39,900→35,910",
+    "url": "https://naver.me/xM56I4uN",
+    "productUrl": "https://naver.me/GLhbTIGr",
     "status": "공개 발행",
     "length": "0:10"
    },
    {
-    "title": "[후아유] 스티브 와이드 팬츠(브러쉬드) WHTMG4T51U 49,900→44,900",
-    "url": "https://naver.me/FSv8rxeW",
-    "productUrl": "https://naver.me/GYDRhpKM",
+    "title": "초코클래식 벌룬팬츠 기모 남자니트바지 49,000→37,800",
+    "url": "https://naver.me/Ffs5xksB",
+    "productUrl": "https://naver.me/5ECsIxxe",
     "status": "공개 발행",
     "length": "0:10"
    },
    {
-    "title": "올리즌 남자 맨투맨 오버핏 남녀공용 기모 긴팔티 14,800→10,800",
-    "url": "https://naver.me/FORUHSRC",
-    "productUrl": "https://naver.me/Ix0mMv6Z",
+    "title": "LUXTIE HOMME 헤비웨이트 맨투맨(기모선택) 23,800→20,800",
+    "url": "https://naver.me/539FnHXB",
+    "productUrl": "https://naver.me/xRgFwtlw",
     "status": "공개 발행",
     "length": "0:10"
    }
   ],
   "clipsYesterday": [
    {
-    "title": "남자 라드 2단기장 겨울 기모안감 코듀로이 밴딩팬츠",
-    "url": "https://naver.me/Gzd3FPbD",
-    "views": "35"
-   },
-   {
-    "title": "미라클뮤즈 아하바하 메디크림",
-    "url": "https://naver.me/GKIA3jIe",
+    "title": "디키즈 남성 인슐레이티드 아이젠하워 누빔 워크 자켓 (루나웨이)",
+    "url": "https://naver.me/xllNfvrK",
     "views": "7"
    },
    {
-    "title": "[N배송] 스파오 파스텔 퍼퍼 SPJPG4TG11",
-    "url": "https://naver.me/GjyjqA1F",
-    "views": "4"
+    "title": "[후아유] 스티브 와이드 팬츠(브러시드) WHTMG4T51U",
+    "url": "https://naver.me/FSv8rxeW",
+    "views": "14"
+   },
+   {
+    "title": "올리즌 남자 맨투맨 오버핏 남녀공용 기모 긴팔티",
+    "url": "https://naver.me/FORUHSRC",
+    "views": "6"
    }
   ],
   "label": "마지막 발행일",
