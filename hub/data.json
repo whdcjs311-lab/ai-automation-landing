@@ -26,7 +26,7 @@
       "state": "클릭 3 · 구매 0 · 수익 0원 (11.26 기준)",
       "value": 0,
       "valueLabel": "확정 수익",
-      "note": "**** · 승인 + 누계 1만 원 이상 시 매월 15일 정산"
+      "note": "승인 + 누계 1만 원 이상 시 매월 15일 정산"
     },
     {
       "name": "네이버 브랜드 커넥트",
@@ -73,7 +73,7 @@
       {
         "no": 1,
         "title": "🧥 무진장 상의데이, 니트는 '깃 2cm'만 | 11월 26일 남자 카라니트 3만원대",
-        "url": "https://blog.naver.com/myblog/224492793992",
+        "url": "https://blog.naver.com/MyBlog.naver",
         "product": "비스코스 니트티 9color (비욘드마이셀프) 42,800 → 32,800",
         "productUrl": "https://naver.me/FTduD2wm",
         "status": "게시 완료",
@@ -83,7 +83,7 @@
       {
         "no": 2,
         "title": "👖 와이드 팬츠는 '통'이 아니라 기장입니다 | 하의데이에 4만 원대 스파오 코튼 팬츠",
-        "url": "https://blog.naver.com/myblog/224492759251",
+        "url": "https://blog.naver.com/MyBlog.naver",
         "product": "스파오 와이드 코튼 팬츠 SPTCG49G01 49,900 → 39,900",
         "productUrl": "https://naver.me/F4WzHC8D",
         "status": "게시 완료",
@@ -93,7 +93,7 @@
       {
         "no": 3,
         "title": "🧸 2만 7천 원 플리스가 1만 건 리뷰를 받은 이유 | 스파오 퍼플리스 겨울 레이어링",
-        "url": "https://blog.naver.com/myblog/224492765653",
+        "url": "https://blog.naver.com/MyBlog.naver",
         "product": "스파오 베이직 퍼플리스 집업 SPFZG4TC01 29,900 → 26,910",
         "productUrl": "https://naver.me/xeFTS4vk",
         "status": "게시 완료",
@@ -103,7 +103,7 @@
       {
         "no": 4,
         "title": "💧 '수지 세럼' 78,000원이 33,900원 | 겨울 속건조에 1+1로 두 병 쓰는 이유",
-        "url": "https://blog.naver.com/myblog/224492814895",
+        "url": "https://blog.naver.com/MyBlog.naver",
         "product": "아누아 PDRN 히알루론산 캡슐 세럼 30ml 2개 78,000 → 33,900",
         "productUrl": "https://naver.me/F2Lybamh",
         "status": "게시 완료",
@@ -113,7 +113,7 @@
       {
         "no": 5,
         "title": "🤖 은행원도 희망퇴직 20% 늘었다 | AI가 가져간 일, 남는 일 (11월 26일 뉴스)",
-        "url": "https://blog.naver.com/myblog/224492820279",
+        "url": "https://blog.naver.com/MyBlog.naver",
         "product": "핫이슈 · 동아일보 2026-11-26 · 쇼핑 링크 없음",
         "productUrl": "",
         "status": "게시 완료",
@@ -184,8 +184,7 @@
     }
   },
   "brand": {
-    "space": "****",
-    "creator": "myblog님의 블로그",
+    "creator": "내 블로그",
     "appliedAt": "2026-11-26",
     "announceWindow": "2026-11-26~2026-12-04",
     "items": [
@@ -200,7 +199,7 @@
         "submitStart": "2026-11-26",
         "submitEnd": "2026-12-07",
         "mission": "블로그 1건 정보성 원고 1,500자 이상 · 사진 10장 · 세스코 링크 삽입 · 3개월 공개 유지",
-        "url": "https://brandconnect.naver.com/****/campaign/1021074708020450",
+        "url": "https://brandconnect.naver.com/campaign",
         "status": "미선정 (2026-11-26 발표)"
       },
       {
@@ -214,7 +213,7 @@
         "submitStart": "2026-12-01",
         "submitEnd": "2026-12-28",
         "mission": "블로그 1건 · 사진 5~10장 · 6개월 공개 유지 (인센스 스틱 동봉 요청)",
-        "url": "https://brandconnect.naver.com/****/campaign/1021353381850147",
+        "url": "https://brandconnect.naver.com/campaign",
         "status": "선정 대기"
       },
       {
@@ -228,7 +227,7 @@
         "submitStart": "2026-12-02",
         "submitEnd": "2026-12-10",
         "mission": "블로그 1건 · 6개월 공개 유지 · 지정 키워드 사용",
-        "url": "https://brandconnect.naver.com/****/campaign/1020745209833826",
+        "url": "https://brandconnect.naver.com/campaign",
         "status": "선정 대기"
       },
       {
@@ -242,7 +241,7 @@
         "submitStart": "2026-12-02",
         "submitEnd": "2026-12-10",
         "mission": "블로그 1건 · 6개월 공개 유지 · 페이스/바디 랜덤 제공",
-        "url": "https://brandconnect.naver.com/****/campaign/1020742356330914",
+        "url": "https://brandconnect.naver.com/campaign",
         "status": "선정 대기"
       },
       {
@@ -256,7 +255,7 @@
         "submitStart": "2026-12-02",
         "submitEnd": "2026-12-18",
         "mission": "블로그 1건 · 선정 시 무료 쿠폰으로 직접 주문(자부담 0원)",
-        "url": "https://brandconnect.naver.com/****/campaign/1020410717763878",
+        "url": "https://brandconnect.naver.com/campaign",
         "status": "선정 대기"
       },
       {
@@ -270,7 +269,7 @@
         "submitStart": "2026-12-07",
         "submitEnd": "2026-12-20",
         "mission": "블로그 1건 · 200자 이상 · 사진 5장 · 지정 키워드",
-        "url": "https://brandconnect.naver.com/****/campaign/1021106557348866",
+        "url": "https://brandconnect.naver.com/campaign",
         "status": "선정 대기"
       },
       {
@@ -284,7 +283,7 @@
         "submitStart": "2026-12-03",
         "submitEnd": "2026-12-10",
         "mission": "블로그 1건 · 1,500자 · 사진 10장 · GIF/숏영상 2개 · 필수 키워드·구매링크",
-        "url": "https://brandconnect.naver.com/****/campaign/1021139613183362",
+        "url": "https://brandconnect.naver.com/campaign",
         "status": "선정 대기"
       },
       {
@@ -298,14 +297,13 @@
         "submitStart": "2026-12-07",
         "submitEnd": "2026-12-20",
         "mission": "블로그 1건 · 200자 · 사진 5장 · 해시태그 3회 이상 · 6개월 유지",
-        "url": "https://brandconnect.naver.com/****/campaign/1021346509257796",
+        "url": "https://brandconnect.naver.com/campaign",
         "status": "선정 대기"
       }
     ],
     "resultSummary": "11/26 발표: 세스코(현금 10만 원) 미선정 · 나머지 7건 선정 대기"
   },
   "musinsa": {
-    "account": "private-account",
     "total": 21,
     "appliedAt": "2026-11-25",
     "announceRange": "2026-12-01~2026-12-03",
@@ -403,7 +401,7 @@
     {
       "id": "t1",
       "text": "세스코(현금 10만 원) 발표 확인 — 브랜드 커넥트 > 캠페인 관리 > 대기 중",
-      "url": "https://brandconnect.naver.com/****/campaign/1021074708020450"
+      "url": "https://brandconnect.naver.com/campaign"
     },
     {
       "id": "t7",
@@ -428,12 +426,12 @@
     {
       "id": "t13",
       "text": "세스코 캠페인 미선정 확인 → 현금 10만 원 목표에서 제외, 신규 현금형 캠페인 재탐색",
-      "url": "https://brandconnect.naver.com/****/campaign/search"
+      "url": "https://brandconnect.naver.com/campaign/search"
     },
     {
       "id": "t14",
-      "text": "정산 계좌: 첫 수익 발생 시 개인 유형 등록(카카오뱅크 ****) — 지금은 시스템이 등록 차단",
-      "url": "https://brandconnect.naver.com/****/settlement/affiliate"
+      "text": "정산 계좌: 첫 수익 발생 시 개인 유형 등록(카카오뱅크 끝자리 1140) — 지금은 시스템이 등록 차단",
+      "url": "https://brandconnect.naver.com/"
     }
   ],
   "reviewSample": {
@@ -458,11 +456,10 @@
     ]
   },
   "settlement": {
-    "space": "****",
     "accountRegistered": false,
     "autoSettlement": true,
     "rule": "전월 1일~말일 구매확정 건 → 매월 22일 수익 확정 → 23일 기준 ①정산 신청 내역 ②계좌 등록 시 정산 진행 → 27일까지 매출증빙 → 익월 15일 지급 (개인 원천세 3.3%)",
-    "blocker": "개인 유형 정산 정보는 \"수익(현금 리워드)이 발생된 이후\"부터 등록 가능 → 현재 등록 버튼은 사업자 경로만 열림. 첫 수익 발생 시 카카오뱅크 ****(예금주 비공개) 등록 필요",
+    "blocker": "개인 유형 정산 정보는 \"수익(현금 리워드)이 발생된 이후\"부터 등록 가능 → 현재 등록 버튼은 사업자 경로만 열림. 첫 수익 발생 시 카카오뱅크(끝자리 1140 · 본인 명의) 등록 필요",
     "checkedAt": "2026-11-27 04:05"
   }
 }

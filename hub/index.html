@@ -597,9 +597,9 @@ function renderDash() {
     ["../keyword/", "📊 키워드 스팟"],
     ["../shorts/", "🎬 쇼츠 생성기"],
     ["../look/", "👗 LOOK AI"],
-    ["https://blog.naver.com/myblog", "📝 내 블로그"],
+    ["https://blog.naver.com/MyBlog.naver", "📝 내 블로그"],
     ["https://clip.naver.com/@pickstyle_daily", "▶ 네이버 클립"],
-    ["https://brandconnect.naver.com/****/campaign", "🎁 브랜드 커넥트"]
+    ["https://brandconnect.naver.com/campaign", "🎁 브랜드 커넥트"]
   ];
   $("#quickLinks").innerHTML = links.map(l =>
     '<a class="btn sm" href="' + esc(/^https?:/.test(l[0]) ? l[0] : withApi(l[0])) + '" target="' + (/^https?:/.test(l[0]) ? "_blank" : "_self") + '" rel="noopener">' + esc(l[1]) + "</a>"
@@ -1136,7 +1136,7 @@ function drawCard(f) {
 
   /* 하단 */
   x.font = "700 22px " + FONT; x.fillStyle = "rgba(238,242,255,.42)";
-  x.fillText("blog.naver.com/myblog · 실제 구매자 후기 요약", PAD, H - 92);
+  x.fillText("네이버 블로그 실제 구매자 후기 요약", PAD, H - 92);
   x.textAlign = "right";
   x.fillStyle = "rgba(238,242,255,.30)";
   x.fillText(new Date().toISOString().slice(0, 10).replace(/-/g, ".") + " · 대가성 고지 포함", W - PAD, H - 92);
