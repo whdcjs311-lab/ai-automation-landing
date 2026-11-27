@@ -1,7 +1,7 @@
 {
   "meta": {
     "updated": "2026-11-27",
-    "updatedAt": "2026.11.27 04:05 기준 (11/26 성과 실측 · 마지막 발행일 기준)",
+    "updatedAt": "2026.11.27 10:20 기준 (11/27 10시 루틴 실행 후)",
     "source": "scheduled-actions/🎁-매일-오전-10시-체험단-자동-신청-및-추천-보고/notes.md · scheduled-actions/📝-네이버-블로그-매일-5건-자동-발행/notes.md · scheduled-actions/🎬-네이버-클립-매일-3건-자동-발행/notes.md",
     "disclaimer": "표시된 리워드는 신청·응모 단계의 예정 금액이며 선정 전에는 수익이 아닙니다. 후기·발표 일정은 캠페인 공지 기준입니다."
   },
@@ -10,8 +10,8 @@
     "max": 10000000,
     "confirmed": 0,
     "pendingCash": 0,
-    "pendingGoods": 342900,
-    "note": "월 100만~1,000만 원 목표 · 확정 수익 0원 · 선정 대기 상품 342,900원 (세스코 현금 10만 원은 11/26 미선정으로 제외)"
+    "pendingGoods": 414900,
+    "note": "월 100만~1,000만 원 목표 · 확정 수익 0원 · 선정 대기 상품 414,900원 (11/27 신규 2건 72,000원 추가 · 세스코 현금 10만 원은 미선정 제외)"
   },
   "channels": [
     {
@@ -30,10 +30,10 @@
     },
     {
       "name": "네이버 브랜드 커넥트",
-      "state": "7건 선정 대기 · 1건 미선정",
-      "value": 342900,
+      "state": "9건 선정 대기 · 1건 미선정",
+      "value": 414900,
       "valueLabel": "선정 대기 리워드",
-      "note": "세스코 현금 100,000원 11/26 미선정 · 남은 7건 상품 합계 342,900원 · 캠페인 실적 진행/제출/수익 모두 0"
+      "note": "11/27 신규 2건(이어폰 59,900원·헤어파우더 12,100원) 신청 · 세스코 현금 100,000원 11/26 미선정 · 캠페인 실적 진행/제출/수익 모두 0"
     },
     {
       "name": "무신사 체험단",
@@ -186,7 +186,7 @@
   "brand": {
     "creator": "내 블로그",
     "appliedAt": "2026-11-26",
-    "announceWindow": "2026-11-26~2026-12-04",
+    "announceWindow": "2026-11-30~2026-12-04",
     "items": [
       {
         "id": "sesco",
@@ -222,7 +222,7 @@
         "reward": "상품 60,000원",
         "cash": 0,
         "goods": 60000,
-        "apply": "30명 / 81명",
+        "apply": "30명 / 82명",
         "announce": "2026-12-01",
         "submitStart": "2026-12-02",
         "submitEnd": "2026-12-10",
@@ -236,7 +236,7 @@
         "reward": "상품 150,000원",
         "cash": 0,
         "goods": 150000,
-        "apply": "30명 / 137명",
+        "apply": "30명 / 141명",
         "announce": null,
         "submitStart": "2026-12-02",
         "submitEnd": "2026-12-10",
@@ -278,7 +278,7 @@
         "reward": "상품 27,000원",
         "cash": 0,
         "goods": 27000,
-        "apply": "20명 / 80명",
+        "apply": "20명 / 81명",
         "announce": null,
         "submitStart": "2026-12-03",
         "submitEnd": "2026-12-10",
@@ -292,13 +292,41 @@
         "reward": "상품 11,900원",
         "cash": 0,
         "goods": 11900,
-        "apply": "50명 / 22명",
+        "apply": "50명 / 21명",
         "announce": null,
         "submitStart": "2026-12-07",
         "submitEnd": "2026-12-20",
         "mission": "블로그 1건 · 200자 · 사진 5장 · 해시태그 3회 이상 · 6개월 유지",
         "url": "https://brandconnect.naver.com/campaign",
         "status": "선정 대기"
+      },
+      {
+        "id": "aitwo-earphone",
+        "name": "에이투 고음질 유선이어폰 GE5",
+        "reward": "상품 59,900원",
+        "cash": 0,
+        "goods": 59900,
+        "apply": "10명 / 4명",
+        "announce": "2026-11-30",
+        "submitStart": "2026-12-01",
+        "submitEnd": "2026-12-11",
+        "mission": "블로그 1건 필수 + 클립 1건 필수 · 공정위 문구 · 1년 유지",
+        "url": "https://brandconnect.naver.com/campaign",
+        "status": "선정 대기 (11/27 신청)"
+      },
+      {
+        "id": "bellca-powder",
+        "name": "벨카 노세범 헤어 퀵 파우더",
+        "reward": "상품 12,100원",
+        "cash": 0,
+        "goods": 12100,
+        "apply": "5명 / 34명",
+        "announce": "2026-12-02",
+        "submitStart": "2026-12-03",
+        "submitEnd": "2026-12-17",
+        "mission": "블로그 1건 필수(인스타·유튜브 선택) · 쇼핑커넥트 링크 필수 · 6개월 유지 · 3,000자 내외",
+        "url": "https://brandconnect.naver.com/campaign",
+        "status": "선정 대기 (11/27 신청)"
       }
     ],
     "resultSummary": "11/26 발표: 세스코(현금 10만 원) 미선정 · 나머지 7건 선정 대기"
@@ -309,7 +337,7 @@
     "announceRange": "2026-12-01~2026-12-03",
     "reviewPeriod": "2026-12-04~2026-12-18",
     "url": "https://www.musinsa.com/preuser",
-    "note": "앱 전용 신청 · 당첨 시 사진 5장 + 200자 후기 (12/4~12/18)",
+    "note": "앱 전용 신청 · 당첨 시 사진 5장 + 200자 후기 (12/4~12/18) · 11/27 웹 체험단 목록 Cloudflare 차단으로 실시간 조회 불가",
     "items": [
       {
         "name": "소닉플로우 미니 드라이기",
@@ -400,36 +428,31 @@
   "tasks": [
     {
       "id": "t1",
-      "text": "세스코(현금 10만 원) 발표 확인 — 브랜드 커넥트 > 캠페인 관리 > 대기 중",
+      "text": "12/1~12/4 브랜드 커넥트 발표 확인 (에이투 11/30 · 떼르디 12/1 · 벨카 12/2)",
       "url": "https://brandconnect.naver.com/campaign"
     },
     {
-      "id": "t7",
-      "text": "이웃 품앗이 공감·댓글 4건 (PC 페이지에서 진행)",
-      "url": "https://blog.naver.com/hl-henry/224480622249"
-    },
-    {
-      "id": "t8",
-      "text": "쇼핑 커넥트·쿠팡 클릭 수 내일 오후 4시 재확인",
-      "url": "https://sell.shopping.naver.com/"
-    },
-    {
-      "id": "t11",
-      "text": "무진장 상의·하의데이 마지막 날(11/27) — 블로그 5건·클립 3건에 \"오늘까지\" 반영",
-      "url": "https://www.musinsa.com/"
-    },
-    {
-      "id": "t12",
-      "text": "올영데이 마지막 날(11/27) → 12월 올영 빅세일 예고 앵글로 뷰티 글 1건",
-      "url": "https://www.oliveyoung.co.kr/"
-    },
-    {
-      "id": "t13",
-      "text": "세스코 캠페인 미선정 확인 → 현금 10만 원 목표에서 제외, 신규 현금형 캠페인 재탐색",
+      "id": "t2",
+      "text": "봄비유 5건: 인스타그램 발행 가능하면 현금 1만원형 신청 (모집 5명·신청 0~2명)",
       "url": "https://brandconnect.naver.com/campaign/search"
     },
     {
-      "id": "t14",
+      "id": "t3",
+      "text": "무신사 체험단: 웹 목록 차단 → 앱에서 마감 임박 8건 확인·응모",
+      "url": "https://www.musinsa.com/preuser"
+    },
+    {
+      "id": "t4",
+      "text": "무진장 오늘의 미션 응모권 3장 받기 (무신사머니 5만원 40명)",
+      "url": "https://www.musinsa.com/campaign/mujinjangsale/benefit"
+    },
+    {
+      "id": "t5",
+      "text": "리뷰노트 원커넥트 보험 컨설팅 5만P (창원 한정, 11/30 마감) — 가입 여부 확인",
+      "url": "https://www.reviewnote.co.kr/"
+    },
+    {
+      "id": "t6",
       "text": "정산 계좌: 첫 수익 발생 시 개인 유형 등록(카카오뱅크 끝자리 1140) — 지금은 시스템이 등록 차단",
       "url": "https://brandconnect.naver.com/"
     }
