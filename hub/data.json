@@ -1,7 +1,7 @@
 {
  "meta": {
   "updated": "2026-11-28",
-  "updatedAt": "2026.11.28 10:30 기준 (11/28 10시 체험단 루틴)",
+  "updatedAt": "2026.11.28 13:20 기준 (11/28 10:15 블로그 5건 발행 후)",
   "source": "scheduled-actions/🎁-매일-오전-10시-체험단-자동-신청-및-추천-보고/notes.md · scheduled-actions/📝-네이버-블로그-매일-5건-자동-발행/notes.md · scheduled-actions/🎬-네이버-클립-매일-3건-자동-발행/notes.md",
   "disclaimer": "표시된 리워드는 신청·응모 단계의 예정 금액이며 선정 전에는 수익이 아닙니다. 후기·발표 일정은 캠페인 공지 기준입니다."
  },
@@ -51,7 +51,7 @@
   }
  ],
  "today": {
-  "date": "2026-11-27",
+  "date": "2026-11-28",
   "blog": {
    "target": 5,
    "published": 5,
@@ -67,54 +67,54 @@
   "clicks": {
    "shoppingConnect": 19,
    "coupang": 4,
-   "checkedAt": "2026-11-28 04:05 · 쇼핑커넥트는 11/26 집계분"
+   "checkedAt": "2026-11-28 10:20 · 쇼핑커넥트는 11/27 집계분"
   },
   "posts": [
    {
     "no": 1,
-    "title": "🧥 무진장 상의데이 오늘 끝 | 남자 기모 맨투맨 2만 800원, 12월 전 마지막",
+    "title": "🧥 롱패딩 8만9,910원, 12월엔 4배 | 기장부터 확인하세요",
     "url": "https://blog.naver.com/MyBlog.naver",
-    "product": "남자 맨투맨 오버핏 헤비웨이트 (LUXTIE) 23,800 → 20,800",
-    "productUrl": "https://naver.me/xRgFwtlw",
+    "product": "스파오 베이직 롱패딩 SPJPG4VC01 99,900 → 89,910",
+    "productUrl": "https://naver.me/xnONDD8A",
     "status": "게시 완료",
     "photos": 5,
     "views": 0
    },
    {
     "no": 2,
-    "title": "👖 하의데이 오늘 끝 | 기모 벌룬팬츠 3만 7,800원, 밑단 16cm 총장 96cm 실측",
+    "title": "🧣 패딩조끼 12월 134% 급증 | 4만4,910원 3겹 레이어",
     "url": "https://blog.naver.com/MyBlog.naver",
-    "product": "벌룬팬츠 통큰바지 기모 합포 (초코클래식) 49,000 → 37,800",
-    "productUrl": "https://naver.me/5ECsIxxe",
+    "product": "스파오 베이직 패쪼 SPJVG4TC01 49,900 → 44,910",
+    "productUrl": "https://naver.me/GJZHqxFD",
     "status": "게시 완료",
     "photos": 5,
     "views": 0
    },
    {
     "no": 3,
-    "title": "💧 올영데이 오늘 끝 | 1만 7,550원 겨울 수분크림, 50ml로 12월 버티기",
+    "title": "💧 3.5L 가습기 2만2,400원 | 건조한 날 물 채우는 횟수 비교",
     "url": "https://blog.naver.com/MyBlog.naver",
-    "product": "그린티 씨드 히알루론산 수분크림 50ml (이니스프리) 27,000 → 17,550",
-    "productUrl": "https://naver.me/5bCQkyKK",
+    "product": "듀플렉스 무드등 통세척 가습기 3.5L DP-G50UH 36,900 → 22,400",
+    "productUrl": "https://naver.me/GJZHphlT",
     "status": "게시 완료",
     "photos": 5,
     "views": 0
    },
    {
     "no": 4,
-    "title": "🎄 25만 원 트리가 3만 9,900원 | 1.2m 크리스마스 풀세트, 12월 전에 사는 이유",
+    "title": "💄 립밤 3만7,350원, 11/29까지 앰플 증정 | 컬러부터 확인",
     "url": "https://blog.naver.com/MyBlog.naver",
-    "product": "크리스마스트리 풀세트 에델린레드 1.2M (조아트) 259,000 → 39,900",
-    "productUrl": "https://naver.me/FLEN98Ze",
+    "product": "더후 에센셜 립 글로우밤 3.3g 45,000 → 37,350",
+    "productUrl": "https://naver.me/GjyjAkxs",
     "status": "게시 완료",
     "photos": 5,
     "views": 0
    },
    {
     "no": 5,
-    "title": "🔒 CJ올리브영 234만 건 유출 | 11월 27일, 지금 확인할 3가지",
+    "title": "💍 곽시양 유지애 오늘 결혼 | 6살 차이 1년 교제 타임라인 정리",
     "url": "https://blog.naver.com/MyBlog.naver",
-    "product": "핫이슈 · CJ올리브영 개인정보 유출(2026-11-26 공지) · 쇼핑 링크 없음",
+    "product": "핫이슈 · 소속사 공식 입장 타임라인 (제휴 링크 없음)",
     "productUrl": "",
     "status": "게시 완료",
     "photos": 3,
